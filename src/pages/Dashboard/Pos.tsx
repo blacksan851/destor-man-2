@@ -21,6 +21,7 @@ interface Product {
   stock_quantity: number;
   min_stock_alert: number;
   unit: string;
+  image_url?: string;
 }
 
 interface CustomerOption {
@@ -435,6 +436,9 @@ export function Pos() {
                     }`}
                   >
                     <div>
+                      {product.image_url && (
+                        <img src={product.image_url} alt={product.name} className="w-full h-24 object-cover rounded-xl mb-2.5 border border-gray-100 dark:border-gray-700 bg-gray-50" />
+                      )}
                       <div className="flex justify-between items-start mb-2">
                         <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 rounded-md">
                           {product.category || 'Geral'}

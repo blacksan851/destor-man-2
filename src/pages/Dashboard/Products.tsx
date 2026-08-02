@@ -20,6 +20,7 @@ interface Product {
   stock_quantity: number;
   min_stock_alert: number;
   unit: string;
+  image_url?: string;
   created_at?: string;
 }
 
@@ -68,7 +69,8 @@ export function Products() {
     cost_price: '',
     stock_quantity: '',
     min_stock_alert: '5',
-    unit: 'UN'
+    unit: 'UN',
+    image_url: ''
   });
 
   const defaultCategories = ['Alimentação', 'Bebidas', 'Higiene & Limpeza', 'Eletrónicos', 'Outros'];
@@ -129,7 +131,8 @@ export function Products() {
       cost_price: '',
       stock_quantity: '',
       min_stock_alert: '5',
-      unit: 'UN'
+      unit: 'UN',
+      image_url: ''
     });
     setFormError('');
     setIsModalOpen(true);
@@ -146,7 +149,8 @@ export function Products() {
       cost_price: product.cost_price ? product.cost_price.toString() : '0',
       stock_quantity: product.stock_quantity.toString(),
       min_stock_alert: product.min_stock_alert.toString(),
-      unit: product.unit || 'UN'
+      unit: product.unit || 'UN',
+      image_url: product.image_url || ''
     });
     setFormError('');
     setIsModalOpen(true);
@@ -206,18 +210,20 @@ export function Products() {
 
       if (editingProduct) {
         // Update product
+        const payload: any = {
+          name: formData.name,
+          sku: formData.sku,
+          category: formData.category,
+          price: priceNum,
+          cost_price: costNum,
+          stock_quantity: stockNum,
+          min_stock_alert: minAlertNum,
+          unit: formData.unit,
+          image_url: formData.image_url
+        };
         const { error } = await supabase
           .from('products')
-          .update({
-            name: formData.name,
-            sku: formData.sku,
-            category: formData.category,
-            price: priceNum,
-            cost_price: costNum,
-            stock_quantity: stockNum,
-            min_stock_alert: minAlertNum,
-            unit: formData.unit
-          })
+          .update(payload)
           .eq('id', editingProduct.id)
           .eq('company_id', user.id);
 
@@ -551,12 +557,23 @@ export function Products() {
                     return (
                       <tr key={p.id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/40 transition-colors">
                         <td className="py-4 px-6">
-                          <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
-                            <span>{p.name}</span>
-                          </div>
-                          <div className="text-xs text-gray-400 font-mono mt-0.5 flex items-center gap-1">
-                            <Barcode className="w-3 h-3 text-emerald-500" />
-                            <span>{p.sku || 'Sem SKU'}</span>
+                          <div className="flex items-center gap-3">
+                            {p.image_url ? (
+                              <img src={p.image_url} alt={p.name} className="w-10 h-10 rounded-xl object-cover border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 shrink-0" />
+                            ) : (
+                              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center font-bold text-sm shrink-0">
+                                {p.name.charAt(0).toUpperCase()}
+                              </div>
+                            )}
+                            <div>
+                              <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                                <span>{p.name}</span>
+                              </div>
+                              <div className="text-xs text-gray-400 font-mono mt-0.5 flex items-center gap-1">
+                                <Barcode className="w-3 h-3 text-emerald-500" />
+                                <span>{p.sku || 'Sem SKU'}</span>
+                              </div>
+                            </div>
                           </div>
                         </td>
                         <td className="py-4 px-6 text-slate-600 dark:text-gray-300">
@@ -621,15 +638,24 @@ export function Products() {
 
               return (
                 <div key={p.id} className="p-4 space-y-3 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
-                  <div className="flex justify-between items-start">
-                    <div>
-                      <h4 className="font-bold text-slate-900 dark:text-white text-base">{p.name}</h4>
-                      <p className="text-xs text-gray-400 font-mono flex items-center gap-1 mt-0.5">
-                        <Barcode className="w-3 h-3 text-emerald-500" />
-                        <span>{p.sku || 'Sem SKU'}</span>
-                      </p>
+                  <div className="flex justify-between items-start gap-3">
+                    <div className="flex items-center gap-3">
+                      {p.image_url ? (
+                        <img src={p.image_url} alt={p.name} className="w-12 h-12 rounded-xl object-cover border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 shrink-0" />
+                      ) : (
+                        <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center font-bold text-base shrink-0">
+                          {p.name.charAt(0).toUpperCase()}
+                        </div>
+                      )}
+                      <div>
+                        <h4 className="font-bold text-slate-900 dark:text-white text-base">{p.name}</h4>
+                        <p className="text-xs text-gray-400 font-mono flex items-center gap-1 mt-0.5">
+                          <Barcode className="w-3 h-3 text-emerald-500" />
+                          <span>{p.sku || 'Sem SKU'}</span>
+                        </p>
+                      </div>
                     </div>
-                    <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 rounded-lg text-xs font-semibold text-slate-600 dark:text-gray-300">
+                    <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 rounded-lg text-xs font-semibold text-slate-600 dark:text-gray-300 shrink-0">
                       {p.category || 'Geral'}
                     </span>
                   </div>
@@ -717,6 +743,25 @@ export function Products() {
                     placeholder="Ex: Arroz 25kg Top"
                     className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm"
                   />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1">
+                    Imagem do Produto (URL da foto)
+                  </label>
+                  <div className="flex gap-2 items-center">
+                    {formData.image_url && (
+                      <img src={formData.image_url} alt="Preview" className="w-11 h-11 rounded-xl object-cover border border-gray-200 dark:border-gray-700 shrink-0 bg-gray-50" />
+                    )}
+                    <input
+                      type="url"
+                      value={formData.image_url || ''}
+                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
+                      placeholder="https://exemplo.com/imagem-do-produto.jpg"
+                      className="w-full px-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm"
+                    />
+                  </div>
+                  <p className="text-[10px] text-gray-400 mt-1">Insira a URL de uma imagem da internet para ser exibida no POS e no Catálogo.</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">
