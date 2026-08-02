@@ -189,9 +189,7 @@ export function LandingPage() {
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <div className="flex items-center gap-2.5">
-              <div className="w-9 h-9 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-xl flex items-center justify-center shadow-md shadow-emerald-500/30">
-                <span className="text-white font-black text-lg">D</span>
-              </div>
+              <img src="/logo.png" alt="Dr Gestor MZ" className="w-10 h-10 rounded-xl object-contain bg-white/5 p-0.5" />
               <div>
                 <span className="font-black text-lg text-slate-900 dark:text-white tracking-tight">Dr Gestor</span>
                 <span className="font-black text-lg text-emerald-500 tracking-tight"> MZ</span>
