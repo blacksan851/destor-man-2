@@ -3,7 +3,7 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, ShoppingCart, Box, Users, CreditCard, 
   Wallet, BarChart3, Settings, LogOut, Menu, X, Sun, Moon,
-  BadgeCheck, Store, Shield, Zap, Receipt
+  BadgeCheck, Store, Shield, Zap, Receipt, Download
 } from 'lucide-react';
 import { useThemeStore } from '../lib/store';
 import { supabase } from '../lib/supabase';
@@ -19,6 +19,16 @@ export function DashboardLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const { theme, toggleTheme } = useThemeStore();
+  const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
+
+  useEffect(() => {
+    const handleBeforeInstallPrompt = (e: Event) => {
+      e.preventDefault();
+      setDeferredPrompt(e);
+    };
+    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt);
+  }, []);
 
   const fetchCompanyData = async () => {
     try {
@@ -197,6 +207,22 @@ export function DashboardLayout() {
               >
                 <Zap className="w-4 h-4 fill-white" />
                 <span>UPGRADE P/ PREMIUM (500 MT)</span>
+              </button>
+            )}
+
+            {/* PWA Install Button */}
+            {deferredPrompt && (
+              <button
+                onClick={async () => {
+                  deferredPrompt.prompt();
+                  const { outcome } = await deferredPrompt.userChoice;
+                  if (outcome === 'accepted') setDeferredPrompt(null);
+                }}
+                className="px-3 py-2 bg-emerald-500 hover:bg-emerald-600 text-white text-xs font-bold rounded-xl flex items-center gap-1.5 shadow-md shadow-emerald-500/20 transition-all cursor-pointer"
+                title="Instalar App Dr Gestor MZ no seu dispositivo"
+              >
+                <Download className="w-4 h-4" />
+                <span className="hidden md:inline">Instalar App</span>
               </button>
             )}
 
