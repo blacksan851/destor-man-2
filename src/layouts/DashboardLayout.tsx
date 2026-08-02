@@ -158,37 +158,10 @@ export function DashboardLayout() {
           })}
         </nav>
 
-        <div className="p-6 space-y-3">
-          <div className="bg-white/5 p-4 rounded-2xl border border-white/10">
-            <div className="flex justify-between items-center mb-1">
-              <p className="text-xs text-gray-400 uppercase tracking-widest font-bold">
-                Plano {company?.plan || 'Base'}
-              </p>
-              {isBasePlan && (
-                <button
-                  onClick={() => setIsUpgradeModalOpen(true)}
-                  className="text-[10px] text-amber-400 font-extrabold flex items-center gap-0.5 hover:underline cursor-pointer"
-                >
-                  <Zap className="w-3 h-3 fill-amber-400" /> Upgrade
-                </button>
-              )}
-            </div>
-            <p className="text-sm text-white mb-3">
-              {company?.subscription_status === 'active' 
-                ? `Vence em ${getDaysRemaining()} dias` 
-                : 'Assinatura Pendente'}
-            </p>
-            <button 
-              onClick={() => setIsPaymentModalOpen(true)}
-              className="w-full py-2 bg-white/10 hover:bg-white/20 text-white text-xs font-bold rounded-lg transition-colors italic cursor-pointer"
-            >
-              RENOVAR
-            </button>
-          </div>
-
+        <div className="p-6">
           <button 
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 py-2 text-gray-400 hover:text-white text-xs font-bold rounded-lg transition-colors cursor-pointer border border-white/10 bg-white/5 hover:bg-white/10"
+            className="w-full flex items-center justify-center gap-2 py-3 text-gray-400 hover:text-white text-xs font-bold rounded-xl transition-colors cursor-pointer border border-white/10 bg-white/5 hover:bg-white/10"
           >
             <LogOut className="w-4 h-4" />
             <span>SAIR</span>
