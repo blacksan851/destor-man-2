@@ -58,6 +58,9 @@ export function Pos() {
   const [searchQuery, setSearchQuery] = useState('');
   const [loading, setLoading] = useState(true);
 
+  // Mobile Tab State ('products' | 'cart')
+  const [mobileTab, setMobileTab] = useState<'products' | 'cart'>('products');
+
   // Cart & Order State
   const [cart, setCart] = useState<CartItem[]>([]);
   const [selectedCustomerId, setSelectedCustomerId] = useState<string>('balcao');
@@ -354,9 +357,40 @@ export function Pos() {
   });
 
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-5rem)] bg-[#F5F5F5] dark:bg-slate-900 overflow-hidden">
+    <div className="flex flex-col lg:flex-row h-[calc(100vh-4rem)] bg-[#F5F5F5] dark:bg-slate-900 overflow-hidden relative">
+      {/* Mobile Tab Toggle Bar */}
+      <div className="lg:hidden flex border-b border-gray-200 dark:border-gray-800 bg-white dark:bg-gray-900 p-2 gap-2 shrink-0">
+        <button
+          onClick={() => setMobileTab('products')}
+          className={`flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${
+            mobileTab === 'products'
+              ? 'bg-emerald-500 text-white shadow-md'
+              : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
+          }`}
+        >
+          <Package className="w-4 h-4" />
+          <span>Produtos / Catálogo</span>
+        </button>
+        <button
+          onClick={() => setMobileTab('cart')}
+          className={`flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all relative ${
+            mobileTab === 'cart'
+              ? 'bg-emerald-500 text-white shadow-md'
+              : 'bg-gray-100 dark:bg-gray-800 text-gray-500 dark:text-gray-400'
+          }`}
+        >
+          <ShoppingCart className="w-4 h-4" />
+          <span>Carrinho ({cart.reduce((sum, item) => sum + item.quantity, 0)})</span>
+          {cart.length > 0 && (
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse absolute top-2 right-3" />
+          )}
+        </button>
+      </div>
+
       {/* Left Column: Product Selection Grid */}
-      <div className="flex-1 flex flex-col p-4 sm:p-6 overflow-hidden border-r border-gray-200 dark:border-gray-800">
+      <div className={`flex-1 flex flex-col p-4 sm:p-6 overflow-hidden border-r border-gray-200 dark:border-gray-800 ${
+        mobileTab === 'cart' ? 'hidden lg:flex' : 'flex'
+      }`}>
         {/* Search & Scan Header */}
         <div className="flex gap-2 mb-4">
           <div className="relative flex-1">
@@ -484,7 +518,9 @@ export function Pos() {
       </div>
 
       {/* Right Column: Active Order Cart & Payment Panel */}
-      <div className="w-full lg:w-[420px] bg-white dark:bg-gray-900 flex flex-col h-full shadow-2xl border-l border-gray-100 dark:border-gray-800">
+      <div className={`w-full lg:w-[420px] bg-white dark:bg-gray-900 flex flex-col h-full shadow-2xl border-l border-gray-100 dark:border-gray-800 ${
+        mobileTab === 'products' ? 'hidden lg:flex' : 'flex'
+      }`}>
         {/* Cart Header & Customer Selection */}
         <div className="p-4 border-b border-gray-100 dark:border-gray-800 space-y-3">
           <div className="flex justify-between items-center">
