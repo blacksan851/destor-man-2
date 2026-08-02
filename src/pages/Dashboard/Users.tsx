@@ -41,9 +41,11 @@ export function Users() {
     name: '',
     email: '',
     phone: '',
+    password: '',
     role: 'caixa' as 'admin' | 'gerente' | 'caixa',
     status: 'ativo' as 'ativo' | 'inativo'
   });
+  const [showPassword, setShowPassword] = useState(false);
 
   // Fetch Users from Supabase
   const fetchCompanyUsers = async () => {
@@ -89,6 +91,7 @@ export function Users() {
       name: '',
       email: '',
       phone: '',
+      password: '',
       role: 'caixa',
       status: 'ativo'
     });
@@ -103,6 +106,7 @@ export function Users() {
       name: u.name,
       email: u.email,
       phone: u.phone || '',
+      password: '',
       role: u.role,
       status: u.status
     });
@@ -518,6 +522,43 @@ export function Users() {
                     className="w-full px-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none text-slate-900 dark:text-white text-sm"
                   />
                 </div>
+
+                {!editingUser && (
+                  <div>
+                    <div className="flex justify-between items-center mb-1">
+                      <label className="block text-xs font-bold text-gray-400 uppercase">Senha Inicial de Acesso *</label>
+                      <button
+                        type="button"
+                        onClick={() => {
+                          const randomPass = Math.random().toString(36).slice(-8) + '1#';
+                          setFormData({ ...formData, password: randomPass });
+                          setShowPassword(true);
+                        }}
+                        className="text-[10px] text-emerald-500 font-bold hover:underline"
+                      >
+                        Gerar Senha
+                      </button>
+                    </div>
+                    <div className="relative">
+                      <input
+                        type={showPassword ? 'text' : 'password'}
+                        required={!editingUser}
+                        value={formData.password}
+                        onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                        placeholder="••••••••"
+                        className="w-full px-4 py-2.5 pr-10 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none text-slate-900 dark:text-white text-sm font-mono font-bold"
+                      />
+                      <button
+                        type="button"
+                        onClick={() => setShowPassword(!showPassword)}
+                        className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                      >
+                        {showPassword ? <Key className="w-4 h-4 text-emerald-500" /> : <Lock className="w-4 h-4" />}
+                      </button>
+                    </div>
+                    <p className="text-[10px] text-gray-400 mt-1">Forneça esta senha inicial ao utilizador para que ele possa autenticar-se.</p>
+                  </div>
+                )}
 
                 <div className="grid grid-cols-2 gap-3">
                   <div>
