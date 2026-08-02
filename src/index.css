@@ -1,23 +1,77 @@
 @import "tailwindcss";
 
 @layer base {
+  /* Light Mode Default — Pure White Backgrounds, High-Contrast Text */
+  :root {
+    --bg-primary: #FFFFFF;
+    --bg-secondary: #F8FAFC;
+    --bg-card: #FFFFFF;
+    --text-primary: #0F172A;
+    --text-secondary: #475569;
+    --border-color: #E2E8F0;
+  }
+
+  /* Dark Mode Pure Black — 100% Pure Black (#000000) for OLED/Aesthetics */
+  .dark {
+    --bg-primary: #000000;
+    --bg-secondary: #0A0A0A;
+    --bg-card: #050505;
+    --text-primary: #FFFFFF;
+    --text-secondary: #94A3B8;
+    --border-color: #1E293B;
+  }
+
   body {
     font-weight: 400;
-    color: #1E293B;
-    background-color: #F8FAFC;
-    transition: background-color 0.25s ease, color 0.25s ease;
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.2s ease-in-out, color 0.2s ease-in-out;
   }
 
   .dark body {
-    color: #F8FAFC;
-    background-color: #090D16;
+    background-color: #000000 !important;
+    color: #FFFFFF !important;
   }
+}
+
+/* Ensure clean contrast for panels and cards */
+.dark .bg-white {
+  background-color: #000000 !important;
+}
+
+.dark .bg-gray-900,
+.dark .bg-slate-900,
+.dark .bg-[#0F172A],
+.dark .bg-slate-950 {
+  background-color: #000000 !important;
+}
+
+.dark .bg-gray-800,
+.dark .bg-gray-800\/50,
+.dark .bg-gray-800\/40 {
+  background-color: #0A0A0A !important;
+}
+
+.dark .border-gray-800,
+.dark .border-gray-700,
+.dark .border-white\/10 {
+  border-color: #1E293B !important;
+}
+
+.dark .text-slate-900 {
+  color: #FFFFFF !important;
+}
+
+/* Light Mode Overrides for 100% Pure Clean White Backgrounds */
+:not(.dark) .bg-[#F5F5F5],
+:not(.dark) .bg-slate-900 {
+  background-color: #FFFFFF !important;
 }
 
 /* Antigravity Minimalist Scrollbars */
 ::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+  width: 5px;
+  height: 5px;
 }
 
 ::-webkit-scrollbar-track {
@@ -25,28 +79,27 @@
 }
 
 ::-webkit-scrollbar-thumb {
-  background: rgba(148, 163, 184, 0.25);
+  background: rgba(148, 163, 184, 0.3);
   border-radius: 9999px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(16, 185, 129, 0.5);
+  background: #10B981;
 }
 
 .dark ::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.12);
+  background: rgba(255, 255, 255, 0.2);
 }
 
 .dark ::-webkit-scrollbar-thumb:hover {
-  background: rgba(16, 185, 129, 0.6);
+  background: #10B981;
 }
 
-/* Firefox minimalist scrollbar */
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(148, 163, 184, 0.25) transparent;
+  scrollbar-color: rgba(148, 163, 184, 0.3) transparent;
 }
 
 .dark * {
-  scrollbar-color: rgba(255, 255, 255, 0.15) transparent;
+  scrollbar-color: rgba(255, 255, 255, 0.2) transparent;
 }

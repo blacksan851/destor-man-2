@@ -118,7 +118,7 @@ export function DashboardLayout() {
   ];
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'dark bg-slate-900 text-white' : 'bg-[#F5F5F5] text-slate-900'} flex transition-colors duration-200`}>
+    <div className={`min-h-screen ${theme === 'dark' ? 'dark bg-black text-white' : 'bg-white text-slate-900'} flex transition-colors duration-200`}>
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div 
