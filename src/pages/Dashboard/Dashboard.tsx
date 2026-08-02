@@ -84,28 +84,70 @@ export function Dashboard() {
       const mpesaSum = salesList
         .filter(s => s.payment_method === 'M-Pesa')
         .reduce((acc, s) => acc + (s.total_amount || 0), 0);
-      setMpesaBalance(mpesaSum);
 
       const emolaSum = salesList
         .filter(s => s.payment_method === 'e-Mola')
         .reduce((acc, s) => acc + (s.total_amount || 0), 0);
-      setEmolaBalance(emolaSum);
 
       const dinheiroSum = salesList
         .filter(s => s.payment_method === 'Dinheiro')
         .reduce((acc, s) => acc + (s.total_amount || 0), 0);
-      setDinheiroBalance(dinheiroSum);
 
       const cartaoSum = salesList
         .filter(s => s.payment_method === 'Cartão' || s.payment_method === 'Transferência')
         .reduce((acc, s) => acc + (s.total_amount || 0), 0);
       setCartaoBalance(cartaoSum);
 
+      // 1.1 Fetch Expenses & Wallet Movements to calculate net balances
+      const { data: expensesData } = await supabase
+        .from('expenses')
+        .select('*')
+        .eq('company_id', user.id);
+
+      const { data: movementsData } = await supabase
+        .from('wallet_movements')
+        .select('*')
+        .eq('company_id', user.id);
+
+      const expensesList = expensesData || [];
+      const movementsList = movementsData || [];
+
+      // Deduct Expenses and apply manual movements
+      const mpesaExpenses = expensesList
+        .filter(e => e.payment_method === 'M-Pesa')
+        .reduce((acc, e) => acc + (e.amount || 0), 0);
+      const mpesaMoveIns = movementsList
+        .filter(m => m.wallet_type === 'M-Pesa' && m.movement_type === 'in')
+        .reduce((acc, m) => acc + (m.amount || 0), 0);
+      const mpesaMoveOuts = movementsList
+        .filter(m => m.wallet_type === 'M-Pesa' && m.movement_type === 'out')
+        .reduce((acc, m) => acc + (m.amount || 0), 0);
+      const netMpesa = Math.max(0, mpesaSum + mpesaMoveIns - mpesaExpenses - mpesaMoveOuts);
+      setMpesaBalance(netMpesa);
+
+      const emolaExpenses = expensesList
+        .filter(e => e.payment_method === 'e-Mola')
+        .reduce((acc, e) => acc + (e.amount || 0), 0);
+      const emolaMoveIns = movementsList
+        .filter(m => m.wallet_type === 'e-Mola' && m.movement_type === 'in')
+        .reduce((acc, m) => acc + (m.amount || 0), 0);
+      const emolaMoveOuts = movementsList
+        .filter(m => m.wallet_type === 'e-Mola' && m.movement_type === 'out')
+        .reduce((acc, m) => acc + (m.amount || 0), 0);
+      const netEmola = Math.max(0, emolaSum + emolaMoveIns - emolaExpenses - emolaMoveOuts);
+      setEmolaBalance(netEmola);
+
+      const dinheiroExpenses = expensesList
+        .filter(e => e.payment_method === 'Dinheiro')
+        .reduce((acc, e) => acc + (e.amount || 0), 0);
+      const netDinheiro = Math.max(0, dinheiroSum - dinheiroExpenses);
+      setDinheiroBalance(netDinheiro);
+
       // Build Pie Chart Data for Payment Methods
       const pieData: PiePaymentItem[] = [
-        { name: 'M-Pesa', value: mpesaSum, color: '#EF4444' },      // Red
-        { name: 'e-Mola', value: emolaSum, color: '#F97316' },      // Orange
-        { name: 'Dinheiro', value: dinheiroSum, color: '#10B981' },  // Emerald
+        { name: 'M-Pesa', value: netMpesa, color: '#EF4444' },      // Red
+        { name: 'e-Mola', value: netEmola, color: '#F97316' },      // Orange
+        { name: 'Dinheiro', value: netDinheiro, color: '#10B981' },  // Emerald
         { name: 'Cartão/Transf', value: cartaoSum, color: '#3B82F6' } // Blue
       ].filter(item => item.value > 0);
 
@@ -185,13 +227,19 @@ export function Dashboard() {
   useEffect(() => {
     fetchDashboardData();
 
-    // Supabase Realtime Listener for instant updates when sales or products are added/edited
+    // Supabase Realtime Listener for instant updates when sales, products, expenses, or movements change
     const salesChannel = supabase
-      .channel('dashboard-realtime-sales')
+      .channel('dashboard-realtime-all')
       .on('postgres_changes', { event: '*', schema: 'public', table: 'sales' }, () => {
         fetchDashboardData();
       })
       .on('postgres_changes', { event: '*', schema: 'public', table: 'products' }, () => {
+        fetchDashboardData();
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'expenses' }, () => {
+        fetchDashboardData();
+      })
+      .on('postgres_changes', { event: '*', schema: 'public', table: 'wallet_movements' }, () => {
         fetchDashboardData();
       })
       .subscribe();
