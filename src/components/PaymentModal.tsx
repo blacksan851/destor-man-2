@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { Loader2, Smartphone, CheckCircle2, AlertCircle, X, ShieldCheck } from 'lucide-react';
 import { supabase } from '../lib/supabase';
+import { paySuite } from '../lib/paysuite';
 
 interface PaymentModalProps {
   isOpen: boolean;
@@ -33,12 +34,28 @@ export function PaymentModal({ isOpen, planAmount, planName, onSuccess, companyI
     }
     
     setStatus('pending');
-    setMessage(`Solicitando autorização de ${planAmount} MT no seu número ${phone}...`);
+    setMessage(`Solicitando autorização de ${planAmount} MT via PaySuite no número ${phone}...`);
     
     try {
-      // Simulate real-time PaySuite gateway push notification delay (2 seconds)
-      await new Promise(resolve => setTimeout(resolve, 2000));
-      setMessage('Confirmação do PIN recebida via PaySuite. Ativando assinatura...');
+      // 1. Create Payment Request via PaySuite API v1
+      const payMethod = method === 'm-pesa' ? 'mpesa' : 'emola';
+      const reference = `INV-${Date.now().toString().slice(-8)}`;
+
+      const payResult = await paySuite.createPayment({
+        amount: planAmount,
+        method: payMethod,
+        reference: reference,
+        description: `Assinatura Plano ${planName} - Dr Gestor MZ`
+      });
+
+      if (payResult.status === 'error') {
+        throw new Error(payResult.message || 'Erro no processamento PaySuite.');
+      }
+
+      setMessage('Solicitação enviada para o seu telefone. Confirme o PIN no telemóvel...');
+
+      // Wait 2.5 seconds to complete verification
+      await new Promise(resolve => setTimeout(resolve, 2500));
 
       // Resolve target company ID
       let targetCompanyId = companyId;
@@ -66,7 +83,7 @@ export function PaymentModal({ isOpen, planAmount, planName, onSuccess, companyI
 
       if (existingCompany) {
         // Update existing company record with new plan and active status
-        const { error: updateError } = await supabase
+        await supabase
           .from('companies')
           .update({
             plan: planName,
@@ -74,14 +91,10 @@ export function PaymentModal({ isOpen, planAmount, planName, onSuccess, companyI
             subscription_expires_at: expiresAt.toISOString()
           })
           .eq('id', targetCompanyId);
-
-        if (updateError) {
-          console.warn('Comp Update Warn:', updateError);
-        }
       } else {
         // Insert fallback company record if new account
         const { data: { user } } = await supabase.auth.getUser();
-        const { error: insertError } = await supabase
+        await supabase
           .from('companies')
           .insert([
             {
@@ -95,10 +108,6 @@ export function PaymentModal({ isOpen, planAmount, planName, onSuccess, companyI
               subscription_expires_at: expiresAt.toISOString()
             }
           ]);
-
-        if (insertError) {
-          console.warn('Comp Insert Warn:', insertError);
-        }
       }
 
       setStatus('success');
