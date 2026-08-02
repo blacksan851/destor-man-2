@@ -93,8 +93,8 @@ export function Register() {
     <div className="min-h-screen bg-slate-950 flex relative overflow-hidden">
 
       {/* Background decorations */}
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(16,185,129,0.08),transparent_60%)]" />
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.05),transparent_60%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_20%_30%,rgba(16,185,129,0.08),transparent_60%)] pointer-events-none" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_80%_70%,rgba(59,130,246,0.05),transparent_60%)] pointer-events-none" />
 
       {/* ── LEFT PANEL (Desktop only) — Visual / Branding ── */}
       <div className="hidden lg:flex lg:w-[45%] xl:w-[42%] flex-col justify-between p-10 relative z-10">
@@ -163,7 +163,7 @@ export function Register() {
       </div>
 
       {/* ── RIGHT PANEL — Registration Form ── */}
-      <div className="flex-1 flex flex-col min-h-screen">
+      <div className="flex-1 flex flex-col min-h-screen relative z-10">
         {/* Mobile header */}
         <div className="lg:hidden flex items-center justify-between p-4">
           <Link to="/" className="flex items-center gap-2">
