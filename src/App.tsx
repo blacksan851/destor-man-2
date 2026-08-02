@@ -44,7 +44,7 @@ export default function App() {
             <Route path="pos" element={<Pos />} />
             <Route path="produtos" element={<Products />} />
             <Route path="clientes" element={<Customers />} />
-            <Route path="financeiro" element={<Reports />} />
+            <Route path="financeiro" element={<Navigate to="/dashboard/relatorios" replace />} />
             <Route path="carteiras" element={<Wallets />} />
             <Route path="relatorios" element={<Reports />} />
             <Route path="configuracoes" element={<Settings />} />
