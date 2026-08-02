@@ -181,20 +181,20 @@ export function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950 font-sans transition-colors duration-200 overflow-x-hidden">
+    <div className="min-h-screen bg-white dark:bg-slate-950 font-sans transition-colors duration-200 overflow-x-hidden w-full max-w-full">
 
       {/* ── NAVBAR ── */}
-      <nav className="sticky top-0 z-50 bg-white/90 dark:bg-slate-950/90 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800">
+      <nav className="sticky top-0 z-50 bg-white/95 dark:bg-slate-950/95 backdrop-blur-xl border-b border-gray-100 dark:border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
-            <div className="flex items-center gap-2.5">
-              <img src="/logo.png" alt="Dr Gestor MZ" className="w-10 h-10 rounded-xl object-contain bg-white/5 p-0.5" />
-              <div>
+            <Link to="/" className="flex items-center gap-2.5">
+              <img src="/logo.png" alt="Dr Gestor MZ" className="w-10 h-10 rounded-xl object-contain bg-white/5 p-0.5 shrink-0" />
+              <div className="whitespace-nowrap">
                 <span className="font-black text-lg text-slate-900 dark:text-white tracking-tight">Dr Gestor</span>
                 <span className="font-black text-lg text-emerald-500 tracking-tight"> MZ</span>
               </div>
-            </div>
+            </Link>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8">
