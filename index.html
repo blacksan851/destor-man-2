@@ -1,13 +1,45 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-MZ">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Google AI Studio App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <!-- PWA Meta Tags -->
+    <title>Dr Gestor MZ — Gestão Empresarial</title>
+    <meta name="description" content="Dr Gestor MZ — Plataforma de gestão empresarial para Moçambique. POS, Estoque, Fiado, M-Pesa, e-Mola, WhatsApp e Impressão Térmica." />
+    <meta name="theme-color" content="#10B981" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <meta name="apple-mobile-web-app-title" content="Dr Gestor MZ" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="application-name" content="Dr Gestor MZ" />
+    <meta name="msapplication-TileColor" content="#0F172A" />
+    <meta name="msapplication-starturl" content="/" />
+
+    <!-- PWA Manifest -->
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192.png" />
+    <link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-192.png" />
+
+    <!-- iOS Splash Screen styling -->
+    <style>
+      html, body { margin: 0; padding: 0; overscroll-behavior: none; }
+    </style>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => {});
+        });
+      }
+    </script>
   </body>
 </html>
-

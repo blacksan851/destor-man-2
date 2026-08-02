@@ -125,9 +125,7 @@ export function DashboardLayout() {
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="p-6 border-b border-white/10 flex items-center gap-3">
-          <div className="w-8 h-8 bg-[#10B981] rounded-lg flex items-center justify-center font-bold text-white">
-            Dr
-          </div>
+          <img src="/logo.png" alt="Dr Gestor MZ" className="w-9 h-9 rounded-lg object-contain bg-white/5 p-0.5" />
           <span className="text-white font-bold text-lg tracking-tight">
             Dr Gestor <span className="text-[#10B981]">MZ</span>
           </span>
@@ -140,6 +138,7 @@ export function DashboardLayout() {
               <Link
                 key={item.name}
                 to={item.href}
+                onClick={() => setSidebarOpen(false)}
                 className={`flex items-center justify-between px-4 py-3 rounded-xl font-medium transition-colors ${
                   isActive 
                     ? 'bg-[#10B981] text-white shadow-lg shadow-emerald-900/20' 
