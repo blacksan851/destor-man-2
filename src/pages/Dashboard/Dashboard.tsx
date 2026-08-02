@@ -234,7 +234,7 @@ export function Dashboard() {
             <h3 className="font-bold text-gray-400 text-xs uppercase tracking-widest">Movimento Financeiro (Últimos 7 dias)</h3>
             <span className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-[#10B981] text-xs font-bold rounded-full flex items-center gap-1.5">
               <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
-              <span>Tempo Real Supabase</span>
+              <span>Tempo Real</span>
             </span>
           </div>
           <div className="flex-1 w-full min-h-[200px]">
