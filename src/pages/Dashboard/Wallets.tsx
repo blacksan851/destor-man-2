@@ -78,8 +78,26 @@ export function Wallets() {
         created_at: m.created_at
       }));
 
-      // Combine and sort by date descending
-      const combined = [...salesList, ...moveList].sort((a, b) => 
+      // 3. Fetch Expenses paid via M-Pesa or e-Mola from `expenses`
+      const { data: expData } = await supabase
+        .from('expenses')
+        .select('*')
+        .eq('company_id', user.id)
+        .in('payment_method', ['M-Pesa', 'e-Mola']);
+
+      const expList: WalletItem[] = (expData || []).map((e: any) => ({
+        id: `exp-${e.id}`,
+        receipt_number: 'DESPESA',
+        customer_name: e.description || e.category,
+        total_amount: e.amount,
+        payment_method: e.payment_method,
+        type: 'out',
+        description: `Despesa: ${e.category} - ${e.description}`,
+        created_at: e.expense_date || e.created_at || new Date().toISOString()
+      }));
+
+      // Combine and deduplicate if movement was recorded
+      const combined = [...salesList, ...moveList, ...expList].sort((a, b) => 
         new Date(b.created_at).getTime() - new Date(a.created_at).getTime()
       );
 

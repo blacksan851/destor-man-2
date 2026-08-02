@@ -139,6 +139,21 @@ export function Expenses() {
 
       if (error) throw error;
 
+      // Se a despesa for paga via M-Pesa ou e-Mola, registra automaticamente a saída nas Carteiras Móveis
+      if (formData.payment_method === 'M-Pesa' || formData.payment_method === 'e-Mola') {
+        await supabase
+          .from('wallet_movements')
+          .insert([
+            {
+              company_id: user.id,
+              wallet_type: formData.payment_method,
+              movement_type: 'out',
+              amount: numAmount,
+              description: `Despesa: ${formData.category} - ${formData.description}`
+            }
+          ]);
+      }
+
       setIsModalOpen(false);
       fetchExpenses();
     } catch (err: any) {

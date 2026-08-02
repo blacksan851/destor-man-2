@@ -102,8 +102,7 @@ export function DashboardLayout() {
     { name: 'Clientes', href: '/dashboard/clientes', icon: Users, isPremium: false },
     { name: 'Despesas', href: '/dashboard/despesas', icon: Receipt, isPremium: false },
     { name: 'Carteiras Móveis', href: '/dashboard/carteiras', icon: Wallet, isPremium: false },
-    { name: 'Financeiro', href: '/dashboard/financeiro', icon: CreditCard, isPremium: true },
-    { name: 'Relatórios', href: '/dashboard/relatorios', icon: BarChart3, isPremium: true },
+    { name: 'Relatórios & DRE', href: '/dashboard/relatorios', icon: BarChart3, isPremium: true },
     { name: 'Utilizadores', href: '/dashboard/utilizadores', icon: Shield, isPremium: true },
     { name: 'Configurações', href: '/dashboard/configuracoes', icon: Settings, isPremium: false },
   ];

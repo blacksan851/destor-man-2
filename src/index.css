@@ -1,1 +1,12 @@
 @import "tailwindcss";
+
+@layer base {
+  body {
+    font-weight: 400;
+    color: #1E293B;
+  }
+
+  .dark body {
+    color: #F8FAFC;
+  }
+}
