@@ -582,44 +582,44 @@ export function Pos() {
             </div>
           ) : (
             cart.map((item) => (
-              <div key={item.product.id} className="flex items-center justify-between p-3 bg-gray-50 dark:bg-gray-800/60 rounded-2xl border border-gray-100 dark:border-gray-800">
+              <div key={item.product.id} className="flex items-center justify-between p-3.5 bg-[#0B1120] rounded-2xl border border-gray-800 shadow-md">
                 <div className="flex-1 min-w-0 pr-2">
-                  <h5 className="font-bold text-slate-900 dark:text-white text-xs truncate">
+                  <h5 className="font-bold text-white text-xs truncate">
                     {item.product.name}
                   </h5>
-                  <p className="text-[11px] font-semibold text-emerald-600 dark:text-emerald-400 mt-0.5">
+                  <p className="text-[11px] font-black text-emerald-400 mt-0.5">
                     {item.product.price.toLocaleString('pt-MZ')},00 MT
                   </p>
                 </div>
 
                 <div className="flex items-center gap-2">
-                  <div className="flex items-center border border-gray-200 dark:border-gray-700 rounded-lg bg-white dark:bg-gray-800 overflow-hidden">
+                  <div className="flex items-center border border-gray-700 rounded-xl bg-[#1E293B] overflow-hidden">
                     <button 
                       onClick={() => handleUpdateQuantity(item.product.id, -1)}
-                      className="p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      className="p-1.5 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
                     >
-                      <Minus className="w-3 h-3" />
+                      <Minus className="w-3.5 h-3.5" />
                     </button>
-                    <span className="px-2 text-xs font-extrabold text-slate-900 dark:text-white">
+                    <span className="px-2 text-xs font-black text-white">
                       {item.quantity}
                     </span>
                     <button 
                       onClick={() => handleUpdateQuantity(item.product.id, 1)}
-                      className="p-1 text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700"
+                      className="p-1.5 text-gray-300 hover:text-white hover:bg-gray-700 transition-colors"
                     >
-                      <Plus className="w-3 h-3" />
+                      <Plus className="w-3.5 h-3.5" />
                     </button>
                   </div>
 
-                  <span className="text-xs font-black text-slate-900 dark:text-white w-16 text-right">
+                  <span className="text-xs font-black text-emerald-400 w-16 text-right">
                     {(item.product.price * item.quantity).toLocaleString('pt-MZ')} MT
                   </span>
 
                   <button 
                     onClick={() => handleRemoveFromCart(item.product.id)}
-                    className="p-1 text-gray-400 hover:text-red-500"
+                    className="p-1.5 text-gray-400 hover:text-red-400 hover:bg-red-500/10 rounded-lg transition-colors"
                   >
-                    <Trash2 className="w-3.5 h-3.5" />
+                    <Trash2 className="w-4 h-4" />
                   </button>
                 </div>
               </div>

@@ -535,7 +535,7 @@ export function Products() {
       </div>
 
       {/* Products Table View */}
-      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+      <div className="bg-[#0B1120] rounded-2xl border border-gray-800 shadow-xl overflow-hidden">
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center text-gray-500">
             <Loader2 className="w-8 h-8 animate-spin text-emerald-500 mb-2" />
@@ -567,7 +567,7 @@ export function Products() {
             <div className="hidden md:block overflow-x-auto">
               <table className="w-full text-left border-collapse">
                 <thead>
-                  <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                  <tr className="border-b border-gray-800 bg-[#0F172A] text-xs font-black text-gray-300 uppercase tracking-wider">
                     <th className="py-4 px-6">Produto</th>
                     <th className="py-4 px-6">Categoria</th>
                     <th className="py-4 px-6">Preço Venda</th>
@@ -576,24 +576,24 @@ export function Products() {
                     <th className="py-4 px-6 text-right">Ações</th>
                   </tr>
                 </thead>
-                <tbody className="divide-y divide-gray-100 dark:divide-gray-800 text-sm">
+                <tbody className="divide-y divide-gray-800 bg-[#0F172A] text-sm">
                   {filteredProducts.map((p) => {
                     const isOut = p.stock_quantity <= 0;
                     const isLow = p.stock_quantity > 0 && p.stock_quantity <= p.min_stock_alert;
 
                     return (
-                      <tr key={p.id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/40 transition-colors">
+                      <tr key={p.id} className="bg-[#0F172A] hover:bg-[#1E293B] transition-colors">
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-3">
                             {p.image_url ? (
-                              <img src={p.image_url} alt={p.name} className="w-10 h-10 rounded-xl object-cover border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 shrink-0" />
+                              <img src={p.image_url} alt={p.name} className="w-10 h-10 rounded-xl object-cover border border-gray-700 bg-gray-800 shrink-0" />
                             ) : (
-                              <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center font-bold text-sm shrink-0">
+                              <div className="w-10 h-10 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-bold text-sm shrink-0">
                                 {p.name.charAt(0).toUpperCase()}
                               </div>
                             )}
                             <div>
-                              <div className="font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                              <div className="font-extrabold text-white flex items-center gap-2 text-sm">
                                 <span>{p.name}</span>
                               </div>
                               <div className="text-xs text-gray-400 font-mono mt-0.5 flex items-center gap-1">
@@ -603,20 +603,20 @@ export function Products() {
                             </div>
                           </div>
                         </td>
-                        <td className="py-4 px-6 text-slate-600 dark:text-gray-300">
-                          <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 rounded-lg text-xs font-medium">
+                        <td className="py-4 px-6 text-gray-300">
+                          <span className="px-2.5 py-1 bg-[#1E293B] border border-gray-700 rounded-lg text-xs font-bold text-gray-200">
                             {p.category || 'Geral'}
                           </span>
                         </td>
-                        <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">
+                        <td className="py-4 px-6 font-black text-white text-sm">
                           {p.price.toLocaleString('pt-MZ')},00 MT
                         </td>
-                        <td className="py-4 px-6 text-gray-500 dark:text-gray-400">
+                        <td className="py-4 px-6 text-gray-400 font-semibold">
                           {p.cost_price ? `${p.cost_price.toLocaleString('pt-MZ')},00 MT` : '-'}
                         </td>
                         <td className="py-4 px-6">
                           <div className="flex items-center gap-2">
-                            <span className={`font-bold ${isOut ? 'text-red-500' : isLow ? 'text-amber-500' : 'text-slate-900 dark:text-white'}`}>
+                            <span className={`font-bold ${isOut ? 'text-red-400' : isLow ? 'text-amber-400' : 'text-white'}`}>
                               {p.stock_quantity} {p.unit || 'UN'}
                             </span>
 
@@ -658,39 +658,39 @@ export function Products() {
           </div>
 
           {/* Mobile Card View */}
-          <div className="block md:hidden divide-y divide-gray-100 dark:divide-gray-800">
+          <div className="block md:hidden divide-y divide-gray-800 bg-[#0F172A]">
             {filteredProducts.map((p) => {
               const isOut = p.stock_quantity <= 0;
               const isLow = p.stock_quantity > 0 && p.stock_quantity <= p.min_stock_alert;
 
               return (
-                <div key={p.id} className="p-4 space-y-3 hover:bg-gray-50/50 dark:hover:bg-gray-800/30 transition-colors">
+                <div key={p.id} className="p-4 space-y-3 bg-[#0F172A] hover:bg-[#1E293B] transition-colors">
                   <div className="flex justify-between items-start gap-3">
                     <div className="flex items-center gap-3">
                       {p.image_url ? (
-                        <img src={p.image_url} alt={p.name} className="w-12 h-12 rounded-xl object-cover border border-gray-200 dark:border-gray-700 bg-gray-50 dark:bg-gray-800 shrink-0" />
+                        <img src={p.image_url} alt={p.name} className="w-12 h-12 rounded-xl object-cover border border-gray-700 bg-gray-800 shrink-0" />
                       ) : (
-                        <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 border border-emerald-100 dark:border-emerald-800 flex items-center justify-center font-bold text-base shrink-0">
+                        <div className="w-12 h-12 rounded-xl bg-emerald-500/20 text-emerald-400 border border-emerald-500/30 flex items-center justify-center font-bold text-base shrink-0">
                           {p.name.charAt(0).toUpperCase()}
                         </div>
                       )}
                       <div>
-                        <h4 className="font-bold text-slate-900 dark:text-white text-base">{p.name}</h4>
+                        <h4 className="font-bold text-white text-base">{p.name}</h4>
                         <p className="text-xs text-gray-400 font-mono flex items-center gap-1 mt-0.5">
                           <Barcode className="w-3 h-3 text-emerald-500" />
                           <span>{p.sku || 'Sem SKU'}</span>
                         </p>
                       </div>
                     </div>
-                    <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 rounded-lg text-xs font-semibold text-slate-600 dark:text-gray-300 shrink-0">
+                    <span className="px-2.5 py-1 bg-[#1E293B] border border-gray-700 rounded-lg text-xs font-semibold text-gray-200 shrink-0">
                       {p.category || 'Geral'}
                     </span>
                   </div>
 
-                  <div className="flex justify-between items-center bg-gray-50 dark:bg-gray-800/50 p-3 rounded-xl">
+                  <div className="flex justify-between items-center bg-[#1E293B] p-3 rounded-xl border border-gray-800">
                     <div>
                       <p className="text-[10px] text-gray-400 font-bold uppercase">Preço Venda</p>
-                      <p className="font-black text-emerald-600 dark:text-emerald-400 text-sm">
+                      <p className="font-black text-emerald-400 text-sm">
                         {p.price.toLocaleString('pt-MZ')},00 MT
                       </p>
                     </div>
@@ -698,11 +698,11 @@ export function Products() {
                     <div>
                       <p className="text-[10px] text-gray-400 font-bold uppercase">Estoque</p>
                       <div className="flex items-center gap-1">
-                        <span className={`font-black text-xs ${isOut ? 'text-red-500' : isLow ? 'text-amber-500' : 'text-slate-900 dark:text-white'}`}>
+                        <span className={`font-black text-xs ${isOut ? 'text-red-400' : isLow ? 'text-amber-400' : 'text-white'}`}>
                           {p.stock_quantity} {p.unit || 'UN'}
                         </span>
-                        {isOut && <span className="text-[9px] font-extrabold text-red-500 bg-red-100 dark:bg-red-900/40 px-1.5 py-0.5 rounded">Esgotado</span>}
-                        {isLow && <span className="text-[9px] font-extrabold text-amber-500 bg-amber-100 dark:bg-amber-900/40 px-1.5 py-0.5 rounded">Baixo</span>}
+                        {isOut && <span className="text-[9px] font-extrabold text-red-400 bg-red-900/40 px-1.5 py-0.5 rounded">Esgotado</span>}
+                        {isLow && <span className="text-[9px] font-extrabold text-amber-400 bg-amber-900/40 px-1.5 py-0.5 rounded">Baixo</span>}
                       </div>
                     </div>
                   </div>
