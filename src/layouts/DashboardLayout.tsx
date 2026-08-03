@@ -195,19 +195,19 @@ export function DashboardLayout() {
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Topbar */}
-        <header className="h-20 bg-white/80 dark:bg-gray-900/80 backdrop-blur-md border-b border-gray-200 dark:border-gray-800 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-8">
+        <header className="h-20 bg-[#0F172A]/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-8">
           <div className="flex items-center gap-4">
             <button 
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-lg text-slate-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"
+              className="lg:hidden p-2 rounded-lg text-gray-300 hover:bg-white/10"
             >
               <Menu className="w-6 h-6" />
             </button>
             <div className="flex flex-col">
-              <h1 className="text-xl font-bold text-slate-900 dark:text-white">
+              <h1 className="text-xl font-bold text-white">
                 Olá, {company?.company_name || 'Carregando...'}
               </h1>
-              <p className="text-xs text-gray-500 dark:text-gray-400 uppercase tracking-wide hidden sm:block">Controle Geral em Tempo Real</p>
+              <p className="text-xs text-gray-400 uppercase tracking-wide hidden sm:block">Controle Geral em Tempo Real</p>
             </div>
           </div>
 
@@ -239,7 +239,7 @@ export function DashboardLayout() {
               </button>
             )}
             
-            <div className="hidden sm:block h-8 w-[1px] bg-gray-200 dark:bg-gray-800"></div>
+            <div className="hidden sm:block h-8 w-[1px] bg-white/10"></div>
             
             <Link 
               to="/dashboard/configuracoes" 
@@ -247,7 +247,7 @@ export function DashboardLayout() {
               title="Clique para editar as configurações da empresa"
             >
               <div className="text-right hidden sm:block">
-                <p className="text-sm font-bold text-slate-900 dark:text-white group-hover:text-emerald-500 transition-colors">
+                <p className="text-sm font-bold text-white group-hover:text-emerald-400 transition-colors">
                   {company?.company_name || 'Sua Empresa'}
                 </p>
                 <p className="text-[10px] text-emerald-500 font-bold uppercase tracking-widest">

@@ -13,25 +13,33 @@
   }
 }
 
-/* Elegant Dark Matte Theme (#0F172A Slate / Dark Matte) */
+/* Enforce Dark Matte (#0F172A & #0B1120) across all components & white overrides */
 .bg-white,
 .bg-[#F8FAFC],
-.bg-gray-50 {
+.bg-[#FFFFFF],
+.bg-gray-50,
+.bg-slate-50,
+header.bg-white\/80 {
   background-color: #0F172A !important;
 }
 
-.bg-[#F5F5F5] {
+.bg-gray-50\/50,
+.bg-gray-100,
+.bg-slate-100 {
   background-color: #0B1120 !important;
 }
 
 .text-slate-900,
 .text-slate-800,
-.text-slate-700 {
+.text-slate-700,
+.text-gray-900,
+.text-gray-800 {
   color: #F8FAFC !important;
 }
 
 .border-gray-100,
-.border-gray-200 {
+.border-gray-200,
+.border-slate-200 {
   border-color: rgba(255, 255, 255, 0.1) !important;
 }
 
