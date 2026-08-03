@@ -1,11 +1,10 @@
-const CACHE_NAME = 'dr-gestor-mz-v2-' + Date.now();
+const CACHE_NAME = 'dr-gestor-mz-v3-light-' + Date.now();
 const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
 ];
 
-// Install — cache shell & force update
 self.addEventListener('install', (event) => {
   event.waitUntil(
     caches.open(CACHE_NAME).then((cache) => cache.addAll(STATIC_ASSETS))
@@ -13,7 +12,6 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Activate — purge all old caches immediately
 self.addEventListener('activate', (event) => {
   event.waitUntil(
     caches.keys().then((keys) =>
@@ -23,7 +21,6 @@ self.addEventListener('activate', (event) => {
   self.clients.claim();
 });
 
-// Fetch — network-first for fresh updates across all devices
 self.addEventListener('fetch', (event) => {
   const { request } = event;
   const url = new URL(request.url);
@@ -31,7 +28,6 @@ self.addEventListener('fetch', (event) => {
   if (request.method !== 'GET') return;
   if (url.hostname !== self.location.hostname) return;
 
-  // Network first: always fetch newest version from server
   event.respondWith(
     fetch(request)
       .then((response) => {

@@ -118,7 +118,7 @@ export function DashboardLayout() {
   ];
 
   return (
-    <div className={`min-h-screen ${theme === 'dark' ? 'dark bg-black text-white' : 'bg-white text-slate-900'} flex transition-colors duration-200`}>
+    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex transition-colors duration-200">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div 
@@ -225,13 +225,6 @@ export function DashboardLayout() {
                 <span className="hidden md:inline">Instalar App</span>
               </button>
             )}
-
-            <button 
-              onClick={toggleTheme}
-              className="p-2 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300 border border-gray-100 dark:border-gray-700 rounded-full bg-gray-50 dark:bg-gray-800 transition-colors"
-            >
-              {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-            </button>
             
             <div className="hidden sm:block h-8 w-[1px] bg-gray-200 dark:bg-gray-800"></div>
             
