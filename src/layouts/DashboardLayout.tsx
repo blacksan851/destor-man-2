@@ -128,29 +128,29 @@ export function DashboardLayout() {
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 z-40 bg-slate-900/50 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-[90] bg-slate-950/80 backdrop-blur-md lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
       <div className={`
-        fixed inset-y-0 left-0 z-50 w-64 bg-[#0F172A] flex flex-col
-        transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0
+        fixed inset-y-0 left-0 z-[100] w-72 max-w-[85vw] bg-[#0B1120] border-r border-emerald-500/30 shadow-2xl flex flex-col
+        transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 lg:max-w-none lg:w-64 lg:border-r lg:border-white/10
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
         <div className="p-6 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src="/logo.png" alt="Dr Gestor MZ" className="w-9 h-9 rounded-lg object-contain bg-white/5 p-0.5" />
-            <span className="text-white font-bold text-lg tracking-tight">
+            <span className="text-white font-black text-lg tracking-tight">
               Dr Gestor <span className="text-[#10B981]">MZ</span>
             </span>
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-1.5 text-gray-400 hover:text-white rounded-lg hover:bg-white/10 transition-colors"
+            className="lg:hidden p-2 text-gray-300 hover:text-white rounded-xl bg-[#0F172A] border border-gray-800 transition-colors"
           >
-            <X className="w-5 h-5" />
+            <X className="w-5 h-5 text-emerald-400" />
           </button>
         </div>
 
