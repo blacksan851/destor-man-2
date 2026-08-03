@@ -4,7 +4,7 @@ import {
   ShoppingCart, Search, Plus, Minus, Trash2, 
   Smartphone, Banknote, CreditCard, CheckCircle2, 
   Printer, ArrowRight, Barcode, Camera, X, Loader2,
-  Package, User, Filter, AlertTriangle, FileText
+  Package, User, Filter, AlertTriangle, FileText, Building
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../../lib/supabase';
@@ -646,10 +646,10 @@ export function Pos() {
           {/* Payment Method Selector Buttons */}
           <div className="space-y-1.5">
             <label className="text-[11px] font-bold text-gray-400 uppercase tracking-wider">Forma de Pagamento</label>
-            <div className="grid grid-cols-4 gap-2">
+            <div className="grid grid-cols-5 gap-2">
               <button
                 onClick={() => setPaymentMethod('M-Pesa')}
-                className={`py-3 px-1.5 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
+                className={`py-3 px-1 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
                   paymentMethod === 'M-Pesa' 
                     ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
                     : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'
@@ -661,7 +661,7 @@ export function Pos() {
 
               <button
                 onClick={() => setPaymentMethod('e-Mola')}
-                className={`py-3 px-1.5 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
+                className={`py-3 px-1 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
                   paymentMethod === 'e-Mola' 
                     ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
                     : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'
@@ -672,8 +672,20 @@ export function Pos() {
               </button>
 
               <button
+                onClick={() => setPaymentMethod('Banco')}
+                className={`py-3 px-1 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
+                  paymentMethod === 'Banco' 
+                    ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
+                    : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'
+                }`}
+              >
+                <Building className="w-4 h-4" />
+                <span>Banco</span>
+              </button>
+
+              <button
                 onClick={() => setPaymentMethod('Dinheiro')}
-                className={`py-3 px-1.5 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
+                className={`py-3 px-1 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
                   paymentMethod === 'Dinheiro' 
                     ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
                     : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'
@@ -685,7 +697,7 @@ export function Pos() {
 
               <button
                 onClick={() => setPaymentMethod('Fiado')}
-                className={`py-3 px-1.5 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
+                className={`py-3 px-1 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
                   paymentMethod === 'Fiado' 
                     ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
                     : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'

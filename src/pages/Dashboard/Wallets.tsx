@@ -3,7 +3,7 @@ import type { FormEvent } from 'react';
 import { 
   Smartphone, ArrowUpRight, ArrowDownLeft, RefreshCw, 
   Search, Filter, CheckCircle2, ShieldCheck, Download,
-  Wallet, DollarSign, Loader2, X, AlertCircle, Plus, Minus
+  Wallet, DollarSign, Loader2, X, AlertCircle, Plus, Minus, Building
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../../lib/supabase';
@@ -22,31 +22,31 @@ interface WalletItem {
 export function Wallets() {
   const [transactions, setTransactions] = useState<WalletItem[]>([]);
   const [loading, setLoading] = useState(true);
-  const [providerFilter, setProviderFilter] = useState<'Todas' | 'M-Pesa' | 'e-Mola'>('Todas');
+  const [providerFilter, setProviderFilter] = useState<'Todas' | 'M-Pesa' | 'e-Mola' | 'Banco'>('Todas');
   const [typeFilter, setTypeFilter] = useState<'Todas' | 'Entradas' | 'Saídas'>('Todas');
   const [searchQuery, setSearchQuery] = useState('');
 
   // Modal State for Manual Movement (Entrada / Saída)
   const [isMovementModalOpen, setIsMovementModalOpen] = useState(false);
   const [movementType, setMovementType] = useState<'in' | 'out'>('out');
-  const [selectedWallet, setSelectedWallet] = useState<'M-Pesa' | 'e-Mola'>('M-Pesa');
+  const [selectedWallet, setSelectedWallet] = useState<'M-Pesa' | 'e-Mola' | 'Banco'>('M-Pesa');
   const [movementAmount, setMovementAmount] = useState('');
   const [movementDescription, setMovementDescription] = useState('');
   const [submittingMovement, setSubmittingMovement] = useState(false);
 
-  // Fetch Mobile Money Transactions & Movements from Supabase
+  // Fetch Mobile Money & Bank Transactions & Movements from Supabase
   const fetchWalletData = async () => {
     setLoading(true);
     try {
       const { data: { user } } = await supabase.auth.getUser();
       if (!user) return;
 
-      // 1. Fetch Sales from `sales` (Entradas de vendas POS)
+      // 1. Fetch Sales from `sales` (Entradas de vendas POS com M-Pesa, e-Mola ou Banco)
       const { data: salesData } = await supabase
         .from('sales')
         .select('*')
         .eq('company_id', user.id)
-        .in('payment_method', ['M-Pesa', 'e-Mola'])
+        .in('payment_method', ['M-Pesa', 'e-Mola', 'Banco'])
         .order('created_at', { ascending: false });
 
       const salesList: WalletItem[] = (salesData || []).map((s: any) => ({
@@ -78,12 +78,12 @@ export function Wallets() {
         created_at: m.created_at
       }));
 
-      // 3. Fetch Expenses paid via M-Pesa or e-Mola from `expenses`
+      // 3. Fetch Expenses paid via M-Pesa, e-Mola or Banco from `expenses`
       const { data: expData } = await supabase
         .from('expenses')
         .select('*')
         .eq('company_id', user.id)
-        .in('payment_method', ['M-Pesa', 'e-Mola']);
+        .in('payment_method', ['M-Pesa', 'e-Mola', 'Banco']);
 
       const expList: WalletItem[] = (expData || []).map((e: any) => ({
         id: `exp-${e.id}`,
@@ -175,7 +175,11 @@ export function Wallets() {
   const emolaOut = transactions.filter(t => t.payment_method === 'e-Mola' && t.type === 'out').reduce((acc, t) => acc + t.total_amount, 0);
   const emolaNet = emolaIn - emolaOut;
 
-  const grandTotalMobile = mpesaNet + emolaNet;
+  const bankIn = transactions.filter(t => t.payment_method === 'Banco' && t.type === 'in').reduce((acc, t) => acc + t.total_amount, 0);
+  const bankOut = transactions.filter(t => t.payment_method === 'Banco' && t.type === 'out').reduce((acc, t) => acc + t.total_amount, 0);
+  const bankNet = bankIn - bankOut;
+
+  const grandTotalMobile = mpesaNet + emolaNet + bankNet;
 
   return (
     <div className="p-4 sm:p-8 space-y-6 max-w-7xl mx-auto">
@@ -183,10 +187,10 @@ export function Wallets() {
       <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
         <div>
           <h1 className="text-2xl sm:text-3xl font-extrabold text-slate-900 dark:text-white tracking-tight">
-            Carteiras Móveis (M-Pesa & e-Mola)
+            Carteiras & Contas Bancárias (M-Pesa, e-Mola & Banco)
           </h1>
           <p className="text-slate-500 dark:text-gray-400 text-sm mt-1">
-            Controle de entradas e saídas/despesas efetuadas diretamente através das suas carteiras móveis.
+            Controle de entradas e saídas efetuadas através de carteiras móveis e transferências bancárias.
           </p>
         </div>
 
@@ -224,81 +228,103 @@ export function Wallets() {
       </div>
 
       {/* Wallet Cards Grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* M-Pesa Business Card */}
-        <div className="bg-[#0F172A] text-white p-6 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[190px] shadow-xl">
-          <div className="relative z-10 space-y-4">
+        <div className="bg-[#0F172A] text-white p-5 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[180px] shadow-xl border border-gray-800">
+          <div className="relative z-10 space-y-3">
             <div className="flex justify-between items-start">
-              <div className="w-11 h-11 bg-red-500 rounded-2xl flex items-center justify-center font-black text-xl shadow-lg shadow-red-500/40">
+              <div className="w-10 h-10 bg-red-500 rounded-2xl flex items-center justify-center font-black text-lg shadow-lg shadow-red-500/40">
                 M
               </div>
-              <span className="px-2.5 py-1 bg-red-500/20 text-red-400 border border-red-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                Vodacom M-Pesa
+              <span className="px-2 py-0.5 bg-red-500/20 text-red-400 border border-red-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                M-Pesa
               </span>
             </div>
 
             <div>
-              <p className="text-xs text-white/60 font-medium">Saldo Líquido M-Pesa</p>
-              <p className="text-3xl font-black tracking-tight mt-0.5">
-                {mpesaNet.toLocaleString('pt-MZ')},00 <span className="text-sm font-normal text-white/60">MT</span>
+              <p className="text-[11px] text-white/60 font-medium">Saldo M-Pesa</p>
+              <p className="text-2xl font-black tracking-tight mt-0.5">
+                {mpesaNet.toLocaleString('pt-MZ')},00 <span className="text-xs font-normal text-white/60">MT</span>
               </p>
             </div>
           </div>
-          <div className="relative z-10 pt-2 border-t border-white/10 flex justify-between items-center text-[11px] text-white/60">
-            <span className="text-emerald-400 font-bold">+{mpesaIn.toLocaleString('pt-MZ')} MT (Entradas)</span>
-            <span className="text-red-400 font-bold">-{mpesaOut.toLocaleString('pt-MZ')} MT (Saídas)</span>
+          <div className="relative z-10 pt-2 border-t border-white/10 flex justify-between items-center text-[10px] text-white/60 font-bold">
+            <span className="text-emerald-400">+{mpesaIn.toLocaleString('pt-MZ')} MT</span>
+            <span className="text-red-400">-{mpesaOut.toLocaleString('pt-MZ')} MT</span>
           </div>
-          <div className="absolute -bottom-6 -right-6 w-36 h-36 bg-red-500/20 rounded-full blur-3xl pointer-events-none"></div>
         </div>
 
         {/* e-Mola Empresa Card */}
-        <div className="bg-[#0B1120] border border-gray-800 p-6 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[190px] shadow-xl">
-          <div className="relative z-10 space-y-4">
+        <div className="bg-[#0B1120] border border-gray-800 p-5 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[180px] shadow-xl">
+          <div className="relative z-10 space-y-3">
             <div className="flex justify-between items-start">
-              <div className="w-11 h-11 bg-orange-500 text-white rounded-2xl flex items-center justify-center font-serif font-black italic text-xl shadow-lg shadow-orange-500/40">
+              <div className="w-10 h-10 bg-orange-500 text-white rounded-2xl flex items-center justify-center font-serif font-black italic text-lg shadow-lg shadow-orange-500/40">
                 e
               </div>
-              <span className="px-2.5 py-1 bg-orange-500/20 text-orange-400 border border-orange-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
-                Movitel e-Mola
+              <span className="px-2 py-0.5 bg-orange-500/20 text-orange-400 border border-orange-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                e-Mola
               </span>
             </div>
 
             <div>
-              <p className="text-xs text-gray-400 font-medium">Saldo Líquido e-Mola</p>
-              <p className="text-3xl font-black tracking-tight text-white mt-0.5">
-                {emolaNet.toLocaleString('pt-MZ')},00 <span className="text-sm font-normal text-gray-400">MT</span>
+              <p className="text-[11px] text-gray-400 font-medium">Saldo e-Mola</p>
+              <p className="text-2xl font-black tracking-tight text-white mt-0.5">
+                {emolaNet.toLocaleString('pt-MZ')},00 <span className="text-xs font-normal text-gray-400">MT</span>
               </p>
             </div>
           </div>
-          <div className="relative z-10 pt-2 border-t border-gray-800 flex justify-between items-center text-[11px] text-gray-400">
-            <span className="text-emerald-400 font-bold">+{emolaIn.toLocaleString('pt-MZ')} MT (Entradas)</span>
-            <span className="text-red-400 font-bold">-{emolaOut.toLocaleString('pt-MZ')} MT (Saídas)</span>
+          <div className="relative z-10 pt-2 border-t border-gray-800 flex justify-between items-center text-[10px] text-gray-400 font-bold">
+            <span className="text-emerald-400">+{emolaIn.toLocaleString('pt-MZ')} MT</span>
+            <span className="text-red-400">-{emolaOut.toLocaleString('pt-MZ')} MT</span>
           </div>
-          <div className="absolute -bottom-6 -right-6 w-36 h-36 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
         </div>
 
-        {/* Grand Total Mobile Card */}
-        <div className="bg-gradient-to-br from-emerald-500 to-teal-700 text-white p-6 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[190px] shadow-xl">
-          <div className="relative z-10 space-y-4">
+        {/* Banco / Conta Bancaria Card */}
+        <div className="bg-[#0B1120] border border-gray-800 p-5 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[180px] shadow-xl">
+          <div className="relative z-10 space-y-3">
             <div className="flex justify-between items-start">
-              <div className="w-11 h-11 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center font-bold text-white shadow-inner">
-                <Wallet className="w-6 h-6" />
+              <div className="w-10 h-10 bg-blue-600 text-white rounded-2xl flex items-center justify-center font-black text-lg shadow-lg shadow-blue-500/40">
+                B
               </div>
-              <span className="px-2.5 py-1 bg-white/20 text-white rounded-full text-[10px] font-bold uppercase tracking-wider">
-                Saldo Disponível
+              <span className="px-2 py-0.5 bg-blue-500/20 text-blue-400 border border-blue-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
+                Banco
               </span>
             </div>
 
             <div>
-              <p className="text-xs text-white/80 font-medium">Total em Carteiras Móveis</p>
-              <p className="text-3xl font-black tracking-tight mt-0.5">
-                {grandTotalMobile.toLocaleString('pt-MZ')},00 <span className="text-sm font-normal text-white/80">MT</span>
+              <p className="text-[11px] text-gray-400 font-medium">Saldo Bancário</p>
+              <p className="text-2xl font-black tracking-tight text-white mt-0.5">
+                {bankNet.toLocaleString('pt-MZ')},00 <span className="text-xs font-normal text-gray-400">MT</span>
               </p>
             </div>
           </div>
-          <div className="relative z-10 pt-2 border-t border-white/20 flex justify-between items-center text-xs text-white/80">
+          <div className="relative z-10 pt-2 border-t border-gray-800 flex justify-between items-center text-[10px] text-gray-400 font-bold">
+            <span className="text-emerald-400">+{bankIn.toLocaleString('pt-MZ')} MT</span>
+            <span className="text-red-400">-{bankOut.toLocaleString('pt-MZ')} MT</span>
+          </div>
+        </div>
+
+        {/* Grand Total Mobile & Bank Card */}
+        <div className="bg-gradient-to-br from-emerald-500 to-teal-700 text-white p-5 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[180px] shadow-xl">
+          <div className="relative z-10 space-y-3">
+            <div className="flex justify-between items-start">
+              <div className="w-10 h-10 bg-white/20 backdrop-blur-md rounded-2xl flex items-center justify-center font-bold text-white shadow-inner">
+                <Wallet className="w-5 h-5" />
+              </div>
+              <span className="px-2 py-0.5 bg-white/20 text-white rounded-full text-[10px] font-bold uppercase tracking-wider">
+                Total Digital
+              </span>
+            </div>
+
+            <div>
+              <p className="text-[11px] text-white/80 font-medium">Total em Carteiras & Banco</p>
+              <p className="text-2xl font-black tracking-tight mt-0.5">
+                {grandTotalMobile.toLocaleString('pt-MZ')},00 <span className="text-xs font-normal text-white/80">MT</span>
+              </p>
+            </div>
+          </div>
+          <div className="relative z-10 pt-2 border-t border-white/20 flex justify-between items-center text-xs text-white/80 font-bold">
             <span>Saldo Líquido Acumulado</span>
-            <span className="font-bold">Dr Gestor MZ</span>
           </div>
         </div>
       </div>
@@ -307,7 +333,7 @@ export function Wallets() {
       <div className="bg-[#0B1120] p-4 rounded-2xl border border-gray-800 shadow-xl flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
         {/* Provider Tabs */}
         <div className="flex flex-wrap gap-2 bg-[#0F172A] p-1 rounded-xl border border-gray-800">
-          {(['Todas', 'M-Pesa', 'e-Mola'] as const).map(provider => (
+          {(['Todas', 'M-Pesa', 'e-Mola', 'Banco'] as const).map(provider => (
             <button
               key={provider}
               onClick={() => setProviderFilter(provider)}
@@ -456,15 +482,15 @@ export function Wallets() {
 
               <form onSubmit={handleSubmitMovement} className="space-y-4">
                 <div>
-                  <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Carteira Móvel</label>
-                  <div className="grid grid-cols-2 gap-2">
+                  <label className="block text-xs font-bold text-gray-400 uppercase mb-1">Carteira / Conta</label>
+                  <div className="grid grid-cols-3 gap-2">
                     <button
                       type="button"
                       onClick={() => setSelectedWallet('M-Pesa')}
-                      className={`py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border cursor-pointer ${
+                      className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border cursor-pointer ${
                         selectedWallet === 'M-Pesa'
-                          ? 'border-red-500 bg-red-50 text-red-600'
-                          : 'border-gray-200 text-gray-500'
+                          ? 'border-red-500 bg-red-500/20 text-red-400'
+                          : 'border-gray-800 bg-[#0F172A] text-gray-400'
                       }`}
                     >
                       <span className="w-2 h-2 rounded-full bg-red-500"></span>
@@ -474,14 +500,27 @@ export function Wallets() {
                     <button
                       type="button"
                       onClick={() => setSelectedWallet('e-Mola')}
-                      className={`py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-2 border cursor-pointer ${
+                      className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border cursor-pointer ${
                         selectedWallet === 'e-Mola'
-                          ? 'border-orange-500 bg-orange-50 text-orange-600'
-                          : 'border-gray-200 text-gray-500'
+                          ? 'border-orange-500 bg-orange-500/20 text-orange-400'
+                          : 'border-gray-800 bg-[#0F172A] text-gray-400'
                       }`}
                     >
                       <span className="w-2 h-2 rounded-full bg-orange-500"></span>
                       <span>e-Mola</span>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => setSelectedWallet('Banco')}
+                      className={`py-2 px-2 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 border cursor-pointer ${
+                        selectedWallet === 'Banco'
+                          ? 'border-blue-500 bg-blue-500/20 text-blue-400'
+                          : 'border-gray-800 bg-[#0F172A] text-gray-400'
+                      }`}
+                    >
+                      <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                      <span>Banco</span>
                     </button>
                   </div>
                 </div>
