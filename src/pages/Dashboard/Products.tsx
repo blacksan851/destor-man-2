@@ -732,20 +732,20 @@ export function Products() {
       {/* Modal: Create / Edit Product */}
       <AnimatePresence>
         {isModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4 overflow-y-auto">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4 overflow-y-auto">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-100 dark:border-gray-800 my-8"
+              className="bg-[#0B1120] rounded-2xl shadow-2xl w-full max-w-lg overflow-hidden border border-gray-800 my-8"
             >
-              <div className="p-6 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
-                <h3 className="text-xl font-bold text-slate-900 dark:text-white">
+              <div className="p-6 border-b border-gray-800 flex justify-between items-center bg-[#0B1120]">
+                <h3 className="text-xl font-extrabold text-white">
                   {editingProduct ? 'Editar Produto' : 'Cadastrar Novo Produto'}
                 </h3>
                 <button 
                   onClick={() => setIsModalOpen(false)}
-                  className="p-1.5 text-gray-400 hover:text-gray-600 dark:hover:text-gray-200 rounded-lg"
+                  className="p-1.5 text-gray-400 hover:text-white bg-[#0F172A] rounded-lg border border-gray-800"
                 >
                   <X className="w-5 h-5" />
                 </button>
@@ -759,7 +759,7 @@ export function Products() {
                 )}
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-bold text-gray-200 mb-1">
                     Nome do Produto *
                   </label>
                   <input
@@ -768,24 +768,24 @@ export function Products() {
                     value={formData.name}
                     onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                     placeholder="Ex: Arroz 25kg Top"
-                    className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm"
+                    className="w-full px-4 py-3 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm font-bold"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1">
+                  <label className="block text-sm font-bold text-gray-200 mb-1">
                     Imagem do Produto (URL da foto)
                   </label>
                   <div className="flex gap-2 items-center">
                     {formData.image_url && (
-                      <img src={formData.image_url} alt="Preview" className="w-11 h-11 rounded-xl object-cover border border-gray-200 dark:border-gray-700 shrink-0 bg-gray-50" />
+                      <img src={formData.image_url} alt="Preview" className="w-11 h-11 rounded-xl object-cover border border-gray-700 shrink-0 bg-[#0F172A]" />
                     )}
                     <input
                       type="url"
                       value={formData.image_url || ''}
                       onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
                       placeholder="https://exemplo.com/imagem-do-produto.jpg"
-                      className="w-full px-4 py-2.5 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm"
+                      className="w-full px-4 py-2.5 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm"
                     />
                   </div>
                   <p className="text-[10px] text-gray-400 mt-1">Insira a URL de uma imagem da internet para ser exibida no POS e no Catálogo.</p>
@@ -793,12 +793,12 @@ export function Products() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1 flex justify-between items-center">
+                    <label className="block text-sm font-bold text-gray-200 mb-1 flex justify-between items-center">
                       <span>SKU / Código</span>
                       <button
                         type="button"
                         onClick={() => handleOpenScanner('sku')}
-                        className="text-xs text-emerald-500 font-bold flex items-center gap-1 hover:underline cursor-pointer"
+                        className="text-xs text-emerald-400 font-bold flex items-center gap-1 hover:underline cursor-pointer"
                       >
                         <Scan className="w-3 h-3" /> Escanear
                       </button>
@@ -808,17 +808,17 @@ export function Products() {
                       value={formData.sku}
                       onChange={(e) => setFormData({ ...formData, sku: e.target.value })}
                       placeholder="Ex: 5601234567"
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm"
+                      className="w-full px-4 py-3 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm font-mono font-bold"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1 flex justify-between items-center">
+                    <label className="block text-sm font-bold text-gray-200 mb-1 flex justify-between items-center">
                       <span>Categoria</span>
                       <button
                         type="button"
                         onClick={() => setIsCategoryModalOpen(true)}
-                        className="text-xs text-emerald-500 font-bold hover:underline cursor-pointer"
+                        className="text-xs text-emerald-400 font-bold hover:underline cursor-pointer"
                       >
                         + Nova
                       </button>
@@ -826,7 +826,7 @@ export function Products() {
                     <select
                       value={formData.category}
                       onChange={(e) => setFormData({ ...formData, category: e.target.value })}
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm font-medium"
+                      className="w-full px-4 py-3 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm font-bold"
                     >
                       {allCategories.filter(c => c !== 'Todas').map((cat) => (
                         <option key={cat} value={cat}>{cat}</option>
@@ -837,7 +837,7 @@ export function Products() {
 
                 <div className="grid grid-cols-2 gap-4">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-bold text-gray-200 mb-1">
                       Preço de Venda (MT) *
                     </label>
                     <input
@@ -847,12 +847,12 @@ export function Products() {
                       value={formData.price}
                       onChange={(e) => setFormData({ ...formData, price: e.target.value })}
                       placeholder="0.00"
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm font-bold"
+                      className="w-full px-4 py-3 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm font-bold"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-bold text-gray-200 mb-1">
                       Preço de Custo (MT)
                     </label>
                     <input
@@ -861,14 +861,14 @@ export function Products() {
                       value={formData.cost_price}
                       onChange={(e) => setFormData({ ...formData, cost_price: e.target.value })}
                       placeholder="0.00"
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm"
+                      className="w-full px-4 py-3 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm font-bold"
                     />
                   </div>
                 </div>
 
                 <div className="grid grid-cols-3 gap-3">
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-bold text-gray-200 mb-1">
                       Estoque Inicial *
                     </label>
                     <input
@@ -877,12 +877,12 @@ export function Products() {
                       value={formData.stock_quantity}
                       onChange={(e) => setFormData({ ...formData, stock_quantity: e.target.value })}
                       placeholder="0"
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm font-bold"
+                      className="w-full px-4 py-3 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm font-bold"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-bold text-gray-200 mb-1">
                       Alerta Mínimo
                     </label>
                     <input
@@ -890,18 +890,18 @@ export function Products() {
                       value={formData.min_stock_alert}
                       onChange={(e) => setFormData({ ...formData, min_stock_alert: e.target.value })}
                       placeholder="5"
-                      className="w-full px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm"
+                      className="w-full px-4 py-3 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm font-bold"
                     />
                   </div>
 
                   <div>
-                    <label className="block text-sm font-medium text-slate-700 dark:text-gray-300 mb-1">
+                    <label className="block text-sm font-bold text-gray-200 mb-1">
                       Unidade
                     </label>
                     <select
                       value={formData.unit}
                       onChange={(e) => setFormData({ ...formData, unit: e.target.value })}
-                      className="w-full px-3 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-slate-900 dark:text-white text-sm font-medium"
+                      className="w-full px-3 py-3 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm font-bold"
                     >
                       <option value="UN">UN</option>
                       <option value="KG">KG</option>
@@ -916,14 +916,14 @@ export function Products() {
                   <button
                     type="button"
                     onClick={() => setIsModalOpen(false)}
-                    className="flex-1 py-3 px-4 bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 text-slate-700 dark:text-gray-300 font-medium rounded-xl transition-colors text-sm cursor-pointer"
+                    className="flex-1 py-3 px-4 bg-[#0F172A] border border-gray-800 hover:bg-gray-800 text-white font-bold rounded-xl transition-colors text-sm cursor-pointer"
                   >
                     Cancelar
                   </button>
                   <button
                     type="submit"
                     disabled={submitting}
-                    className="flex-1 py-3 px-4 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-medium rounded-xl transition-colors text-sm flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 cursor-pointer"
+                    className="flex-1 py-3 px-4 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-black rounded-xl transition-colors text-sm flex items-center justify-center gap-2 shadow-md shadow-emerald-500/20 cursor-pointer"
                   >
                     {submitting ? (
                       <>
@@ -944,15 +944,15 @@ export function Products() {
       {/* Modal: Create Category */}
       <AnimatePresence>
         {isCategoryModalOpen && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm p-4">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-sm p-4">
             <motion.div
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-white dark:bg-gray-900 rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-gray-100 dark:border-gray-800 p-6 space-y-4"
+              className="bg-[#0B1120] rounded-2xl shadow-2xl w-full max-w-md overflow-hidden border border-gray-800 p-6 space-y-4 text-white"
             >
               <div className="flex justify-between items-center">
-                <h3 className="text-lg font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
                   <FolderPlus className="w-5 h-5 text-emerald-500" />
                   <span>Cadastrar Nova Categoria</span>
                 </h3>
