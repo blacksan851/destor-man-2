@@ -371,7 +371,7 @@ export function Expenses() {
                         {exp.description}
                       </td>
                       <td className="py-4 px-6">
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-slate-700 dark:text-gray-300 rounded-xl font-medium text-xs">
+                        <span className="inline-flex items-center gap-1 px-3 py-1 bg-[#1E293B] border border-gray-700 text-gray-200 rounded-xl font-bold text-xs">
                           {exp.payment_method}
                         </span>
                       </td>

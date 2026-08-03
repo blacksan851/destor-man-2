@@ -32,15 +32,21 @@ header.bg-white\/80 {
   background-color: #0B1120 !important;
 }
 
-/* Inner elements and input fields background (#1E293B) */
+/* Inner elements, table rows, and input fields background (#1E293B / #0F172A) */
 .bg-gray-50\/50,
 .bg-gray-200,
 .bg-slate-200,
 input,
 select,
-textarea {
-  background-color: #1E293B !important;
+textarea,
+tbody tr,
+tbody td {
+  background-color: #0F172A !important;
   color: #FFFFFF !important;
+}
+
+tbody tr:hover {
+  background-color: #1E293B !important;
 }
 
 /* Force White Buttons to Dark Matte (#0B1120 or #1E293B) while preserving active selection highlights */
