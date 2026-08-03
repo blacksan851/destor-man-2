@@ -22,14 +22,9 @@ export default function App() {
   const { theme } = useThemeStore();
 
   useEffect(() => {
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-      document.documentElement.style.colorScheme = 'dark';
-    } else {
-      document.documentElement.classList.remove('dark');
-      document.documentElement.style.colorScheme = 'light';
-    }
-  }, [theme]);
+    document.documentElement.classList.remove('dark');
+    document.documentElement.style.colorScheme = 'light';
+  }, []);
 
   return (
     <QueryClientProvider client={queryClient}>

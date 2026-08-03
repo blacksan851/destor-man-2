@@ -205,9 +205,6 @@ export function LandingPage() {
             </div>
 
             <div className="hidden md:flex items-center gap-3">
-              <button onClick={toggleTheme} className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 text-slate-500 dark:text-gray-400 transition-colors">
-                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
               <Link to="/login" className="text-sm text-slate-600 dark:text-gray-300 font-semibold hover:text-emerald-500 transition-colors px-3 py-2">Entrar</Link>
               <Link to="/register" className="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md shadow-emerald-500/25 flex items-center gap-1.5">
                 Criar Conta Grátis <ArrowRight className="w-4 h-4" />
@@ -216,9 +213,6 @@ export function LandingPage() {
 
             {/* Mobile */}
             <div className="md:hidden flex items-center gap-3">
-              <button onClick={toggleTheme} className="p-2 text-slate-500 dark:text-gray-400">
-                {theme === 'dark' ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
-              </button>
               <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-slate-600 dark:text-gray-300">
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
