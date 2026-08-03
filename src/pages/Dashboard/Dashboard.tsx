@@ -414,16 +414,16 @@ export function Dashboard() {
           <div>
             <p className="text-xs text-gray-400 uppercase font-bold tracking-widest mb-4">Alertas de Estoque Real</p>
             {lowStockProducts.length > 0 ? (
-              <div className="flex items-center space-x-3 mb-4 p-3 bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-900/30 rounded-2xl">
+              <div className="flex items-center space-x-3 mb-4 p-3 bg font-bold border border-amber-500/30 bg-amber-500/10 rounded-2xl">
                 <div className="w-2 h-2 bg-amber-500 rounded-full animate-pulse"></div>
-                <p className="text-xs font-bold text-amber-700 dark:text-amber-400">
+                <p className="text-xs font-bold text-amber-400">
                   {lowStockProducts.length} {lowStockProducts.length === 1 ? 'Produto necessita reposição' : 'Produtos necessitam reposição'}
                 </p>
               </div>
             ) : (
-              <div className="flex items-center space-x-3 mb-4 p-3 bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-100 dark:border-emerald-900/30 rounded-2xl">
+              <div className="flex items-center space-x-3 mb-4 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-2xl">
                 <div className="w-2 h-2 bg-emerald-500 rounded-full"></div>
-                <p className="text-xs font-bold text-emerald-700 dark:text-emerald-400">Estoque 100% Regularizado</p>
+                <p className="text-xs font-bold text-emerald-400">Estoque 100% Regularizado</p>
               </div>
             )}
           </div>
@@ -449,9 +449,9 @@ export function Dashboard() {
 
           <Link 
             to="/dashboard/produtos"
-            className="w-full py-2.5 mt-2 bg-gray-50 dark:bg-gray-800 text-xs font-bold text-gray-700 dark:text-gray-300 rounded-xl hover:bg-gray-100 dark:hover:bg-gray-700 transition-colors text-center block"
+            className="w-full py-3 mt-2 bg-emerald-500 hover:bg-emerald-600 text-xs font-black text-white rounded-xl transition-all shadow-md shadow-emerald-500/20 text-center block"
           >
-            Gerir Produtos
+            GERIR PRODUTOS
           </Link>
         </div>
 
@@ -468,23 +468,23 @@ export function Dashboard() {
               </div>
             ) : (
               recentTransactions.map(tx => (
-                <div key={tx.id} className="flex items-center justify-between p-3 rounded-2xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors border border-gray-50 dark:border-gray-800">
+                <div key={tx.id} className="flex items-center justify-between p-3 rounded-2xl bg-[#0F172A] hover:bg-[#1E293B] transition-colors border border-gray-800">
                   <div className="flex items-center space-x-3">
-                    <div className="w-9 h-9 bg-emerald-50 dark:bg-emerald-900/30 text-emerald-600 rounded-xl flex items-center justify-center text-xs font-black">
+                    <div className="w-9 h-9 bg-emerald-500/20 text-emerald-400 rounded-xl flex items-center justify-center text-xs font-black border border-emerald-500/30">
                       {(tx.customer_name || 'C')[0].toUpperCase()}
                     </div>
                     <div>
-                      <p className="text-xs font-bold text-slate-900 dark:text-white">{tx.customer_name || 'Cliente Balcão'}</p>
+                      <p className="text-xs font-bold text-white">{tx.customer_name || 'Cliente Balcão'}</p>
                       <p className="text-[10px] text-gray-400 font-medium">
                         {tx.payment_method} • {new Date(tx.created_at).toLocaleTimeString('pt-MZ', { hour: '2-digit', minute: '2-digit' })}
                       </p>
                     </div>
                   </div>
                   <div className="text-right">
-                    <p className="text-xs font-black text-slate-900 dark:text-white">
+                    <p className="text-xs font-black text-white">
                       {tx.total_amount.toLocaleString('pt-MZ')} MT
                     </p>
-                    <p className="text-[9px] uppercase font-extrabold text-emerald-500 tracking-wider">
+                    <p className="text-[9px] uppercase font-extrabold text-emerald-400 tracking-wider">
                       {tx.receipt_number}
                     </p>
                   </div>
