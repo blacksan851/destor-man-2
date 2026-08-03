@@ -38,55 +38,60 @@ export function Login() {
   };
 
   return (
-    <div className="min-h-screen bg-[#F5F5F5] dark:bg-slate-900 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-[#0F172A] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <div className="flex justify-center">
-          <div className="w-12 h-12 bg-emerald-500 rounded-xl flex items-center justify-center shadow-lg shadow-emerald-500/20">
-            <span className="text-white font-bold text-2xl">D</span>
+          <div className="w-14 h-14 bg-emerald-500 rounded-2xl flex items-center justify-center shadow-lg shadow-emerald-500/30">
+            <span className="text-white font-black text-3xl">D</span>
           </div>
         </div>
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-900 dark:text-white">
+        <h2 className="mt-6 text-center text-3xl font-black text-white tracking-tight">
           Acesse a sua conta
         </h2>
+        <p className="text-center text-xs text-gray-400 mt-2 font-medium">
+          Sistema de Gestão Comercial Dr Gestor MZ
+        </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-white dark:bg-gray-900 py-8 px-4 shadow-xl sm:rounded-2xl sm:px-10 border border-gray-100 dark:border-gray-800">
+        <div className="bg-[#0B1120] py-8 px-6 shadow-2xl sm:rounded-3xl sm:px-10 border border-gray-800">
           {error && (
-            <div className="p-3 bg-red-50 text-red-600 rounded-lg text-sm font-medium border border-red-100 mb-4">
+            <div className="p-3 bg-red-500/10 text-red-400 rounded-xl text-sm font-bold border border-red-500/20 mb-4">
               {error}
             </div>
           )}
 
           <form className="space-y-6" onSubmit={handleSubmit}>
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-gray-300">
-                Email
+              <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                Endereço de Email
               </label>
-              <div className="mt-1">
+              <div>
                 <input
                   type="email"
                   required
                   disabled={loading}
                   value={formData.email}
                   onChange={(e) => setFormData({...formData, email: e.target.value})}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm bg-transparent dark:text-white disabled:opacity-50"
+                  placeholder="seuemail@exemplo.com"
+                  className="appearance-none block w-full px-4 py-3.5 border border-gray-800 rounded-xl shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-[#0F172A] text-white disabled:opacity-50 font-bold"
                 />
               </div>
             </div>
 
             <div>
-              <label className="block text-sm font-medium text-slate-700 dark:text-gray-300">
-                Senha
+              <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                Senha de Acesso
               </label>
-              <div className="mt-1">
+              <div>
                 <input
                   type="password"
                   required
                   disabled={loading}
                   value={formData.password}
                   onChange={(e) => setFormData({...formData, password: e.target.value})}
-                  className="appearance-none block w-full px-3 py-3 border border-gray-300 dark:border-gray-700 rounded-xl shadow-sm placeholder-gray-400 focus:outline-none focus:ring-emerald-500 focus:border-emerald-500 sm:text-sm bg-transparent dark:text-white disabled:opacity-50"
+                  placeholder="••••••••"
+                  className="appearance-none block w-full px-4 py-3.5 border border-gray-800 rounded-xl shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500 text-sm bg-[#0F172A] text-white disabled:opacity-50 font-bold"
                 />
               </div>
             </div>
@@ -98,15 +103,15 @@ export function Login() {
                   name="remember-me"
                   type="checkbox"
                   disabled={loading}
-                  className="h-4 w-4 text-emerald-500 focus:ring-emerald-500 border-gray-300 rounded disabled:opacity-50"
+                  className="h-4 w-4 text-emerald-500 focus:ring-emerald-500 border-gray-700 bg-[#0F172A] rounded disabled:opacity-50 cursor-pointer"
                 />
-                <label htmlFor="remember-me" className="ml-2 block text-sm text-gray-900 dark:text-gray-300">
+                <label htmlFor="remember-me" className="ml-2 block text-xs font-bold text-gray-300 cursor-pointer">
                   Lembrar-me
                 </label>
               </div>
 
-              <div className="text-sm">
-                <a href="#" className="font-medium text-emerald-600 hover:text-emerald-500 dark:text-emerald-400">
+              <div className="text-xs">
+                <a href="#" className="font-bold text-emerald-400 hover:text-emerald-300">
                   Esqueceu a senha?
                 </a>
               </div>
@@ -116,7 +121,7 @@ export function Login() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center items-center py-3 px-4 border border-transparent rounded-xl shadow-sm text-sm font-medium text-white bg-emerald-500 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-colors disabled:opacity-50 cursor-pointer"
+                className="w-full flex justify-center items-center py-3.5 px-4 rounded-xl shadow-lg shadow-emerald-500/25 text-sm font-black text-white bg-emerald-500 hover:bg-emerald-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 transition-all disabled:opacity-50 cursor-pointer uppercase tracking-wide"
               >
                 {loading ? (
                   <>
@@ -124,15 +129,15 @@ export function Login() {
                     Entrando...
                   </>
                 ) : (
-                  'Entrar'
+                  'Entrar no Sistema'
                 )}
               </button>
             </div>
           </form>
 
-          <div className="mt-6 text-center">
-            <Link to="/register" className="font-medium text-slate-600 dark:text-gray-400 hover:text-emerald-500">
-              Não tem uma conta? Registe-se
+          <div className="mt-6 text-center pt-4 border-t border-gray-800">
+            <Link to="/register" className="text-xs font-bold text-gray-400 hover:text-emerald-400 transition-colors">
+              Não tem uma conta? <span className="text-emerald-400 font-extrabold">Registe a sua empresa</span>
             </Link>
           </div>
         </div>
