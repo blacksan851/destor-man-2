@@ -13,7 +13,7 @@
   }
 }
 
-/* 100% Dark Matte Theme (#0F172A & #0B1120) — Zero White Card Backgrounds */
+/* Force 100% Dark Matte Theme (#0F172A & #0B1120) across all frames, containers, and cards */
 .bg-white,
 .bg-[#F8FAFC],
 .bg-[#FFFFFF],
@@ -27,15 +27,34 @@
 .bg-blue-50,
 .bg-purple-50,
 .bg-orange-50,
+header,
 header.bg-white\/80 {
   background-color: #0B1120 !important;
 }
 
-/* Inner elements background (#1E293B) */
+/* Inner elements and input fields background (#1E293B) */
 .bg-gray-50\/50,
 .bg-gray-200,
-.bg-slate-200 {
+.bg-slate-200,
+input,
+select,
+textarea {
   background-color: #1E293B !important;
+  color: #FFFFFF !important;
+}
+
+/* Force ALL White Buttons to Dark Matte (#0B1120 or #1E293B) */
+button.bg-white,
+a.bg-white,
+.bg-white button,
+button:not(.bg-emerald-500):not(.bg-emerald-600):not(.bg-amber-500):not(.bg-amber-600):not(.bg-red-500):not(.bg-red-600):not(.bg-blue-500):not(.bg-orange-500) {
+  background-color: #1E293B !important;
+  color: #FFFFFF !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+button:not(.bg-emerald-500):not(.bg-emerald-600):not(.bg-amber-500):hover {
+  background-color: #334155 !important;
 }
 
 /* All Text Forced to High-Contrast Vivid Light Color (#F8FAFC / White) */
@@ -56,7 +75,7 @@ header.bg-white\/80 {
   color: #94A3B8 !important;
 }
 
-/* High Contrast Borders */
+/* High Contrast Borders for Frames & Cards */
 .border-gray-100,
 .border-gray-200,
 .border-gray-300,
@@ -65,11 +84,7 @@ header.bg-white\/80 {
   border-color: rgba(255, 255, 255, 0.15) !important;
 }
 
-/* Buttons Visibility Enhancements */
-button, a.button {
-  color: #FFFFFF;
-}
-
+/* Accent Action Buttons (Green, Amber, Red) */
 .bg-emerald-500 {
   background-color: #10B981 !important;
   color: #FFFFFF !important;
