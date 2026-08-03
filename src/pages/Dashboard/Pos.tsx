@@ -357,15 +357,15 @@ export function Pos() {
   });
 
   return (
-    <div className="flex flex-col lg:flex-row h-[calc(100vh-4rem)] bg-[#F8FAFC] dark:bg-black text-slate-900 dark:text-white overflow-hidden relative transition-colors duration-200">
+    <div className="flex flex-col lg:flex-row h-[calc(100vh-4rem)] bg-[#0F172A] text-white overflow-hidden relative transition-colors duration-200">
       {/* Mobile Tab Toggle Bar */}
-      <div className="lg:hidden flex border-b border-gray-200 dark:border-gray-900 bg-white dark:bg-black p-2 gap-2 shrink-0">
+      <div className="lg:hidden flex border-b border-gray-800 bg-[#0B1120] p-2 gap-2 shrink-0">
         <button
           onClick={() => setMobileTab('products')}
           className={`flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all ${
             mobileTab === 'products'
               ? 'bg-emerald-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400'
+              : 'bg-gray-800 text-gray-400'
           }`}
         >
           <Package className="w-4 h-4" />
@@ -376,7 +376,7 @@ export function Pos() {
           className={`flex-1 py-2.5 rounded-xl font-bold text-xs flex items-center justify-center gap-2 transition-all relative ${
             mobileTab === 'cart'
               ? 'bg-emerald-500 text-white shadow-md'
-              : 'bg-gray-100 dark:bg-gray-900 text-gray-600 dark:text-gray-400'
+              : 'bg-gray-800 text-gray-400'
           }`}
         >
           <ShoppingCart className="w-4 h-4" />
@@ -388,24 +388,24 @@ export function Pos() {
       </div>
 
       {/* Left Column: Product Selection Grid */}
-      <div className={`flex-1 flex flex-col p-4 sm:p-6 overflow-hidden border-r border-gray-200 dark:border-gray-900 bg-white dark:bg-black ${
+      <div className={`flex-1 flex flex-col p-4 sm:p-6 overflow-hidden border-r border-gray-800 bg-[#0F172A] ${
         mobileTab === 'cart' ? 'hidden lg:flex' : 'flex'
       }`}>
         {/* Search & Scan Header */}
         <div className="flex gap-2 mb-4">
           <div className="relative flex-1">
-            <Search className="w-5 h-5 text-gray-400 dark:text-gray-500 absolute left-3.5 top-1/2 -translate-y-1/2" />
+            <Search className="w-5 h-5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Buscar por nome do produto ou bipar código de barras..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-3 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-2xl outline-none text-slate-900 dark:text-white text-sm shadow-sm focus:ring-2 focus:ring-emerald-500 placeholder:text-gray-400 dark:placeholder:text-gray-500"
+              className="w-full pl-11 pr-4 py-3 bg-[#0B1120] border border-gray-800 rounded-2xl outline-none text-white text-sm shadow-sm focus:ring-2 focus:ring-emerald-500 placeholder:text-gray-400"
             />
             {searchQuery && (
               <button 
                 onClick={() => setSearchQuery('')} 
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-gray-200"
               >
                 <X className="w-4 h-4" />
               </button>
@@ -431,7 +431,7 @@ export function Pos() {
               className={`px-4 py-2 rounded-xl text-xs font-bold whitespace-nowrap transition-all cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-emerald-500 text-white shadow-md'
-                  : 'bg-gray-100 dark:bg-gray-900 text-slate-700 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-800 border border-gray-200 dark:border-gray-800'
+                  : 'bg-[#0B1120] text-gray-300 hover:bg-gray-800 border border-gray-800'
               }`}
             >
               {cat}
@@ -448,8 +448,8 @@ export function Pos() {
             </div>
           ) : filteredProducts.length === 0 ? (
             <div className="py-20 text-center">
-              <Package className="w-12 h-12 text-gray-300 dark:text-gray-700 mx-auto mb-3" />
-              <p className="text-slate-600 dark:text-gray-400 font-bold">Nenhum produto disponível</p>
+              <Package className="w-12 h-12 text-gray-600 mx-auto mb-3" />
+              <p className="text-gray-300 font-bold">Nenhum produto disponível</p>
               <p className="text-xs text-gray-400 mt-1">Cadastre produtos na aba 'Produtos' para exibir na Frente de Caixa.</p>
             </div>
           ) : (
@@ -463,10 +463,10 @@ export function Pos() {
                     key={product.id}
                     whileTap={!isOut ? { scale: 0.96 } : undefined}
                     onClick={() => !isOut && handleAddToCart(product)}
-                    className={`p-4 bg-white dark:bg-gray-950 rounded-2xl border transition-all flex flex-col justify-between select-none ${
+                    className={`p-4 bg-[#0B1120] rounded-2xl border transition-all flex flex-col justify-between select-none ${
                       isOut 
-                        ? 'opacity-40 border-gray-200 dark:border-gray-900 cursor-not-allowed' 
-                        : 'hover:border-emerald-500/50 border-gray-200 dark:border-gray-900 cursor-pointer shadow-sm hover:shadow-md'
+                        ? 'opacity-40 border-gray-800 cursor-not-allowed' 
+                        : 'hover:border-emerald-500/50 border-gray-800 cursor-pointer shadow-sm hover:shadow-md'
                     }`}
                   >
                     <div>
@@ -518,20 +518,20 @@ export function Pos() {
       </div>
 
       {/* Right Column: Active Order Cart & Payment Panel */}
-      <div className={`w-full lg:w-[420px] bg-white dark:bg-black flex flex-col h-full shadow-2xl border-l border-gray-200 dark:border-gray-900 ${
+      <div className={`w-full lg:w-[420px] bg-[#0F172A] flex flex-col h-full shadow-2xl border-l border-gray-800 ${
         mobileTab === 'products' ? 'hidden lg:flex' : 'flex'
       }`}>
         {/* Cart Header & Customer Selection */}
-        <div className="p-4 border-b border-gray-200 dark:border-gray-900 space-y-3">
+        <div className="p-4 border-b border-gray-800 space-y-3">
           <div className="flex justify-between items-center">
-            <h3 className="font-extrabold text-slate-900 dark:text-white text-lg flex items-center gap-2">
+            <h3 className="font-extrabold text-white text-lg flex items-center gap-2">
               <ShoppingCart className="w-5 h-5 text-emerald-500" />
               <span>Carrinho de Vendas</span>
             </h3>
             {cart.length > 0 && (
               <button 
                 onClick={handleClearCart} 
-                className="text-xs text-red-500 hover:underline font-bold"
+                className="text-xs text-red-400 hover:underline font-bold"
               >
                 Limpar
               </button>
@@ -539,7 +539,7 @@ export function Pos() {
           </div>
 
           {/* Real Customer Selection Dropdown */}
-          <div className="flex items-center gap-2 bg-gray-50 dark:bg-gray-900 p-2.5 rounded-xl border border-gray-200 dark:border-gray-800">
+          <div className="flex items-center gap-2 bg-[#0B1120] p-2.5 rounded-xl border border-gray-800">
             <User className="w-4 h-4 text-emerald-500" />
             <select
               value={selectedCustomerId}
@@ -550,11 +550,11 @@ export function Pos() {
                   if (found) setCustomerNameInput(found.name);
                 }
               }}
-              className="w-full bg-transparent outline-none text-slate-900 dark:text-white text-xs font-semibold"
+              className="w-full bg-transparent outline-none text-white text-xs font-semibold"
             >
-              <option value="balcao" className="bg-white dark:bg-black text-slate-900 dark:text-white">Cliente Balcão (Avulso)</option>
+              <option value="balcao" className="bg-[#0B1120] text-white">Cliente Balcão (Avulso)</option>
               {registeredCustomers.map((cust) => (
-                <option key={cust.id} value={cust.id} className="bg-white dark:bg-black text-slate-900 dark:text-white">
+                <option key={cust.id} value={cust.id} className="bg-[#0B1120] text-white">
                   {cust.name} {cust.phone ? `(${cust.phone})` : ''} {cust.debt_balance && cust.debt_balance > 0 ? `• Fiado: ${cust.debt_balance} MT` : ''}
                 </option>
               ))}
@@ -567,7 +567,7 @@ export function Pos() {
               value={customerNameInput}
               onChange={(e) => setCustomerNameInput(e.target.value)}
               placeholder="Nome do cliente avulso..."
-              className="w-full px-3 py-1.5 bg-gray-50 dark:bg-gray-900 border border-gray-200 dark:border-gray-800 rounded-lg outline-none text-slate-900 dark:text-white text-xs font-medium placeholder:text-gray-400 dark:placeholder:text-gray-500"
+              className="w-full px-3 py-1.5 bg-[#0B1120] border border-gray-800 rounded-lg outline-none text-white text-xs font-medium placeholder:text-gray-400"
             />
           )}
         </div>
