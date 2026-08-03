@@ -252,27 +252,27 @@ export function Wallets() {
         </div>
 
         {/* e-Mola Empresa Card */}
-        <div className="bg-white dark:bg-gray-900 border border-gray-100 dark:border-gray-800 p-6 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[190px] shadow-sm">
+        <div className="bg-[#0B1120] border border-gray-800 p-6 rounded-3xl relative overflow-hidden flex flex-col justify-between min-h-[190px] shadow-xl">
           <div className="relative z-10 space-y-4">
             <div className="flex justify-between items-start">
               <div className="w-11 h-11 bg-orange-500 text-white rounded-2xl flex items-center justify-center font-serif font-black italic text-xl shadow-lg shadow-orange-500/40">
                 e
               </div>
-              <span className="px-2.5 py-1 bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 border border-orange-200 dark:border-orange-900/40 rounded-full text-[10px] font-bold uppercase tracking-wider">
+              <span className="px-2.5 py-1 bg-orange-500/20 text-orange-400 border border-orange-500/30 rounded-full text-[10px] font-bold uppercase tracking-wider">
                 Movitel e-Mola
               </span>
             </div>
 
             <div>
               <p className="text-xs text-gray-400 font-medium">Saldo Líquido e-Mola</p>
-              <p className="text-3xl font-black tracking-tight text-slate-900 dark:text-white mt-0.5">
+              <p className="text-3xl font-black tracking-tight text-white mt-0.5">
                 {emolaNet.toLocaleString('pt-MZ')},00 <span className="text-sm font-normal text-gray-400">MT</span>
               </p>
             </div>
           </div>
-          <div className="relative z-10 pt-2 border-t border-gray-100 dark:border-gray-800 flex justify-between items-center text-[11px] text-gray-400">
-            <span className="text-emerald-600 font-bold">+{emolaIn.toLocaleString('pt-MZ')} MT (Entradas)</span>
-            <span className="text-red-500 font-bold">-{emolaOut.toLocaleString('pt-MZ')} MT (Saídas)</span>
+          <div className="relative z-10 pt-2 border-t border-gray-800 flex justify-between items-center text-[11px] text-gray-400">
+            <span className="text-emerald-400 font-bold">+{emolaIn.toLocaleString('pt-MZ')} MT (Entradas)</span>
+            <span className="text-red-400 font-bold">-{emolaOut.toLocaleString('pt-MZ')} MT (Saídas)</span>
           </div>
           <div className="absolute -bottom-6 -right-6 w-36 h-36 bg-orange-500/10 rounded-full blur-3xl pointer-events-none"></div>
         </div>
@@ -304,31 +304,31 @@ export function Wallets() {
       </div>
 
       {/* Filter Tabs & Search Bar */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
+      <div className="bg-[#0B1120] p-4 rounded-2xl border border-gray-800 shadow-xl flex flex-col sm:flex-row justify-between items-stretch sm:items-center gap-4">
         {/* Provider Tabs */}
-        <div className="flex flex-wrap gap-2 bg-gray-100 dark:bg-gray-800 p-1 rounded-xl">
+        <div className="flex flex-wrap gap-2 bg-[#0F172A] p-1 rounded-xl border border-gray-800">
           {(['Todas', 'M-Pesa', 'e-Mola'] as const).map(provider => (
             <button
               key={provider}
               onClick={() => setProviderFilter(provider)}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 providerFilter === provider
-                  ? 'bg-white dark:bg-gray-900 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-slate-900'
+                  ? 'bg-emerald-500 text-white shadow-sm'
+                  : 'text-gray-400 hover:text-white'
               }`}
             >
               {provider}
             </button>
           ))}
-          <div className="w-px h-5 bg-gray-300 dark:bg-gray-700 my-auto mx-1"></div>
+          <div className="w-px h-5 bg-gray-800 my-auto mx-1"></div>
           {(['Todas', 'Entradas', 'Saídas'] as const).map(t => (
             <button
               key={t}
               onClick={() => setTypeFilter(t)}
               className={`px-3.5 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
                 typeFilter === t
-                  ? 'bg-white dark:bg-gray-900 text-slate-900 dark:text-white shadow-sm'
-                  : 'text-gray-500 dark:text-gray-400 hover:text-slate-900'
+                  ? 'bg-emerald-500 text-white shadow-sm'
+                  : 'text-gray-400 hover:text-white'
               }`}
             >
               {t}
@@ -344,15 +344,15 @@ export function Wallets() {
             placeholder="Buscar por descrição ou cliente..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl text-xs outline-none text-slate-900 dark:text-white font-medium"
+            className="w-full pl-10 pr-4 py-2 bg-[#0F172A] border border-gray-800 rounded-xl text-xs outline-none text-white font-medium placeholder:text-gray-400"
           />
         </div>
       </div>
 
       {/* Statement Table */}
-      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
-        <div className="p-4 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
-          <h3 className="font-extrabold text-slate-900 dark:text-white text-base flex items-center gap-2">
+      <div className="bg-[#0B1120] rounded-2xl border border-gray-800 shadow-xl overflow-hidden">
+        <div className="p-4 border-b border-gray-800 flex justify-between items-center bg-[#0B1120]">
+          <h3 className="font-extrabold text-white text-base flex items-center gap-2">
             <Smartphone className="w-5 h-5 text-emerald-500" />
             <span>Extrato de Entradas e Saídas das Carteiras Móveis</span>
           </h3>
@@ -362,21 +362,21 @@ export function Wallets() {
         </div>
 
         {loading ? (
-          <div className="py-16 flex flex-col items-center justify-center text-gray-400">
+          <div className="py-16 flex flex-col items-center justify-center text-gray-400 bg-[#0F172A]">
             <Loader2 className="w-8 h-8 animate-spin text-emerald-500 mb-2" />
             <p className="text-sm font-medium">Carregando extrato das carteiras móveis...</p>
           </div>
         ) : filteredTransactions.length === 0 ? (
-          <div className="py-16 text-center text-gray-400">
-            <Smartphone className="w-12 h-12 text-gray-300 dark:text-gray-700 mx-auto mb-2 opacity-50" />
-            <p className="text-sm font-bold text-slate-700 dark:text-gray-300">Nenhuma transação encontrada</p>
+          <div className="py-16 text-center text-gray-400 bg-[#0F172A]">
+            <Smartphone className="w-12 h-12 text-gray-600 mx-auto mb-2 opacity-50" />
+            <p className="text-sm font-bold text-white">Nenhuma transação encontrada</p>
             <p className="text-xs text-gray-400 mt-1">Realize vendas no POS ou registre saídas manuais para exibir aqui.</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                <tr className="border-b border-gray-800 bg-[#0F172A] text-[11px] font-black text-gray-300 uppercase tracking-wider">
                   <th className="py-3.5 px-6">Tipo</th>
                   <th className="py-3.5 px-6">Carteira</th>
                   <th className="py-3.5 px-6">Descrição / Origem</th>
@@ -384,7 +384,7 @@ export function Wallets() {
                   <th className="py-3.5 px-6 text-right">Valor em MT</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-800 text-xs">
+              <tbody className="divide-y divide-gray-800 bg-[#0F172A] text-xs">
                 {filteredTransactions.map((tx) => {
                   const isMpesa = tx.payment_method === 'M-Pesa';
                   const isIn = tx.type === 'in';
