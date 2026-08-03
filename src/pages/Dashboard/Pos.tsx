@@ -470,8 +470,22 @@ export function Pos() {
                     }`}
                   >
                     <div>
-                      {product.image_url && (
-                        <img src={product.image_url} alt={product.name} className="w-full h-24 object-cover rounded-xl mb-2.5 border border-gray-100 dark:border-gray-700 bg-gray-50" />
+                      {product.image_url ? (
+                        <div className="w-full h-32 rounded-xl mb-3 overflow-hidden border border-gray-800 bg-[#0F172A] relative group">
+                          <img 
+                            src={product.image_url} 
+                            alt={product.name} 
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                            onError={(e) => {
+                              // If broken image URL, hide image and show initial letter fallback
+                              e.currentTarget.style.display = 'none';
+                            }}
+                          />
+                        </div>
+                      ) : (
+                        <div className="w-full h-24 rounded-xl mb-3 border border-gray-800 bg-[#0F172A] flex items-center justify-center text-emerald-400 font-black text-2xl shadow-inner">
+                          {product.name.charAt(0).toUpperCase()}
+                        </div>
                       )}
                       <div className="flex justify-between items-start mb-2">
                         <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 bg-[#1E293B] text-gray-200 border border-gray-700 rounded-md">
