@@ -474,15 +474,15 @@ export function Pos() {
                         <img src={product.image_url} alt={product.name} className="w-full h-24 object-cover rounded-xl mb-2.5 border border-gray-100 dark:border-gray-700 bg-gray-50" />
                       )}
                       <div className="flex justify-between items-start mb-2">
-                        <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 bg-gray-100 dark:bg-gray-700 text-gray-500 dark:text-gray-300 rounded-md">
+                        <span className="text-[10px] font-extrabold uppercase tracking-wider px-2 py-0.5 bg-[#1E293B] text-gray-200 border border-gray-700 rounded-md">
                           {product.category || 'Geral'}
                         </span>
-                        <span className={`text-[10px] font-black px-1.5 py-0.5 rounded ${
+                        <span className={`text-[10px] font-black px-2 py-0.5 rounded-md border ${
                           isOut 
-                            ? 'bg-red-50 text-red-600 dark:bg-red-900/30' 
+                            ? 'bg-red-500/20 text-red-400 border-red-500/30' 
                             : isLow 
-                            ? 'bg-amber-50 text-amber-600 dark:bg-amber-900/30' 
-                            : 'bg-emerald-50 text-emerald-600 dark:bg-emerald-900/30'
+                            ? 'bg-amber-500/20 text-amber-400 border-amber-500/30' 
+                            : 'bg-emerald-500/20 text-emerald-400 border-emerald-500/30'
                         }`}>
                           {isOut ? '0 UN' : `${product.stock_quantity} ${product.unit || 'UN'}`}
                         </span>

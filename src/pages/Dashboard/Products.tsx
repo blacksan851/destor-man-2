@@ -4,7 +4,7 @@ import {
   Package, Plus, Search, Filter, Edit3, Trash2, 
   AlertTriangle, CheckCircle2, XCircle, DollarSign, 
   Loader2, X, RefreshCw, Barcode, Scan, FolderPlus,
-  Camera, Check
+  Camera, Check, Upload
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
 import { supabase } from '../../lib/supabase';
@@ -774,21 +774,39 @@ export function Products() {
 
                 <div>
                   <label className="block text-sm font-bold text-gray-200 mb-1">
-                    Imagem do Produto (URL da foto)
+                    Foto do Produto (Upload da Galeria / Arquivos)
                   </label>
-                  <div className="flex gap-2 items-center">
-                    {formData.image_url && (
-                      <img src={formData.image_url} alt="Preview" className="w-11 h-11 rounded-xl object-cover border border-gray-700 shrink-0 bg-[#0F172A]" />
+                  <div className="flex items-center gap-3">
+                    {formData.image_url ? (
+                      <img src={formData.image_url} alt="Preview" className="w-12 h-12 rounded-xl object-cover border border-gray-700 shrink-0 bg-[#0F172A] p-0.5" />
+                    ) : (
+                      <div className="w-12 h-12 rounded-xl border border-dashed border-gray-700 bg-[#0F172A] flex items-center justify-center text-gray-500 text-[10px] font-bold shrink-0">
+                        Sem Foto
+                      </div>
                     )}
-                    <input
-                      type="url"
-                      value={formData.image_url || ''}
-                      onChange={(e) => setFormData({ ...formData, image_url: e.target.value })}
-                      placeholder="https://exemplo.com/imagem-do-produto.jpg"
-                      className="w-full px-4 py-2.5 bg-[#0F172A] border border-gray-800 rounded-xl focus:ring-2 focus:ring-emerald-500 outline-none text-white text-sm"
-                    />
+                    <label className="flex-1 px-4 py-2.5 bg-[#0F172A] border border-gray-800 hover:bg-gray-800 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all shadow-sm">
+                      <Upload className="w-4 h-4 text-emerald-400" />
+                      <span>{formData.image_url ? 'Trocar Foto da Galeria' : 'Escolher Foto da Galeria'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (event) => {
+                              if (event.target?.result) {
+                                setFormData(prev => ({ ...prev, image_url: event.target?.result as string }));
+                              }
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </label>
                   </div>
-                  <p className="text-[10px] text-gray-400 mt-1">Insira a URL de uma imagem da internet para ser exibida no POS e no Catálogo.</p>
+                  <p className="text-[10px] text-gray-400 mt-1">Carregue a foto diretamente da galeria do seu telemóvel ou computador.</p>
                 </div>
 
                 <div className="grid grid-cols-2 gap-4">

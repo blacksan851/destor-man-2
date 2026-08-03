@@ -3,7 +3,7 @@ import type { FormEvent } from 'react';
 import { 
   Building2, Image, FileText, Save, CheckCircle2, 
   MapPin, Phone, Mail, DollarSign, Loader2, RefreshCw,
-  Printer, ShieldCheck
+  Printer, ShieldCheck, Upload
 } from 'lucide-react';
 import { motion } from 'motion/react';
 import { supabase } from '../../lib/supabase';
@@ -253,15 +253,46 @@ export function Settings() {
 
               <div>
                 <label className="block text-xs font-bold text-gray-400 uppercase mb-1">
-                  URL do Logótipo (Imagem PNG/JPG)
+                  Logótipo da Empresa (Upload da Galeria / Arquivos)
                 </label>
-                <input
-                  type="url"
-                  value={formData.logoUrl}
-                  onChange={(e) => setFormData({ ...formData, logoUrl: e.target.value })}
-                  placeholder="https://exemplo.com/logo.png"
-                  className="w-full px-4 py-3 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none text-slate-900 dark:text-white text-sm focus:ring-2 focus:ring-emerald-500"
-                />
+                <div className="flex items-center gap-3">
+                  {formData.logoUrl ? (
+                    <img 
+                      src={formData.logoUrl} 
+                      alt="Logo Preview" 
+                      className="w-14 h-14 object-contain rounded-xl border border-gray-700 bg-[#0F172A] p-1 shrink-0" 
+                    />
+                  ) : (
+                    <div className="w-14 h-14 rounded-xl border border-dashed border-gray-700 bg-[#0F172A] flex items-center justify-center text-gray-500 text-xs font-bold shrink-0">
+                      Sem Logo
+                    </div>
+                  )}
+
+                  <div className="flex-1 space-y-1">
+                    <label className="px-4 py-2.5 bg-[#0F172A] border border-gray-700 hover:bg-gray-800 text-white text-xs font-bold rounded-xl flex items-center justify-center gap-2 cursor-pointer transition-all shadow-sm">
+                      <Upload className="w-4 h-4 text-emerald-400" />
+                      <span>{formData.logoUrl ? 'Trocar Imagem da Galeria' : 'Escolher Foto da Galeria'}</span>
+                      <input
+                        type="file"
+                        accept="image/*"
+                        className="hidden"
+                        onChange={(e) => {
+                          const file = e.target.files?.[0];
+                          if (file) {
+                            const reader = new FileReader();
+                            reader.onload = (event) => {
+                              if (event.target?.result) {
+                                setFormData({ ...formData, logoUrl: event.target.result as string });
+                              }
+                            };
+                            reader.readAsDataURL(file);
+                          }
+                        }}
+                      />
+                    </label>
+                    <p className="text-[10px] text-gray-400">Selecione diretamente a foto ou logótipo salvo no seu telemóvel ou computador.</p>
+                  </div>
+                </div>
               </div>
 
               <div>
