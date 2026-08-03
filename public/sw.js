@@ -1,4 +1,4 @@
-const CACHE_NAME = 'dr-gestor-mz-v3-light-' + Date.now();
+const CACHE_NAME = 'dr-gestor-mz-v4-matte-' + Date.now();
 const STATIC_ASSETS = [
   '/',
   '/index.html',

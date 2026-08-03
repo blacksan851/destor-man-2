@@ -123,7 +123,7 @@ export function DashboardLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC] text-slate-900 flex transition-colors duration-200">
+    <div className="min-h-screen bg-[#0F172A] text-white flex transition-colors duration-200">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div 
