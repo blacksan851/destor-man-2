@@ -277,7 +277,7 @@ export function Dashboard() {
 
       <div className="flex-1 grid grid-cols-1 lg:grid-cols-12 gap-6 auto-rows-[minmax(180px,auto)]">
         {/* Sales Large Card (AreaChart) - col-span-8 */}
-        <div className="col-span-1 lg:col-span-8 bg-white dark:bg-gray-900 rounded-3xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col min-h-[340px]">
+        <div className="col-span-1 lg:col-span-8 bg-[#0B1120] rounded-3xl p-6 border border-gray-800 shadow-xl flex flex-col min-h-[340px]">
           <div className="flex justify-between items-center mb-6">
             <h3 className="font-bold text-gray-400 text-xs uppercase tracking-widest">Movimento Financeiro (Últimos 7 dias)</h3>
             <span className="px-3 py-1 bg-emerald-50 dark:bg-emerald-900/20 text-[#10B981] text-xs font-bold rounded-full flex items-center gap-1.5">
@@ -331,7 +331,7 @@ export function Dashboard() {
         </div>
 
         {/* NEW: Gráfico de Pizza (PieChart) - Distribution of Payment Methods - col-span-4 */}
-        <div className="col-span-1 lg:col-span-4 bg-white dark:bg-gray-900 rounded-3xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between min-h-[340px]">
+        <div className="col-span-1 lg:col-span-4 bg-[#0B1120] rounded-3xl p-6 border border-gray-800 shadow-xl flex flex-col justify-between min-h-[340px]">
           <div className="flex justify-between items-center mb-2">
             <h3 className="font-bold text-gray-400 text-xs uppercase tracking-widest flex items-center gap-1.5">
               <PieIcon className="w-4 h-4 text-emerald-500" />
@@ -394,14 +394,14 @@ export function Dashboard() {
             <div className="absolute -bottom-4 -right-4 w-32 h-32 bg-red-500/20 rounded-full blur-2xl"></div>
           </div>
 
-          <div className="flex-1 bg-white dark:bg-gray-800 rounded-3xl p-6 border border-gray-100 dark:border-gray-700 shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[150px]">
+          <div className="flex-1 bg-[#0B1120] rounded-3xl p-6 border border-gray-800 shadow-xl relative overflow-hidden flex flex-col justify-between min-h-[150px]">
             <div className="relative z-10">
               <div className="flex justify-between items-start mb-3">
                 <div className="w-9 h-9 bg-orange-500 rounded-lg flex items-center justify-center font-bold text-base text-white font-serif italic shadow-lg shadow-orange-500/30">e</div>
                 <p className="text-[10px] text-gray-400 uppercase font-bold tracking-widest">Carteira Móvel</p>
               </div>
-              <p className="text-xs text-gray-500 dark:text-gray-400 mb-1 font-medium">Saldo e-Mola Acumulado</p>
-              <p className="text-2xl font-black tracking-tight text-slate-900 dark:text-white">
+              <p className="text-xs text-gray-400 mb-1 font-medium">Saldo e-Mola Acumulado</p>
+              <p className="text-2xl font-black tracking-tight text-white">
                 {emolaBalance.toLocaleString('pt-MZ')} <span className="text-xs font-normal text-gray-400">MT</span>
               </p>
             </div>
@@ -410,7 +410,7 @@ export function Dashboard() {
         </div>
 
         {/* Real Low Stock Alerts - col-span-4 */}
-        <div className="col-span-1 lg:col-span-4 bg-white dark:bg-gray-900 rounded-3xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between min-h-[300px]">
+        <div className="col-span-1 lg:col-span-4 bg-[#0B1120] rounded-3xl p-6 border border-gray-800 shadow-xl flex flex-col justify-between min-h-[300px]">
           <div>
             <p className="text-xs text-gray-400 uppercase font-bold tracking-widest mb-4">Alertas de Estoque Real</p>
             {lowStockProducts.length > 0 ? (
@@ -456,7 +456,7 @@ export function Dashboard() {
         </div>
 
         {/* Real Recent POS Transactions - col-span-4 */}
-        <div className="col-span-1 lg:col-span-4 bg-white dark:bg-gray-900 rounded-3xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col min-h-[300px]">
+        <div className="col-span-1 lg:col-span-4 bg-[#0B1120] rounded-3xl p-6 border border-gray-800 shadow-xl flex flex-col min-h-[300px]">
           <p className="text-xs text-gray-400 uppercase font-bold tracking-widest mb-4">Últimas Vendas POS Reais</p>
           
           <div className="flex-1 overflow-y-auto space-y-2 pr-2">

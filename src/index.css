@@ -13,34 +13,71 @@
   }
 }
 
-/* Enforce Dark Matte (#0F172A & #0B1120) across all components & white overrides */
+/* 100% Dark Matte Theme (#0F172A & #0B1120) — Zero White Card Backgrounds */
 .bg-white,
 .bg-[#F8FAFC],
 .bg-[#FFFFFF],
 .bg-gray-50,
 .bg-slate-50,
-header.bg-white\/80 {
-  background-color: #0F172A !important;
-}
-
-.bg-gray-50\/50,
 .bg-gray-100,
-.bg-slate-100 {
+.bg-slate-100,
+.bg-emerald-50,
+.bg-amber-50,
+.bg-red-50,
+.bg-blue-50,
+.bg-purple-50,
+.bg-orange-50,
+header.bg-white\/80 {
   background-color: #0B1120 !important;
 }
 
+/* Inner elements background (#1E293B) */
+.bg-gray-50\/50,
+.bg-gray-200,
+.bg-slate-200 {
+  background-color: #1E293B !important;
+}
+
+/* All Text Forced to High-Contrast Vivid Light Color (#F8FAFC / White) */
 .text-slate-900,
 .text-slate-800,
 .text-slate-700,
+.text-slate-600,
 .text-gray-900,
-.text-gray-800 {
+.text-gray-800,
+.text-gray-700,
+.text-gray-600,
+.text-gray-500 {
   color: #F8FAFC !important;
 }
 
+/* Dark contrast for subtitles and secondary metadata */
+.text-gray-400 {
+  color: #94A3B8 !important;
+}
+
+/* High Contrast Borders */
 .border-gray-100,
 .border-gray-200,
-.border-slate-200 {
-  border-color: rgba(255, 255, 255, 0.1) !important;
+.border-gray-300,
+.border-slate-200,
+.border-slate-300 {
+  border-color: rgba(255, 255, 255, 0.15) !important;
+}
+
+/* Buttons Visibility Enhancements */
+button, a.button {
+  color: #FFFFFF;
+}
+
+.bg-emerald-500 {
+  background-color: #10B981 !important;
+  color: #FFFFFF !important;
+}
+
+.bg-amber-500 {
+  background-color: #F59E0B !important;
+  color: #FFFFFF !important;
 }
 
 /* Antigravity Minimalist Scrollbars */

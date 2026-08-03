@@ -409,7 +409,7 @@ export function Products() {
         <div className="flex gap-2 w-full sm:w-auto">
           <button
             onClick={() => setIsCategoryModalOpen(true)}
-            className="px-4 py-3 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-700 text-slate-900 dark:text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer text-sm shadow-sm"
+            className="px-4 py-3 bg-[#0B1120] border border-gray-800 hover:bg-gray-800 text-white font-semibold rounded-xl flex items-center justify-center gap-2 transition-all cursor-pointer text-sm shadow-sm"
           >
             <FolderPlus className="w-4 h-4 text-emerald-500" />
             <span>+ Categoria</span>
@@ -443,43 +443,43 @@ export function Products() {
 
       {/* KPI Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center text-emerald-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500">
             <Package className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Total de Produtos</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalProducts}</p>
+            <p className="text-xs text-gray-400 font-medium">Total de Produtos</p>
+            <p className="text-2xl font-bold text-white">{totalProducts}</p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-xl flex items-center justify-center text-amber-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500">
             <AlertTriangle className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Estoque Baixo</p>
-            <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{lowStockCount}</p>
+            <p className="text-xs text-gray-400 font-medium">Estoque Baixo</p>
+            <p className="text-2xl font-bold text-amber-400">{lowStockCount}</p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-red-50 dark:bg-red-900/20 rounded-xl flex items-center justify-center text-red-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center text-red-500">
             <XCircle className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Esgotados</p>
-            <p className="text-2xl font-bold text-red-600 dark:text-red-400">{outOfStockCount}</p>
+            <p className="text-xs text-gray-400 font-medium">Esgotados</p>
+            <p className="text-2xl font-bold text-red-400">{outOfStockCount}</p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center text-emerald-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500">
             <DollarSign className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Valor em Inventário</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">
+            <p className="text-xs text-gray-400 font-medium">Valor em Inventário</p>
+            <p className="text-2xl font-bold text-white">
               {totalInventoryValue.toLocaleString('pt-MZ')},00 MT
             </p>
           </div>
@@ -487,7 +487,7 @@ export function Products() {
       </div>
 
       {/* Filters & Barcode Scanner Controls */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col sm:flex-row justify-between gap-4">
+      <div className="bg-[#0B1120] p-4 rounded-2xl border border-gray-800 shadow-xl flex flex-col sm:flex-row justify-between gap-4">
         {/* Search Bar with Scanner Button */}
         <div className="relative flex-1 flex gap-2">
           <div className="relative flex-1">
@@ -497,7 +497,7 @@ export function Products() {
               placeholder="Buscar por nome do produto ou escaneie o código SKU..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-11 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 text-sm transition-all"
+              className="w-full pl-11 pr-4 py-2.5 bg-[#0F172A] border border-gray-800 rounded-xl outline-none text-white focus:ring-2 focus:ring-emerald-500 text-sm transition-all"
             />
             {searchQuery && (
               <button 
