@@ -303,7 +303,7 @@ export function Reports() {
       </div>
 
       {/* Filter Tabs */}
-      <div className="flex items-center gap-2 bg-white dark:bg-gray-900 p-2 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm w-fit">
+      <div className="flex items-center gap-2 bg-[#0B1120] p-2 rounded-2xl border border-gray-800 shadow-xl w-fit">
         <Calendar className="w-4 h-4 text-gray-400 ml-2" />
         <span className="text-xs font-bold text-gray-400 mr-2">Período:</span>
         {(['Hoje', '7dias', 'EsteMes', 'Todas'] as const).map(p => (
@@ -313,7 +313,7 @@ export function Reports() {
             className={`px-3.5 py-1.5 rounded-xl text-xs font-bold transition-all cursor-pointer ${
               periodFilter === p
                 ? 'bg-emerald-500 text-white shadow-sm'
-                : 'text-gray-500 hover:text-slate-900 dark:hover:text-white'
+                : 'text-gray-400 hover:text-white bg-[#0F172A]'
             }`}
           >
             {p === 'Hoje' ? 'Hoje' : p === '7dias' ? 'Últimos 7 dias' : p === 'EsteMes' ? 'Este Mês' : 'Todo o Histórico'}
@@ -324,72 +324,72 @@ export function Reports() {
       {/* DRE Summary Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* Receita Bruta */}
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between">
+        <div className="bg-[#0B1120] p-5 rounded-3xl border border-gray-800 shadow-xl flex flex-col justify-between">
           <div className="flex justify-between items-center mb-3">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Faturamento Bruto</span>
-            <div className="w-9 h-9 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center">
               <DollarSign className="w-5 h-5" />
             </div>
           </div>
           <div>
-            <p className="text-2xl font-black text-slate-900 dark:text-white">
+            <p className="text-2xl font-black text-white">
               {totalRevenue.toLocaleString('pt-MZ')},00 <span className="text-xs font-normal text-gray-400">MT</span>
             </p>
-            <p className="text-[11px] text-emerald-500 font-bold flex items-center gap-1 mt-1">
+            <p className="text-[11px] text-emerald-400 font-bold flex items-center gap-1 mt-1">
               <ArrowUpRight className="w-3.5 h-3.5" /> Receita Total de Vendas
             </p>
           </div>
         </div>
 
         {/* Custo CPV */}
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between">
+        <div className="bg-[#0B1120] p-5 rounded-3xl border border-gray-800 shadow-xl flex flex-col justify-between">
           <div className="flex justify-between items-center mb-3">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Custo dos Produtos (CPV)</span>
-            <div className="w-9 h-9 bg-red-50 dark:bg-red-900/20 text-red-500 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-red-500/10 text-red-500 rounded-xl flex items-center justify-center">
               <TrendingDown className="w-5 h-5" />
             </div>
           </div>
           <div>
-            <p className="text-2xl font-black text-slate-900 dark:text-white">
+            <p className="text-2xl font-black text-white">
               {totalCost.toLocaleString('pt-MZ')},00 <span className="text-xs font-normal text-gray-400">MT</span>
             </p>
-            <p className="text-[11px] text-red-500 font-bold flex items-center gap-1 mt-1">
+            <p className="text-[11px] text-red-400 font-bold flex items-center gap-1 mt-1">
               <ArrowDownRight className="w-3.5 h-3.5" /> Custos de Aquisição
             </p>
           </div>
         </div>
 
         {/* Lucro Bruto */}
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between">
+        <div className="bg-[#0B1120] p-5 rounded-3xl border border-gray-800 shadow-xl flex flex-col justify-between">
           <div className="flex justify-between items-center mb-3">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Lucro Bruto Real</span>
-            <div className="w-9 h-9 bg-emerald-50 dark:bg-emerald-900/20 text-emerald-500 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-emerald-500/10 text-emerald-500 rounded-xl flex items-center justify-center">
               <TrendingUp className="w-5 h-5" />
             </div>
           </div>
           <div>
-            <p className="text-2xl font-black text-emerald-600 dark:text-emerald-400">
+            <p className="text-2xl font-black text-emerald-400">
               {grossProfit.toLocaleString('pt-MZ')},00 <span className="text-xs font-normal text-gray-400">MT</span>
             </p>
-            <p className="text-[11px] text-emerald-500 font-bold mt-1">
+            <p className="text-[11px] text-emerald-400 font-bold mt-1">
               Receita (-) Custos
             </p>
           </div>
         </div>
 
         {/* Margem % */}
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between">
+        <div className="bg-[#0B1120] p-5 rounded-3xl border border-gray-800 shadow-xl flex flex-col justify-between">
           <div className="flex justify-between items-center mb-3">
             <span className="text-xs font-bold text-gray-400 uppercase tracking-wider">Margem de Lucro Média</span>
-            <div className="w-9 h-9 bg-purple-50 dark:bg-purple-900/20 text-purple-500 rounded-xl flex items-center justify-center">
+            <div className="w-9 h-9 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center">
               <BarChart2 className="w-5 h-5" />
             </div>
           </div>
           <div>
-            <p className="text-2xl font-black text-slate-900 dark:text-white">
+            <p className="text-2xl font-black text-white">
               {profitMargin.toFixed(1)} <span className="text-xs font-normal text-gray-400">%</span>
             </p>
-            <p className="text-[11px] text-purple-500 font-bold mt-1">
+            <p className="text-[11px] text-purple-400 font-bold mt-1">
               Rentabilidade Média
             </p>
           </div>
@@ -399,7 +399,7 @@ export function Reports() {
       {/* Visual Charts Grid */}
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Bar Chart: Revenue vs Cost vs Profit */}
-        <div className="col-span-1 lg:col-span-8 bg-white dark:bg-gray-900 p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col min-h-[340px]">
+        <div className="col-span-1 lg:col-span-8 bg-[#0B1120] p-6 rounded-3xl border border-gray-800 shadow-xl flex flex-col min-h-[340px]">
           <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-4">
             Desempenho Financeiro (Faturamento vs Custo vs Lucro)
           </h3>
@@ -412,11 +412,11 @@ export function Reports() {
             ) : (
               <ResponsiveContainer width="100%" height="100%">
                 <BarChart data={financialChartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
-                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#374151" opacity={0.1} />
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#374151" opacity={0.3} />
                   <XAxis dataKey="period" axisLine={false} tickLine={false} tick={{fill: '#9CA3AF', fontSize: 12, fontWeight: 600}} />
                   <YAxis axisLine={false} tickLine={false} tick={{fill: '#9CA3AF', fontSize: 12, fontWeight: 600}} tickFormatter={(val) => `${val/1000}k`} />
                   <Tooltip 
-                    contentStyle={{ backgroundColor: '#111827', borderColor: '#1F2937', color: '#fff', borderRadius: '12px', fontWeight: 600 }}
+                    contentStyle={{ backgroundColor: '#0F172A', borderColor: '#1F2937', color: '#fff', borderRadius: '12px', fontWeight: 600 }}
                     formatter={(val: any) => `${Number(val).toLocaleString('pt-MZ')} MT`}
                   />
                   <Bar dataKey="receita" fill="#10B981" name="Faturamento" radius={[4, 4, 0, 0]} />
@@ -429,7 +429,7 @@ export function Reports() {
         </div>
 
         {/* Pie Chart: Payment Method Distribution */}
-        <div className="col-span-1 lg:col-span-4 bg-white dark:bg-gray-900 p-6 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col justify-between min-h-[340px]">
+        <div className="col-span-1 lg:col-span-4 bg-[#0B1120] p-6 rounded-3xl border border-gray-800 shadow-xl flex flex-col justify-between min-h-[340px]">
           <h3 className="text-xs font-bold text-gray-400 uppercase tracking-widest mb-2 flex items-center gap-2">
             <PieIcon className="w-4 h-4 text-emerald-500" />
             <span>Meios de Pagamento</span>
@@ -458,7 +458,7 @@ export function Reports() {
                     ))}
                   </Pie>
                   <Tooltip formatter={(val: any) => `${Number(val).toLocaleString('pt-MZ')} MT`} />
-                  <Legend verticalAlign="bottom" height={36} formatter={(v) => <span className="text-xs font-bold text-slate-700 dark:text-gray-300">{v}</span>} />
+                  <Legend verticalAlign="bottom" height={36} formatter={(v) => <span className="text-xs font-bold text-gray-200">{v}</span>} />
                 </PieChart>
               </ResponsiveContainer>
             )}
@@ -467,9 +467,9 @@ export function Reports() {
       </div>
 
       {/* Product Profitability Report Table */}
-      <div className="bg-white dark:bg-gray-900 rounded-3xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
-        <div className="p-5 border-b border-gray-100 dark:border-gray-800 flex justify-between items-center">
-          <h3 className="font-extrabold text-slate-900 dark:text-white text-base flex items-center gap-2">
+      <div className="bg-[#0B1120] rounded-3xl border border-gray-800 shadow-xl overflow-hidden">
+        <div className="p-5 border-b border-gray-800 flex justify-between items-center bg-[#0B1120]">
+          <h3 className="font-extrabold text-white text-base flex items-center gap-2">
             <Package className="w-5 h-5 text-emerald-500" />
             <span>Relatório de Rentabilidade por Produto</span>
           </h3>
@@ -477,20 +477,20 @@ export function Reports() {
         </div>
 
         {loading ? (
-          <div className="py-16 flex flex-col items-center justify-center text-gray-400">
+          <div className="py-16 flex flex-col items-center justify-center text-gray-400 bg-[#0F172A]">
             <Loader2 className="w-8 h-8 animate-spin text-emerald-500 mb-2" />
             <p className="text-sm font-medium">Calculando margens de lucro dos produtos...</p>
           </div>
         ) : productReports.length === 0 ? (
-          <div className="py-16 text-center text-gray-400">
-            <Package className="w-12 h-12 text-gray-300 dark:text-gray-700 mx-auto mb-2 opacity-50" />
-            <p className="text-sm font-bold text-slate-700 dark:text-gray-300">Nenhum produto vendido no período</p>
+          <div className="py-16 text-center text-gray-400 bg-[#0F172A]">
+            <Package className="w-12 h-12 text-gray-600 mx-auto mb-2 opacity-50" />
+            <p className="text-sm font-bold text-white">Nenhum produto vendido no período</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 text-[11px] font-bold text-gray-400 uppercase tracking-wider">
+                <tr className="border-b border-gray-800 bg-[#0F172A] text-[11px] font-black text-gray-300 uppercase tracking-wider">
                   <th className="py-3.5 px-6">Produto</th>
                   <th className="py-3.5 px-6 text-center">Qtd Vendida</th>
                   <th className="py-3.5 px-6 text-right">Preço Venda</th>
