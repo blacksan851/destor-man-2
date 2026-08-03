@@ -43,18 +43,21 @@ textarea {
   color: #FFFFFF !important;
 }
 
-/* Force ALL White Buttons to Dark Matte (#0B1120 or #1E293B) */
+/* Force White Buttons to Dark Matte (#0B1120 or #1E293B) while preserving active selection highlights */
 button.bg-white,
 a.bg-white,
 .bg-white button,
-button:not(.bg-emerald-500):not(.bg-emerald-600):not(.bg-amber-500):not(.bg-amber-600):not(.bg-red-500):not(.bg-red-600):not(.bg-blue-500):not(.bg-orange-500) {
-  background-color: #1E293B !important;
+button:not(.bg-emerald-500):not(.bg-emerald-600):not(.bg-amber-500):not(.bg-amber-600):not(.bg-red-500):not(.bg-red-600):not(.bg-blue-500):not(.bg-orange-500):not(.bg-emerald-600\/20):not(.bg-emerald-900\/30):not(.payment-active) {
+  background-color: #1E293B;
   color: #FFFFFF !important;
   border-color: rgba(255, 255, 255, 0.2) !important;
 }
 
-button:not(.bg-emerald-500):not(.bg-emerald-600):not(.bg-amber-500):hover {
-  background-color: #334155 !important;
+.payment-active {
+  background-color: #10B981 !important;
+  color: #FFFFFF !important;
+  border-color: #10B981 !important;
+  box-shadow: 0 4px 14px 0 rgba(16, 185, 129, 0.4) !important;
 }
 
 /* All Text Forced to High-Contrast Vivid Light Color (#F8FAFC / White) */

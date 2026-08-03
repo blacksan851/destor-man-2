@@ -502,11 +502,11 @@ export function Pos() {
                       </span>
                       <button 
                         disabled={isOut}
-                        className={`w-8 h-8 rounded-xl flex items-center justify-center transition-colors ${
-                          isOut ? 'bg-gray-200 text-gray-400' : 'bg-emerald-500 text-white hover:bg-emerald-600'
+                        className={`w-8 h-8 rounded-xl flex items-center justify-center transition-colors cursor-pointer ${
+                          isOut ? 'bg-gray-800 text-gray-600' : 'bg-emerald-500 text-white hover:bg-emerald-600 shadow-md shadow-emerald-500/20'
                         }`}
                       >
-                        <Plus className="w-4 h-4" />
+                        <Plus className="w-4 h-4 text-white" />
                       </button>
                     </div>
                   </motion.div>
@@ -635,10 +635,10 @@ export function Pos() {
             <div className="grid grid-cols-4 gap-2">
               <button
                 onClick={() => setPaymentMethod('M-Pesa')}
-                className={`py-2 px-1.5 rounded-xl text-xs font-bold flex flex-col items-center gap-1 border transition-all cursor-pointer ${
+                className={`py-3 px-1.5 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
                   paymentMethod === 'M-Pesa' 
-                    ? 'border-red-500 bg-red-50 text-red-700 dark:bg-red-900/20 dark:text-red-400 shadow-sm' 
-                    : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800'
+                    ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
+                    : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'
                 }`}
               >
                 <Smartphone className="w-4 h-4" />
@@ -647,10 +647,10 @@ export function Pos() {
 
               <button
                 onClick={() => setPaymentMethod('e-Mola')}
-                className={`py-2 px-1.5 rounded-xl text-xs font-bold flex flex-col items-center gap-1 border transition-all cursor-pointer ${
+                className={`py-3 px-1.5 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
                   paymentMethod === 'e-Mola' 
-                    ? 'border-orange-500 bg-orange-50 text-orange-700 dark:bg-orange-900/20 dark:text-orange-400 shadow-sm' 
-                    : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800'
+                    ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
+                    : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'
                 }`}
               >
                 <Smartphone className="w-4 h-4" />
@@ -659,10 +659,10 @@ export function Pos() {
 
               <button
                 onClick={() => setPaymentMethod('Dinheiro')}
-                className={`py-2 px-1.5 rounded-xl text-xs font-bold flex flex-col items-center gap-1 border transition-all cursor-pointer ${
+                className={`py-3 px-1.5 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
                   paymentMethod === 'Dinheiro' 
-                    ? 'border-emerald-500 bg-emerald-50 text-emerald-700 dark:bg-emerald-900/20 dark:text-emerald-400 shadow-sm' 
-                    : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800'
+                    ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
+                    : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'
                 }`}
               >
                 <Banknote className="w-4 h-4" />
@@ -671,10 +671,10 @@ export function Pos() {
 
               <button
                 onClick={() => setPaymentMethod('Fiado')}
-                className={`py-2 px-1.5 rounded-xl text-xs font-bold flex flex-col items-center gap-1 border transition-all cursor-pointer ${
+                className={`py-3 px-1.5 rounded-xl text-xs font-black flex flex-col items-center justify-center gap-1 border transition-all cursor-pointer ${
                   paymentMethod === 'Fiado' 
-                    ? 'border-amber-500 bg-amber-50 text-amber-700 dark:bg-amber-900/20 dark:text-amber-400 shadow-sm' 
-                    : 'border-gray-200 dark:border-gray-700 text-gray-500 dark:text-gray-400 hover:bg-white dark:hover:bg-gray-800'
+                    ? 'payment-active bg-emerald-500 text-white border-emerald-500 shadow-lg shadow-emerald-500/30' 
+                    : 'border-gray-800 bg-[#0B1120] text-gray-300 hover:bg-gray-800'
                 }`}
               >
                 <FileText className="w-4 h-4" />
