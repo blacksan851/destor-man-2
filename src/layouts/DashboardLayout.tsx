@@ -119,6 +119,7 @@ export function DashboardLayout() {
     { name: 'Carteiras Móveis', href: '/dashboard/carteiras', icon: Wallet, isPremium: false },
     { name: 'Relatórios & DRE', href: '/dashboard/relatorios', icon: BarChart3, isPremium: true },
     { name: 'Utilizadores', href: '/dashboard/utilizadores', icon: Shield, isPremium: true },
+    { name: 'Planos & Upgrade', href: '/dashboard/planos', icon: Zap, isPremium: false },
     { name: 'Configurações', href: '/dashboard/configuracoes', icon: Settings, isPremium: false },
   ];
 
@@ -215,7 +216,7 @@ export function DashboardLayout() {
             {/* Upgrade Badge Button if on Base Plan */}
             {isBasePlan && (
               <button
-                onClick={() => setIsUpgradeModalOpen(true)}
+                onClick={() => navigate('/dashboard/planos')}
                 className="hidden sm:flex px-3.5 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-black rounded-xl items-center gap-1.5 shadow-md shadow-amber-500/20 transition-all cursor-pointer"
               >
                 <Zap className="w-4 h-4 fill-white" />

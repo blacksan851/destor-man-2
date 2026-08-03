@@ -14,6 +14,7 @@ import { Reports } from './pages/Dashboard/Reports';
 import { Users } from './pages/Dashboard/Users';
 import { Settings } from './pages/Dashboard/Settings';
 import { Expenses } from './pages/Dashboard/Expenses';
+import { PlansPage } from './pages/Dashboard/Plans';
 import { useThemeStore } from './lib/store';
 
 const queryClient = new QueryClient();
@@ -43,7 +44,8 @@ export default function App() {
             <Route path="carteiras" element={<Wallets />} />
             <Route path="relatorios" element={<Reports />} />
             <Route path="configuracoes" element={<Settings />} />
-            <Route path="assinatura" element={<Placeholder title="Painel da Assinatura" />} />
+            <Route path="planos" element={<PlansPage />} />
+            <Route path="assinatura" element={<PlansPage />} />
             <Route path="utilizadores" element={<Users />} />
             <Route path="despesas" element={<Expenses />} />
           </Route>
