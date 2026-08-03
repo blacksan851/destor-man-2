@@ -124,22 +124,22 @@ export function DashboardLayout() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0F172A] text-white flex transition-colors duration-200">
+    <div className="min-h-screen bg-[#0F172A] text-white flex transition-colors duration-200 relative overflow-x-hidden">
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 z-[90] bg-slate-950/80 backdrop-blur-md lg:hidden"
+          className="fixed inset-0 z-[998] bg-black/80 backdrop-blur-sm lg:hidden"
           onClick={() => setSidebarOpen(false)}
         />
       )}
 
       {/* Sidebar */}
-      <div className={`
-        fixed inset-y-0 left-0 z-[100] w-72 max-w-[85vw] bg-[#0B1120] border-r border-emerald-500/30 shadow-2xl flex flex-col
-        transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 lg:max-w-none lg:w-64 lg:border-r lg:border-white/10
+      <aside className={`
+        fixed top-0 bottom-0 left-0 h-full z-[999] w-72 max-w-[80vw] bg-[#0B1120] border-r border-gray-800 shadow-2xl flex flex-col
+        transform transition-transform duration-300 ease-in-out lg:translate-x-0 lg:static lg:z-auto lg:h-auto lg:max-w-none lg:w-64 lg:border-r lg:border-white/10
         ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}
       `}>
-        <div className="p-6 border-b border-white/10 flex items-center justify-between">
+        <div className="p-5 border-b border-white/10 flex items-center justify-between">
           <div className="flex items-center gap-3">
             <img src="/logo.png" alt="Dr Gestor MZ" className="w-9 h-9 rounded-lg object-contain bg-white/5 p-0.5" />
             <span className="text-white font-black text-lg tracking-tight">
@@ -148,7 +148,8 @@ export function DashboardLayout() {
           </div>
           <button
             onClick={() => setSidebarOpen(false)}
-            className="lg:hidden p-2 text-gray-300 hover:text-white rounded-xl bg-[#0F172A] border border-gray-800 transition-colors"
+            className="lg:hidden p-2 text-gray-300 hover:text-white rounded-xl bg-[#0F172A] border border-gray-800 transition-colors cursor-pointer"
+            aria-label="Fechar Menu"
           >
             <X className="w-5 h-5 text-emerald-400" />
           </button>
@@ -182,7 +183,7 @@ export function DashboardLayout() {
           })}
         </nav>
 
-        <div className="p-6">
+        <div className="p-5 border-t border-white/10">
           <button 
             onClick={handleLogout}
             className="w-full flex items-center justify-center gap-2 py-3 text-gray-400 hover:text-white text-xs font-bold rounded-xl transition-colors cursor-pointer border border-white/10 bg-white/5 hover:bg-white/10"
@@ -191,28 +192,29 @@ export function DashboardLayout() {
             <span>SAIR</span>
           </button>
         </div>
-      </div>
+      </aside>
 
       {/* Main content */}
       <div className="flex-1 flex flex-col min-w-0">
         {/* Topbar */}
-        <header className="h-20 bg-[#0F172A]/90 backdrop-blur-md border-b border-white/10 sticky top-0 z-30 flex items-center justify-between px-4 sm:px-8">
-          <div className="flex items-center gap-4">
+        <header className="h-16 bg-[#0B1120] border-b border-gray-800/80 sticky top-0 z-20 flex items-center justify-between px-4 sm:px-8">
+          <div className="flex items-center gap-3">
             <button 
               onClick={() => setSidebarOpen(true)}
-              className="lg:hidden p-2 rounded-lg text-gray-300 hover:bg-white/10"
+              className="p-2 rounded-xl text-white bg-[#1E293B] border border-gray-700/60 shadow-sm active:scale-95 transition-transform"
+              aria-label="Abrir Menu"
             >
-              <Menu className="w-6 h-6" />
+              <Menu className="w-5 h-5 text-white" />
             </button>
             <div className="flex flex-col">
-              <h1 className="text-xl font-bold text-white">
-                Olá, {company?.company_name || 'Carregando...'}
+              <h1 className="text-lg sm:text-xl font-extrabold text-white tracking-tight">
+                Olá, {company?.company_name || 'Usuário'}
               </h1>
-              <p className="text-xs text-gray-400 uppercase tracking-wide hidden sm:block">Controle Geral em Tempo Real</p>
+              <p className="text-[10px] text-gray-400 uppercase tracking-wider hidden sm:block">Controle Geral em Tempo Real</p>
             </div>
           </div>
 
-          <div className="flex items-center space-x-3 sm:space-x-4">
+          <div className="flex items-center space-x-2 sm:space-x-4">
             {/* Upgrade Badge Button if on Base Plan */}
             {isBasePlan && (
               <button
@@ -255,11 +257,11 @@ export function DashboardLayout() {
                   Plano {company?.plan || 'Base'} • NUIT: {company?.nif || 'Não definido'}
                 </p>
               </div>
-              <div className="w-10 h-10 rounded-full bg-emerald-100 dark:bg-emerald-900/30 border-2 border-emerald-500 p-0.5 shadow-sm">
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 border-2 border-emerald-500 p-0.5 shadow-md flex items-center justify-center">
                 {company?.logo_url ? (
                   <img src={company.logo_url} alt="Logo" className="w-full h-full rounded-full object-cover" />
                 ) : (
-                  <div className="w-full h-full rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-black">
+                  <div className="w-full h-full rounded-full bg-emerald-500 flex items-center justify-center text-white text-xs font-black shadow-inner">
                     {(company?.company_name || 'E')[0].toUpperCase()}
                   </div>
                 )}
