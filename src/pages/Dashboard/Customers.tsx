@@ -308,33 +308,33 @@ export function Customers() {
 
       {/* KPI Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center text-emerald-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500">
             <Users className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Total de Clientes</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalCustomers}</p>
+            <p className="text-xs text-gray-400 font-medium">Total de Clientes</p>
+            <p className="text-2xl font-bold text-white">{totalCustomers}</p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-xl flex items-center justify-center text-amber-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500">
             <AlertCircle className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Clientes com Fiado</p>
-            <p className="text-2xl font-bold text-amber-600 dark:text-amber-400">{customersInDebt}</p>
+            <p className="text-xs text-gray-400 font-medium">Clientes com Fiado</p>
+            <p className="text-2xl font-bold text-amber-400">{customersInDebt}</p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center text-emerald-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500">
             <DollarSign className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Total Fiado a Receber</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">
+            <p className="text-xs text-gray-400 font-medium">Total Fiado a Receber</p>
+            <p className="text-2xl font-bold text-white">
               {totalDebtAmount.toLocaleString('pt-MZ')},00 MT
             </p>
           </div>
@@ -342,7 +342,7 @@ export function Customers() {
       </div>
 
       {/* Search Bar */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
+      <div className="bg-[#0B1120] p-4 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
         <div className="relative flex-1">
           <Search className="w-5 h-5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -350,13 +350,13 @@ export function Customers() {
             placeholder="Buscar por nome, telefone ou NUIT do cliente..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 text-sm transition-all"
+            className="w-full pl-11 pr-4 py-2.5 bg-[#0F172A] border border-gray-800 rounded-xl outline-none text-white focus:ring-2 focus:ring-emerald-500 text-sm transition-all placeholder:text-gray-400"
           />
         </div>
       </div>
 
       {/* Customers Table View */}
-      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+      <div className="bg-[#0B1120] rounded-2xl border border-gray-800 shadow-xl overflow-hidden">
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center text-gray-500">
             <Loader2 className="w-8 h-8 animate-spin text-emerald-500 mb-2" />
@@ -364,11 +364,11 @@ export function Customers() {
           </div>
         ) : filteredCustomers.length === 0 ? (
           <div className="py-16 px-4 text-center">
-            <div className="w-16 h-16 bg-gray-100 dark:bg-gray-800 text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4">
+            <div className="w-16 h-16 bg-[#0F172A] text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-800">
               <Users className="w-8 h-8" />
             </div>
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Nenhum cliente encontrado</h3>
-            <p className="text-sm text-gray-500 max-w-sm mx-auto mt-1 mb-6">
+            <h3 className="text-lg font-bold text-white">Nenhum cliente encontrado</h3>
+            <p className="text-sm text-gray-400 max-w-sm mx-auto mt-1 mb-6">
               {searchQuery
                 ? 'Nenhum cliente corresponde aos termos da sua pesquisa.'
                 : 'Você ainda não cadastrou nenhum cliente na sua empresa.'}
@@ -386,7 +386,7 @@ export function Customers() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <tr className="border-b border-gray-800 bg-[#0F172A] text-xs font-black text-gray-300 uppercase tracking-wider">
                   <th className="py-4 px-6">Cliente</th>
                   <th className="py-4 px-6">Contatos</th>
                   <th className="py-4 px-6">NUIT</th>
@@ -394,14 +394,14 @@ export function Customers() {
                   <th className="py-4 px-6 text-right">Ações</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-800 text-sm">
+              <tbody className="divide-y divide-gray-800 bg-[#0F172A] text-sm">
                 {filteredCustomers.map((cust) => {
                   const hasDebt = cust.debt_balance > 0;
 
                   return (
-                    <tr key={cust.id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/40 transition-colors">
+                    <tr key={cust.id} className="bg-[#0F172A] hover:bg-[#1E293B] transition-colors">
                       <td className="py-4 px-6">
-                        <div className="font-bold text-slate-900 dark:text-white">{cust.name}</div>
+                        <div className="font-extrabold text-white text-sm">{cust.name}</div>
                         {cust.address && (
                           <div className="text-xs text-gray-400 flex items-center gap-1 mt-0.5">
                             <MapPin className="w-3 h-3 text-emerald-500" />

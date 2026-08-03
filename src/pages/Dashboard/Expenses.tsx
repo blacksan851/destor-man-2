@@ -243,37 +243,37 @@ export function Expenses() {
 
       {/* KPI Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-red-50 dark:bg-red-900/20 rounded-xl flex items-center justify-center text-red-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-red-500/10 rounded-xl flex items-center justify-center text-red-500">
             <ArrowDownRight className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Total de Despesas</p>
-            <p className="text-2xl font-bold text-red-600 dark:text-red-400">
+            <p className="text-xs text-gray-400 font-medium">Total de Despesas</p>
+            <p className="text-2xl font-bold text-red-400">
               {totalExpenseAmount.toLocaleString('pt-MZ')},00 MT
             </p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-amber-50 dark:bg-amber-900/20 rounded-xl flex items-center justify-center text-amber-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-amber-500/10 rounded-xl flex items-center justify-center text-amber-500">
             <Receipt className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Pagas via M-Pesa / e-Mola</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">
+            <p className="text-xs text-gray-400 font-medium">Pagas via M-Pesa / e-Mola</p>
+            <p className="text-2xl font-bold text-white">
               {mobileExpenseAmount.toLocaleString('pt-MZ')},00 MT
             </p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center text-emerald-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500">
             <DollarSign className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Pagas em Dinheiro (Caixa)</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">
+            <p className="text-xs text-gray-400 font-medium">Pagas em Dinheiro (Caixa)</p>
+            <p className="text-2xl font-bold text-white">
               {cashExpenseAmount.toLocaleString('pt-MZ')},00 MT
             </p>
           </div>
@@ -281,7 +281,7 @@ export function Expenses() {
       </div>
 
       {/* Category Pills & Search */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm space-y-3">
+      <div className="bg-[#0B1120] p-4 rounded-2xl border border-gray-800 shadow-xl space-y-3">
         <div className="relative">
           <Search className="w-5 h-5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -289,7 +289,7 @@ export function Expenses() {
             placeholder="Buscar despesa por descrição ou fornecedor..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none text-slate-900 dark:text-white focus:ring-2 focus:ring-red-500 text-sm transition-all"
+            className="w-full pl-11 pr-4 py-2.5 bg-[#0F172A] border border-gray-800 rounded-xl outline-none text-white focus:ring-2 focus:ring-red-500 text-sm transition-all placeholder:text-gray-400"
           />
         </div>
 
@@ -304,7 +304,7 @@ export function Expenses() {
               className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all shrink-0 cursor-pointer ${
                 selectedCategory === cat
                   ? 'bg-red-500 text-white shadow-sm'
-                  : 'bg-gray-100 dark:bg-gray-800 text-gray-500 hover:text-slate-900 dark:hover:text-white'
+                  : 'bg-[#0F172A] border border-gray-800 text-gray-300 hover:text-white hover:bg-gray-800'
               }`}
             >
               {cat}
@@ -314,7 +314,7 @@ export function Expenses() {
       </div>
 
       {/* Expense List Table */}
-      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+      <div className="bg-[#0B1120] rounded-2xl border border-gray-800 shadow-xl overflow-hidden">
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center text-gray-500">
             <Loader2 className="w-8 h-8 animate-spin text-red-500 mb-2" />
@@ -322,9 +322,9 @@ export function Expenses() {
           </div>
         ) : filteredExpenses.length === 0 ? (
           <div className="py-16 px-4 text-center">
-            <Receipt className="w-12 h-12 text-gray-300 dark:text-gray-700 mx-auto mb-3 opacity-50" />
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Nenhuma despesa encontrada</h3>
-            <p className="text-sm text-gray-500 max-w-sm mx-auto mt-1 mb-6">
+            <Receipt className="w-12 h-12 text-gray-600 mx-auto mb-3 opacity-50" />
+            <h3 className="text-lg font-bold text-white">Nenhuma despesa encontrada</h3>
+            <p className="text-sm text-gray-400 max-w-sm mx-auto mt-1 mb-6">
               {searchQuery || selectedCategory !== 'Todas'
                 ? 'Nenhuma despesa corresponde aos filtros selecionados.'
                 : 'Você ainda não registrou nenhuma saída ou despesa operacional.'}
@@ -342,7 +342,7 @@ export function Expenses() {
           <div className="overflow-x-auto">
             <table className="w-full text-left border-collapse">
               <thead>
-                <tr className="border-b border-gray-100 dark:border-gray-800 bg-gray-50/50 dark:bg-gray-800/50 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                <tr className="border-b border-gray-800 bg-[#0F172A] text-xs font-black text-gray-300 uppercase tracking-wider">
                   <th className="py-4 px-6">Data</th>
                   <th className="py-4 px-6">Categoria</th>
                   <th className="py-4 px-6">Descrição / Fornecedor</th>
@@ -351,14 +351,14 @@ export function Expenses() {
                   <th className="py-4 px-6 text-right">Ações</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 dark:divide-gray-800 text-sm">
+              <tbody className="divide-y divide-gray-800 bg-[#0F172A] text-sm">
                 {filteredExpenses.map((exp) => {
                   const catConfig = EXPENSE_CATEGORIES.find(c => c.name === exp.category) || EXPENSE_CATEGORIES[6];
                   const IconComp = catConfig.icon;
 
                   return (
-                    <tr key={exp.id} className="hover:bg-gray-50/80 dark:hover:bg-gray-800/40 transition-colors">
-                      <td className="py-4 px-6 text-xs text-gray-500 dark:text-gray-400 font-mono">
+                    <tr key={exp.id} className="bg-[#0F172A] hover:bg-[#1E293B] transition-colors">
+                      <td className="py-4 px-6 text-xs text-gray-400 font-mono">
                         {new Date(exp.expense_date).toLocaleDateString('pt-MZ')}
                       </td>
                       <td className="py-4 px-6">
@@ -367,7 +367,7 @@ export function Expenses() {
                           <span>{exp.category}</span>
                         </span>
                       </td>
-                      <td className="py-4 px-6 font-bold text-slate-900 dark:text-white">
+                      <td className="py-4 px-6 font-extrabold text-white">
                         {exp.description}
                       </td>
                       <td className="py-4 px-6">
