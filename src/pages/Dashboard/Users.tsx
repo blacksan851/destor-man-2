@@ -279,33 +279,33 @@ export function Users() {
 
       {/* KPI Stats Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/20 rounded-xl flex items-center justify-center text-blue-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-blue-500/10 rounded-xl flex items-center justify-center text-blue-500">
             <UsersIcon className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Equipe Cadastrada</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{totalUsers}</p>
+            <p className="text-xs text-gray-400 font-medium">Equipe Cadastrada</p>
+            <p className="text-2xl font-bold text-white">{totalUsers}</p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-purple-50 dark:bg-purple-900/20 rounded-xl flex items-center justify-center text-purple-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-purple-500/10 rounded-xl flex items-center justify-center text-purple-500">
             <ShieldCheck className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Admins & Gerentes</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{adminCount}</p>
+            <p className="text-xs text-gray-400 font-medium">Admins & Gerentes</p>
+            <p className="text-2xl font-bold text-white">{adminCount}</p>
           </div>
         </div>
 
-        <div className="bg-white dark:bg-gray-900 p-5 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
-          <div className="w-12 h-12 bg-emerald-50 dark:bg-emerald-900/20 rounded-xl flex items-center justify-center text-emerald-500">
+        <div className="bg-[#0B1120] p-5 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
+          <div className="w-12 h-12 bg-emerald-500/10 rounded-xl flex items-center justify-center text-emerald-500">
             <Key className="w-6 h-6" />
           </div>
           <div>
-            <p className="text-xs text-gray-500 dark:text-gray-400 font-medium">Operadores de Caixa</p>
-            <p className="text-2xl font-bold text-slate-900 dark:text-white">{cashierCount}</p>
+            <p className="text-xs text-gray-400 font-medium">Operadores de Caixa</p>
+            <p className="text-2xl font-bold text-white">{cashierCount}</p>
           </div>
         </div>
       </div>
@@ -351,7 +351,7 @@ export function Users() {
       </div>
 
       {/* Search Bar */}
-      <div className="bg-white dark:bg-gray-900 p-4 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm flex items-center gap-4">
+      <div className="bg-[#0B1120] p-4 rounded-2xl border border-gray-800 shadow-xl flex items-center gap-4">
         <div className="relative flex-1">
           <Search className="w-5 h-5 text-gray-400 absolute left-3.5 top-1/2 -translate-y-1/2" />
           <input
@@ -359,25 +359,27 @@ export function Users() {
             placeholder="Buscar operador por nome ou email..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-11 pr-4 py-2.5 bg-gray-50 dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-xl outline-none text-slate-900 dark:text-white focus:ring-2 focus:ring-emerald-500 text-sm transition-all"
+            className="w-full pl-11 pr-4 py-2.5 bg-[#0F172A] border border-gray-800 rounded-xl outline-none text-white focus:ring-2 focus:ring-emerald-500 text-sm transition-all placeholder:text-gray-400"
           />
         </div>
       </div>
 
       {/* Users Table */}
-      <div className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 shadow-sm overflow-hidden">
+      <div className="bg-[#0B1120] rounded-2xl border border-gray-800 shadow-xl overflow-hidden">
         {loading ? (
           <div className="py-20 flex flex-col items-center justify-center text-gray-500">
             <Loader2 className="w-8 h-8 animate-spin text-emerald-500 mb-2" />
-            <p className="text-sm font-medium">Carregando membros da equipe...</p>
+            <p className="text-sm font-medium">Carregando utilizadores...</p>
           </div>
         ) : filteredUsers.length === 0 ? (
-          <div className="py-16 px-4 text-center">
-            <UsersIcon className="w-12 h-12 text-gray-300 dark:text-gray-700 mx-auto mb-3 opacity-50" />
-            <h3 className="text-lg font-bold text-slate-900 dark:text-white">Nenhum utilizador encontrado</h3>
-            <p className="text-sm text-gray-500 max-w-sm mx-auto mt-1 mb-6">
+          <div className="py-16 px-4 text-center bg-[#0F172A]">
+            <div className="w-16 h-16 bg-[#1E293B] text-gray-400 rounded-full flex items-center justify-center mx-auto mb-4 border border-gray-700">
+              <UsersIcon className="w-8 h-8" />
+            </div>
+            <h3 className="text-lg font-bold text-white">Nenhum utilizador encontrado</h3>
+            <p className="text-sm text-gray-400 max-w-sm mx-auto mt-1 mb-6">
               {searchQuery
-                ? 'Nenhum membro corresponde aos termos da pesquisa.'
+                ? 'Nenhum operador de caixa ou gerente corresponde à pesquisa.'
                 : 'Você ainda não cadastrou nenhum operador de caixa ou gerente na sua empresa.'}
             </p>
             {!searchQuery && (

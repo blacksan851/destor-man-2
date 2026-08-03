@@ -151,11 +151,11 @@ export function Settings() {
 
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
         {/* Main Settings Form - col-span-7 */}
-        <div className="col-span-1 lg:col-span-7 bg-white dark:bg-gray-900 rounded-3xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm space-y-6">
+        <div className="col-span-1 lg:col-span-7 bg-[#0B1120] rounded-3xl p-6 border border-gray-800 shadow-xl space-y-6">
           <form onSubmit={handleSubmit} className="space-y-6">
             {/* Section 1: Company Profile */}
             <div className="space-y-4">
-              <h3 className="font-extrabold text-slate-900 dark:text-white text-base flex items-center gap-2 border-b border-gray-100 dark:border-gray-800 pb-3">
+              <h3 className="font-extrabold text-white text-base flex items-center gap-2 border-b border-gray-800 pb-3">
                 <Building2 className="w-5 h-5 text-emerald-500" />
                 <span>Dados Gerais da Empresa</span>
               </h3>
@@ -245,8 +245,8 @@ export function Settings() {
             </div>
 
             {/* Section 2: Receipt & Branding Customization */}
-            <div className="space-y-4 pt-4 border-t border-gray-100 dark:border-gray-800">
-              <h3 className="font-extrabold text-slate-900 dark:text-white text-base flex items-center gap-2 border-b border-gray-100 dark:border-gray-800 pb-3">
+            <div className="space-y-4 pt-4 border-t border-gray-800">
+              <h3 className="font-extrabold text-white text-base flex items-center gap-2 border-b border-gray-800 pb-3">
                 <FileText className="w-5 h-5 text-emerald-500" />
                 <span>Personalização do Recibo (POS)</span>
               </h3>
@@ -307,9 +307,9 @@ export function Settings() {
           </div>
 
           {/* Receipt Mockup Card */}
-          <div className="bg-white text-slate-900 rounded-3xl p-6 shadow-xl border border-gray-200 space-y-4 font-sans text-xs">
+          <div className="bg-[#0B1120] text-white rounded-3xl p-6 shadow-xl border border-gray-800 space-y-4 font-sans text-xs">
             {/* Header */}
-            <div className="text-center space-y-1 pb-4 border-b border-dashed border-gray-300">
+            <div className="text-center space-y-1 pb-4 border-b border-dashed border-gray-700">
               {formData.logoUrl ? (
                 <img 
                   src={formData.logoUrl} 
@@ -323,10 +323,10 @@ export function Settings() {
                 </div>
               )}
 
-              <h2 className="text-lg font-black tracking-tight">
+              <h2 className="text-lg font-black tracking-tight text-white">
                 {formData.companyName || 'Nome da Sua Empresa'}
               </h2>
-              <p className="text-[11px] text-gray-500 font-mono">
+              <p className="text-[11px] text-gray-400 font-mono">
                 NUIT: {formData.nuit || '123456789'}
               </p>
               {formData.address && (
@@ -343,34 +343,34 @@ export function Settings() {
             {/* Items Table */}
             <table className="w-full text-left">
               <thead>
-                <tr className="border-b text-gray-400 uppercase text-[9px]">
+                <tr className="border-b border-gray-800 text-gray-400 uppercase text-[9px]">
                   <th className="py-1">Item</th>
                   <th className="py-1 text-center">Qtd</th>
                   <th className="py-1 text-right">Total</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-gray-100 text-xs">
-                <tr>
-                  <td className="py-1.5 font-medium">Arroz Top 25kg</td>
-                  <td className="py-1.5 text-center font-bold">1</td>
-                  <td className="py-1.5 text-right font-black">1.800,00 MT</td>
+              <tbody className="divide-y divide-gray-800 text-xs">
+                <tr className="bg-[#0F172A]">
+                  <td className="py-1.5 font-bold text-white">Arroz Top 25kg</td>
+                  <td className="py-1.5 text-center font-bold text-white">1</td>
+                  <td className="py-1.5 text-right font-black text-emerald-400">1.800,00 MT</td>
                 </tr>
-                <tr>
-                  <td className="py-1.5 font-medium">Óleo Alimentar 5L</td>
-                  <td className="py-1.5 text-center font-bold">2</td>
-                  <td className="py-1.5 text-right font-black">1.200,00 MT</td>
+                <tr className="bg-[#0F172A]">
+                  <td className="py-1.5 font-bold text-white">Óleo Alimentar 5L</td>
+                  <td className="py-1.5 text-center font-bold text-white">2</td>
+                  <td className="py-1.5 text-right font-black text-emerald-400">1.200,00 MT</td>
                 </tr>
               </tbody>
             </table>
 
             {/* Total */}
-            <div className="pt-3 border-t border-dashed border-gray-300 flex justify-between items-center text-sm font-black">
-              <span>TOTAL PAGO:</span>
-              <span className="text-emerald-600">3.000,00 MT</span>
+            <div className="pt-3 border-t border-dashed border-gray-700 flex justify-between items-center text-sm font-black">
+              <span className="text-white">TOTAL PAGO:</span>
+              <span className="text-emerald-400">3.000,00 MT</span>
             </div>
 
             {/* Footer Note */}
-            <div className="pt-4 border-t border-dashed border-gray-300 text-center text-gray-500 italic text-[11px]">
+            <div className="pt-4 border-t border-dashed border-gray-700 text-center text-gray-400 italic text-[11px]">
               "{formData.receiptFooterNote || 'Obrigado pela preferência!'}"
             </div>
           </div>
