@@ -391,16 +391,16 @@ export function LandingPage() {
       </section>
 
       {/* ── FEATURES ── */}
-      <section id="recursos" className="py-24 bg-gray-50 dark:bg-slate-900">
+      <section id="recursos" className="py-24 bg-[#0F172A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-full text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
               Funcionalidades
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
               Tudo o que o seu negócio precisa
             </h2>
-            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="mt-4 text-lg text-gray-400 max-w-2xl mx-auto">
               Desenvolvido especificamente para o mercado moçambicano — com suporte a M-Pesa, e-Mola, NUIT e impressoras térmicas.
             </p>
           </div>
@@ -413,24 +413,24 @@ export function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: index * 0.05 }}
                 viewport={{ once: true }}
-                className="group p-6 bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 hover:border-emerald-200 dark:hover:border-emerald-800 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300"
+                className="group p-6 bg-[#0B1120] rounded-2xl border border-gray-800 hover:border-emerald-500/50 hover:shadow-xl hover:shadow-emerald-500/5 transition-all duration-300"
               >
                 <div className="flex items-start justify-between mb-4">
-                  <div className="w-12 h-12 bg-gray-50 dark:bg-gray-800 group-hover:bg-emerald-50 dark:group-hover:bg-emerald-900/20 rounded-xl flex items-center justify-center transition-colors">
+                  <div className="w-12 h-12 bg-[#0F172A] group-hover:bg-emerald-500/20 rounded-xl flex items-center justify-center transition-colors text-emerald-400">
                     {feature.icon}
                   </div>
                   {feature.badge && (
                     <span className={`text-[10px] font-black uppercase tracking-wider px-2.5 py-1 rounded-full ${
-                      feature.badge === 'Premium' ? 'bg-amber-50 dark:bg-amber-900/20 text-amber-600 dark:text-amber-400 border border-amber-200 dark:border-amber-800' :
-                      feature.badge === 'Novo' ? 'bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 border border-emerald-200 dark:border-emerald-800' :
-                      'bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800'
+                      feature.badge === 'Premium' ? 'bg-amber-500/10 text-amber-400 border border-amber-500/20' :
+                      feature.badge === 'Novo' ? 'bg-emerald-500/10 text-emerald-400 border border-emerald-500/20' :
+                      'bg-blue-500/10 text-blue-400 border border-blue-500/20'
                     }`}>
                       {feature.badge}
                     </span>
                   )}
                 </div>
-                <h3 className="text-base font-black text-slate-900 dark:text-white mb-2">{feature.title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{feature.description}</p>
+                <h3 className="text-base font-black text-white mb-2">{feature.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">{feature.description}</p>
               </motion.div>
             ))}
           </div>
@@ -507,19 +507,19 @@ export function LandingPage() {
       </section>
 
       {/* ── HOW IT WORKS ── */}
-      <section id="como-funciona" className="py-24 bg-white dark:bg-slate-950">
+      <section id="como-funciona" className="py-24 bg-[#0F172A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-50 dark:bg-blue-900/30 border border-blue-200 dark:border-blue-800 rounded-full text-blue-600 dark:text-blue-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-blue-500/10 border border-blue-500/20 rounded-full text-blue-400 text-xs font-bold uppercase tracking-wider mb-4">
               Como Funciona
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
               Comece em 4 passos simples
             </h2>
           </div>
 
           <div className="grid md:grid-cols-4 gap-6 relative">
-            <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-emerald-200 via-emerald-400 to-emerald-200 dark:from-emerald-900 dark:via-emerald-700 dark:to-emerald-900 z-0" />
+            <div className="hidden md:block absolute top-10 left-[12.5%] right-[12.5%] h-0.5 bg-gradient-to-r from-emerald-900 via-emerald-700 to-emerald-900 z-0" />
             {steps.map((step, i) => (
               <motion.div
                 key={i}
@@ -532,8 +532,8 @@ export function LandingPage() {
                 <div className="w-20 h-20 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-2xl flex items-center justify-center mb-4 shadow-xl shadow-emerald-500/25 text-white font-black text-2xl">
                   {step.num}
                 </div>
-                <h3 className="text-base font-black text-slate-900 dark:text-white mb-2">{step.title}</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed max-w-[200px] mx-auto">{step.description}</p>
+                <h3 className="text-base font-black text-white mb-2">{step.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed max-w-[200px] mx-auto">{step.description}</p>
               </motion.div>
             ))}
           </div>
@@ -547,13 +547,14 @@ export function LandingPage() {
       </section>
 
       {/* ── TESTIMONIALS ── */}
-      <section className="py-24 bg-gray-50 dark:bg-slate-900">
+      {/* ── TESTIMONIALS ── */}
+      <section className="py-24 bg-[#0F172A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-50 dark:bg-amber-900/30 border border-amber-200 dark:border-amber-800 rounded-full text-amber-600 dark:text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-500/10 border border-amber-500/20 rounded-full text-amber-400 text-xs font-bold uppercase tracking-wider mb-4">
               <Star className="w-3 h-3 fill-amber-500 text-amber-500" /> Testemunhos
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
               O que dizem os nossos clientes
             </h2>
           </div>
@@ -566,20 +567,20 @@ export function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.1 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-gray-900 rounded-2xl p-6 border border-gray-100 dark:border-gray-800 shadow-sm flex flex-col gap-4"
+                className="bg-[#0B1120] rounded-2xl p-6 border border-gray-800 shadow-sm flex flex-col gap-4"
               >
                 <div className="flex">
                   {[...Array(t.stars)].map((_, si) => (
                     <Star key={si} className="w-4 h-4 fill-amber-400 text-amber-400" />
                   ))}
                 </div>
-                <p className="text-gray-600 dark:text-gray-300 text-sm leading-relaxed italic flex-1">"{t.text}"</p>
-                <div className="flex items-center gap-3 pt-2 border-t border-gray-100 dark:border-gray-800">
+                <p className="text-gray-300 text-sm leading-relaxed italic flex-1">"{t.text}"</p>
+                <div className="flex items-center gap-3 pt-2 border-t border-gray-800">
                   <div className="w-10 h-10 bg-gradient-to-br from-emerald-400 to-emerald-600 rounded-full flex items-center justify-center text-white font-black text-sm">
                     {t.avatar}
                   </div>
                   <div>
-                    <p className="font-bold text-sm text-slate-900 dark:text-white">{t.name}</p>
+                    <p className="font-bold text-sm text-white">{t.name}</p>
                     <p className="text-xs text-gray-400">{t.business}</p>
                   </div>
                 </div>
@@ -590,16 +591,16 @@ export function LandingPage() {
       </section>
 
       {/* ── PRICING ── */}
-      <section id="precos" className="py-24 bg-white dark:bg-slate-950">
+      <section id="precos" className="py-24 bg-[#0F172A]">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-50 dark:bg-emerald-900/30 border border-emerald-200 dark:border-emerald-800 rounded-full text-emerald-600 dark:text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
               Preços
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
               Planos simples e transparentes
             </h2>
-            <p className="mt-4 text-lg text-gray-500 dark:text-gray-400">
+            <p className="mt-4 text-lg text-gray-400">
               Sem taxas escondidas. Pague via M-Pesa ou e-Mola. Cancele quando quiser.
             </p>
           </div>
@@ -610,27 +611,27 @@ export function LandingPage() {
               initial={{ opacity: 0, x: -20 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              className="bg-gray-50 dark:bg-gray-900 rounded-3xl p-8 border border-gray-200 dark:border-gray-800 flex flex-col"
+              className="bg-[#0B1120] rounded-3xl p-8 border border-gray-800 flex flex-col"
             >
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-xl font-black text-slate-900 dark:text-white">Plano Base</h3>
-                <span className="text-xs font-bold px-2.5 py-1 bg-gray-200 dark:bg-gray-800 text-gray-600 dark:text-gray-400 rounded-full">Essencial</span>
+                <h3 className="text-xl font-black text-white">Plano Base</h3>
+                <span className="text-xs font-bold px-2.5 py-1 bg-gray-800 text-gray-400 rounded-full">Essencial</span>
               </div>
               <div className="flex items-baseline gap-1 mt-4 mb-6">
-                <span className="text-5xl font-black text-slate-900 dark:text-white tracking-tight">300</span>
+                <span className="text-5xl font-black text-white tracking-tight">300</span>
                 <span className="text-xl font-bold text-gray-400">MT/mês</span>
               </div>
               <ul className="space-y-3 flex-1">
                 {basePlanFeatures.map((item, i) => (
                   <li key={i} className="flex items-center gap-2.5">
                     <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                    <span className="text-sm text-slate-600 dark:text-gray-300">{item}</span>
+                    <span className="text-sm text-gray-300">{item}</span>
                   </li>
                 ))}
               </ul>
               <Link
                 to="/register?plan=base"
-                className="mt-8 block w-full py-3.5 px-6 bg-white dark:bg-gray-800 hover:bg-gray-100 dark:hover:bg-gray-700 text-slate-900 dark:text-white text-center font-bold rounded-2xl transition-all border border-gray-200 dark:border-gray-700 text-sm"
+                className="mt-8 block w-full py-3.5 px-6 bg-[#0F172A] hover:bg-gray-800 text-white text-center font-bold rounded-2xl transition-all border border-gray-700 text-sm"
               >
                 Começar com Plano Base
               </Link>
@@ -684,13 +685,13 @@ export function LandingPage() {
       </section>
 
       {/* ── FAQ ── */}
-      <section id="faq" className="py-24 bg-gray-50 dark:bg-slate-900">
+      <section id="faq" className="py-24 bg-[#0F172A]">
         <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center mb-16">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-50 dark:bg-purple-900/30 border border-purple-200 dark:border-purple-800 rounded-full text-purple-600 dark:text-purple-400 text-xs font-bold uppercase tracking-wider mb-4">
+            <div className="inline-flex items-center gap-2 px-3 py-1 bg-purple-500/10 border border-purple-500/20 rounded-full text-purple-400 text-xs font-bold uppercase tracking-wider mb-4">
               FAQ
             </div>
-            <h2 className="text-3xl md:text-5xl font-black text-slate-900 dark:text-white tracking-tight">
+            <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
               Perguntas Frequentes
             </h2>
           </div>
@@ -703,18 +704,18 @@ export function LandingPage() {
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ delay: i * 0.05 }}
                 viewport={{ once: true }}
-                className="bg-white dark:bg-gray-900 rounded-2xl border border-gray-100 dark:border-gray-800 overflow-hidden"
+                className="bg-[#0B1120] rounded-2xl border border-gray-800 overflow-hidden"
               >
                 <button
                   onClick={() => setOpenFaq(openFaq === i ? null : i)}
                   className="w-full flex items-center justify-between p-5 text-left"
                 >
-                  <span className="font-bold text-slate-900 dark:text-white text-sm pr-4">{faq.q}</span>
+                  <span className="font-bold text-white text-sm pr-4">{faq.q}</span>
                   <ChevronDown className={`w-5 h-5 text-gray-400 flex-shrink-0 transition-transform ${openFaq === i ? 'rotate-180' : ''}`} />
                 </button>
                 {openFaq === i && (
                   <div className="px-5 pb-5">
-                    <p className="text-sm text-gray-500 dark:text-gray-400 leading-relaxed">{faq.a}</p>
+                    <p className="text-sm text-gray-400 leading-relaxed">{faq.a}</p>
                   </div>
                 )}
               </motion.div>
