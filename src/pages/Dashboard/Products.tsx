@@ -219,32 +219,59 @@ export function Products() {
           stock_quantity: stockNum,
           min_stock_alert: minAlertNum,
           unit: formData.unit,
-          image_url: formData.image_url
         };
-        const { error } = await supabase
+        if (formData.image_url) {
+          payload.image_url = formData.image_url;
+        }
+
+        let { error } = await supabase
           .from('products')
           .update(payload)
           .eq('id', editingProduct.id)
           .eq('company_id', user.id);
 
+        // Fallback: If image_url column is missing in DB schema cache, retry without image_url
+        if (error && error.message?.includes("image_url")) {
+          delete payload.image_url;
+          const retryRes = await supabase
+            .from('products')
+            .update(payload)
+            .eq('id', editingProduct.id)
+            .eq('company_id', user.id);
+          error = retryRes.error;
+        }
+
         if (error) throw error;
       } else {
         // Create product
-        const { error } = await supabase
+        const payload: any = {
+          company_id: user.id,
+          name: formData.name,
+          sku: formData.sku || `SKU-${Date.now().toString().slice(-6)}`,
+          category: formData.category,
+          price: priceNum,
+          cost_price: costNum,
+          stock_quantity: stockNum,
+          min_stock_alert: minAlertNum,
+          unit: formData.unit
+        };
+
+        if (formData.image_url) {
+          payload.image_url = formData.image_url;
+        }
+
+        let { error } = await supabase
           .from('products')
-          .insert([
-            {
-              company_id: user.id,
-              name: formData.name,
-              sku: formData.sku || `SKU-${Date.now().toString().slice(-6)}`,
-              category: formData.category,
-              price: priceNum,
-              cost_price: costNum,
-              stock_quantity: stockNum,
-              min_stock_alert: minAlertNum,
-              unit: formData.unit
-            }
-          ]);
+          .insert([payload]);
+
+        // Fallback: If image_url column is missing in DB schema cache, retry without image_url
+        if (error && error.message?.includes("image_url")) {
+          delete payload.image_url;
+          const retryRes = await supabase
+            .from('products')
+            .insert([payload]);
+          error = retryRes.error;
+        }
 
         if (error) throw error;
       }
