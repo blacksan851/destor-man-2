@@ -7,7 +7,11 @@ import { supabase } from '../../lib/supabase';
 export function Login() {
   const navigate = useNavigate();
   const [error, setError] = useState('');
+  const [successMsg, setSuccessMsg] = useState('');
   const [loading, setLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
+  const [isResetModalOpen, setIsResetModalOpen] = useState(false);
+  const [resetEmail, setResetEmail] = useState('');
   const [formData, setFormData] = useState({
     email: '',
     password: ''
@@ -37,6 +41,34 @@ export function Login() {
     }
   };
 
+  const handleResetPassword = async (e: FormEvent) => {
+    e.preventDefault();
+    if (!resetEmail) {
+      setError('Por favor insira o seu email para recuperação.');
+      return;
+    }
+    setResetLoading(true);
+    setError('');
+    setSuccessMsg('');
+
+    try {
+      const { error: resetError } = await supabase.auth.resetPasswordForEmail(resetEmail, {
+        redirectTo: `${window.location.origin}/reset-password`,
+      });
+
+      if (resetError) throw resetError;
+
+      setSuccessMsg(`Enviamos as instruções de redefinição de senha para o email: ${resetEmail}`);
+      setIsResetModalOpen(false);
+      setResetEmail('');
+    } catch (err: any) {
+      console.error(err);
+      setError(err.message || 'Erro ao enviar email de redefinição.');
+    } finally {
+      setResetLoading(false);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-[#0F172A] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
@@ -58,6 +90,12 @@ export function Login() {
           {error && (
             <div className="p-3 bg-red-500/10 text-red-400 rounded-xl text-sm font-bold border border-red-500/20 mb-4">
               {error}
+            </div>
+          )}
+
+          {successMsg && (
+            <div className="p-3.5 bg-emerald-500/10 text-emerald-400 rounded-xl text-xs font-bold border border-emerald-500/20 mb-4 leading-relaxed">
+              {successMsg}
             </div>
           )}
 
@@ -111,9 +149,16 @@ export function Login() {
               </div>
 
               <div className="text-xs">
-                <a href="#" className="font-bold text-emerald-400 hover:text-emerald-300">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setResetEmail(formData.email);
+                    setIsResetModalOpen(true);
+                  }}
+                  className="font-bold text-emerald-400 hover:text-emerald-300 cursor-pointer bg-transparent border-0 outline-none p-0"
+                >
                   Esqueceu a senha?
-                </a>
+                </button>
               </div>
             </div>
 
@@ -142,6 +187,60 @@ export function Login() {
           </div>
         </div>
       </div>
+
+      {/* Modal: Recuperação de Senha */}
+      {isResetModalOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-sm p-4">
+          <div className="bg-[#0B1120] border border-gray-800 rounded-3xl p-6 sm:p-8 max-w-md w-full shadow-2xl space-y-5">
+            <div className="space-y-1">
+              <h3 className="text-xl font-extrabold text-white tracking-tight">Recuperar Senha de Acesso</h3>
+              <p className="text-xs text-gray-400 leading-relaxed">
+                Insira o seu endereço de email cadastrado para receber o link de redefinição de senha da sua conta.
+              </p>
+            </div>
+
+            <form onSubmit={handleResetPassword} className="space-y-4">
+              <div>
+                <label className="block text-xs font-bold text-gray-300 uppercase tracking-wider mb-2">
+                  Seu Email Cadastrado
+                </label>
+                <input
+                  type="email"
+                  required
+                  value={resetEmail}
+                  onChange={(e) => setResetEmail(e.target.value)}
+                  placeholder="exemplo@empresa.co.mz"
+                  className="appearance-none block w-full px-4 py-3 border border-gray-800 rounded-xl shadow-sm placeholder-gray-500 focus:outline-none focus:ring-2 focus:ring-emerald-500 text-sm bg-[#0F172A] text-white font-bold"
+                />
+              </div>
+
+              <div className="flex gap-3 pt-2">
+                <button
+                  type="button"
+                  onClick={() => setIsResetModalOpen(false)}
+                  className="flex-1 py-3 px-4 bg-[#0F172A] border border-gray-800 hover:bg-gray-800 text-white font-bold rounded-xl transition-colors text-xs cursor-pointer"
+                >
+                  Cancelar
+                </button>
+                <button
+                  type="submit"
+                  disabled={resetLoading}
+                  className="flex-1 py-3 px-4 bg-emerald-500 hover:bg-emerald-600 disabled:opacity-50 text-white font-black rounded-xl transition-all text-xs flex items-center justify-center gap-2 shadow-lg shadow-emerald-500/25 cursor-pointer uppercase tracking-wider"
+                >
+                  {resetLoading ? (
+                    <>
+                      <Loader2 className="w-4 h-4 animate-spin" />
+                      Enviando...
+                    </>
+                  ) : (
+                    'Enviar Link'
+                  )}
+                </button>
+              </div>
+            </form>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

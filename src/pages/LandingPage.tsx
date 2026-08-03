@@ -181,39 +181,39 @@ export function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-white font-sans transition-colors duration-200 overflow-x-hidden w-full max-w-full">
+    <div className="min-h-screen bg-[#0F172A] font-sans transition-colors duration-200 overflow-x-hidden w-full max-w-full text-white">
 
       {/* ── NAVBAR ── */}
-      <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-xl border-b border-gray-100">
+      <nav className="sticky top-0 z-50 bg-[#0B1120]/95 backdrop-blur-xl border-b border-gray-800">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2.5">
               <img src="/logo.png" alt="Dr Gestor MZ" className="w-10 h-10 rounded-xl object-contain bg-white/5 p-0.5 shrink-0" />
               <div className="whitespace-nowrap">
-                <span className="font-black text-lg text-slate-900 tracking-tight">Dr Gestor</span>
-                <span className="font-black text-lg text-emerald-500 tracking-tight"> MZ</span>
+                <span className="font-black text-lg text-white tracking-tight">Dr Gestor</span>
+                <span className="font-black text-lg text-emerald-400 tracking-tight"> MZ</span>
               </div>
             </Link>
 
             {/* Desktop Menu */}
             <div className="hidden md:flex items-center gap-8">
-              <a href="#recursos" className="text-sm text-slate-600 hover:text-emerald-500 transition-colors font-medium">Recursos</a>
-              <a href="#como-funciona" className="text-sm text-slate-600 hover:text-emerald-500 transition-colors font-medium">Como Funciona</a>
-              <a href="#precos" className="text-sm text-slate-600 hover:text-emerald-500 transition-colors font-medium">Preços</a>
-              <a href="#faq" className="text-sm text-slate-600 hover:text-emerald-500 transition-colors font-medium">FAQ</a>
+              <a href="#recursos" className="text-sm text-gray-300 hover:text-emerald-400 transition-colors font-semibold">Recursos</a>
+              <a href="#como-funciona" className="text-sm text-gray-300 hover:text-emerald-400 transition-colors font-semibold">Como Funciona</a>
+              <a href="#precos" className="text-sm text-gray-300 hover:text-emerald-400 transition-colors font-semibold">Preços</a>
+              <a href="#faq" className="text-sm text-gray-300 hover:text-emerald-400 transition-colors font-semibold">FAQ</a>
             </div>
 
             <div className="hidden md:flex items-center gap-3">
-              <Link to="/login" className="text-sm text-slate-600 font-semibold hover:text-emerald-500 transition-colors px-3 py-2">Entrar</Link>
-              <Link to="/register" className="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-semibold text-sm transition-all shadow-md shadow-emerald-500/25 flex items-center gap-1.5">
+              <Link to="/login" className="text-sm text-gray-300 font-bold hover:text-emerald-400 transition-colors px-3 py-2">Entrar</Link>
+              <Link to="/register" className="bg-emerald-500 hover:bg-emerald-600 text-white px-5 py-2.5 rounded-xl font-bold text-sm transition-all shadow-lg shadow-emerald-500/25 flex items-center gap-1.5 cursor-pointer">
                 Criar Conta Grátis <ArrowRight className="w-4 h-4" />
               </Link>
             </div>
 
             {/* Mobile */}
             <div className="md:hidden flex items-center gap-3">
-              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-slate-600 dark:text-gray-300">
+              <button onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} className="p-2 text-gray-300">
                 {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
               </button>
             </div>
@@ -221,13 +221,13 @@ export function LandingPage() {
         </div>
 
         {isMobileMenuOpen && (
-          <div className="md:hidden bg-white border-b border-gray-100 px-4 py-4 space-y-2">
-            <a href="#recursos" className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-900 hover:bg-gray-50">Recursos</a>
-            <a href="#como-funciona" className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-900 hover:bg-gray-50">Como Funciona</a>
-            <a href="#precos" className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-900 hover:bg-gray-50">Preços</a>
-            <a href="#faq" className="block px-3 py-2 rounded-lg text-sm font-medium text-slate-900 hover:bg-gray-50">FAQ</a>
+          <div className="md:hidden bg-[#0B1120] border-b border-gray-800 px-4 py-4 space-y-2">
+            <a href="#recursos" className="block px-3 py-2 rounded-lg text-sm font-medium text-white hover:bg-gray-800">Recursos</a>
+            <a href="#como-funciona" className="block px-3 py-2 rounded-lg text-sm font-medium text-white hover:bg-gray-800">Como Funciona</a>
+            <a href="#precos" className="block px-3 py-2 rounded-lg text-sm font-medium text-white hover:bg-gray-800">Preços</a>
+            <a href="#faq" className="block px-3 py-2 rounded-lg text-sm font-medium text-white hover:bg-gray-800">FAQ</a>
             <div className="flex gap-3 pt-2">
-              <Link to="/login" className="flex-1 text-center px-4 py-2.5 border border-gray-200 text-slate-900 text-sm font-semibold rounded-xl">Entrar</Link>
+              <Link to="/login" className="flex-1 text-center px-4 py-2.5 border border-gray-800 text-white text-sm font-semibold rounded-xl bg-[#0F172A]">Entrar</Link>
               <Link to="/register" className="flex-1 text-center px-4 py-2.5 bg-emerald-500 text-white text-sm font-semibold rounded-xl">Criar Conta</Link>
             </div>
           </div>
