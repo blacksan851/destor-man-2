@@ -20,10 +20,21 @@ export function DashboardLayout() {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useThemeStore();
 
-  // Auto-close sidebar on route navigation on mobile
+  // Auto-close sidebar on route navigation on mobile & body scroll lock
   useEffect(() => {
     setSidebarOpen(false);
   }, [location.pathname]);
+
+  useEffect(() => {
+    if (sidebarOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [sidebarOpen]);
   const [deferredPrompt, setDeferredPrompt] = useState<any>(null);
 
   useEffect(() => {
@@ -128,8 +139,9 @@ export function DashboardLayout() {
       {/* Mobile sidebar backdrop */}
       {sidebarOpen && (
         <div 
-          className="fixed inset-0 z-[998] bg-black/80 backdrop-blur-sm lg:hidden"
+          className="fixed inset-0 z-[998] bg-black/80 backdrop-blur-sm lg:hidden touch-none"
           onClick={() => setSidebarOpen(false)}
+          onTouchStart={() => setSidebarOpen(false)}
         />
       )}
 
