@@ -3,18 +3,15 @@ import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { 
   LayoutDashboard, ShoppingCart, Box, Users, CreditCard, 
   Wallet, BarChart3, Settings, LogOut, Menu, X, Sun, Moon,
-  BadgeCheck, Store, Shield, Zap, Receipt, Download
+  BadgeCheck, Store, Shield, Receipt, Download
 } from 'lucide-react';
 import { useThemeStore } from '../lib/store';
 import { supabase } from '../lib/supabase';
-import { PaymentModal } from '../components/PaymentModal';
 
 export function DashboardLayout() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [company, setCompany] = useState<any>(null);
   const [loading, setLoading] = useState(true);
-  const [isPaymentModalOpen, setIsPaymentModalOpen] = useState(false);
-  const [isUpgradeModalOpen, setIsUpgradeModalOpen] = useState(false);
 
   const location = useLocation();
   const navigate = useNavigate();
@@ -73,8 +70,8 @@ export function DashboardLayout() {
             nif: user.user_metadata?.nif || '',
             phone: user.user_metadata?.phone || '',
             email: user.email || '',
-            plan: 'Base',
-            subscription_status: 'pending',
+            plan: 'Premium',
+            subscription_status: 'active',
             subscription_expires_at: null
           }])
           .select()
@@ -110,28 +107,18 @@ export function DashboardLayout() {
     navigate('/login');
   };
 
-  const getDaysRemaining = () => {
-    if (!company?.subscription_expires_at) return 0;
-    const expiresAt = new Date(company.subscription_expires_at);
-    const now = new Date();
-    const diffTime = expiresAt.getTime() - now.getTime();
-    const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
-    return diffDays > 0 ? diffDays : 0;
-  };
-
-  const isBasePlan = company?.plan === 'Base';
+  const isBasePlan = false;
 
   const navigation = [
-    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard, isPremium: false },
-    { name: 'POS', href: '/dashboard/pos', icon: Store, isPremium: false },
-    { name: 'Produtos', href: '/dashboard/produtos', icon: Box, isPremium: false },
-    { name: 'Clientes', href: '/dashboard/clientes', icon: Users, isPremium: false },
-    { name: 'Despesas', href: '/dashboard/despesas', icon: Receipt, isPremium: false },
-    { name: 'Carteiras Móveis', href: '/dashboard/carteiras', icon: Wallet, isPremium: false },
-    { name: 'Relatórios & DRE', href: '/dashboard/relatorios', icon: BarChart3, isPremium: true },
-    { name: 'Utilizadores', href: '/dashboard/utilizadores', icon: Shield, isPremium: true },
-    { name: 'Planos & Upgrade', href: '/dashboard/planos', icon: Zap, isPremium: false },
-    { name: 'Configurações', href: '/dashboard/configuracoes', icon: Settings, isPremium: false },
+    { name: 'Dashboard', href: '/dashboard', icon: LayoutDashboard },
+    { name: 'POS', href: '/dashboard/pos', icon: Store },
+    { name: 'Produtos', href: '/dashboard/produtos', icon: Box },
+    { name: 'Clientes', href: '/dashboard/clientes', icon: Users },
+    { name: 'Despesas', href: '/dashboard/despesas', icon: Receipt },
+    { name: 'Carteiras Móveis', href: '/dashboard/carteiras', icon: Wallet },
+    { name: 'Relatórios & DRE', href: '/dashboard/relatorios', icon: BarChart3 },
+    { name: 'Utilizadores', href: '/dashboard/utilizadores', icon: Shield },
+    { name: 'Configurações', href: '/dashboard/configuracoes', icon: Settings },
   ];
 
   return (
@@ -185,11 +172,6 @@ export function DashboardLayout() {
                   <item.icon className="w-5 h-5" />
                   <span>{item.name}</span>
                 </div>
-                {item.isPremium && isBasePlan && (
-                  <span className="px-1.5 py-0.5 bg-amber-500/20 text-amber-400 border border-amber-500/30 rounded text-[9px] font-black tracking-widest uppercase">
-                    PRO
-                  </span>
-                )}
               </Link>
             );
           })}
@@ -213,7 +195,7 @@ export function DashboardLayout() {
           <div className="flex items-center gap-3">
             <button 
               onClick={() => setSidebarOpen(true)}
-              className="p-2 rounded-xl text-white bg-[#1E293B] border border-gray-700/60 shadow-sm active:scale-95 transition-transform"
+              className="p-2 rounded-xl text-white bg-[#1E293B] border border-gray-700/60 shadow-sm active:scale-95 transition-transform lg:hidden"
               aria-label="Abrir Menu"
             >
               <Menu className="w-5 h-5 text-white" />
@@ -227,17 +209,6 @@ export function DashboardLayout() {
           </div>
 
           <div className="flex items-center space-x-2 sm:space-x-4">
-            {/* Upgrade Badge Button if on Base Plan */}
-            {isBasePlan && (
-              <button
-                onClick={() => navigate('/dashboard/planos')}
-                className="hidden sm:flex px-3.5 py-2 bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-black rounded-xl items-center gap-1.5 shadow-md shadow-amber-500/20 transition-all cursor-pointer"
-              >
-                <Zap className="w-4 h-4 fill-white" />
-                <span>UPGRADE P/ PREMIUM (500 MT)</span>
-              </button>
-            )}
-
             {/* PWA Install Button */}
             {deferredPrompt && (
               <button
@@ -266,7 +237,7 @@ export function DashboardLayout() {
                   {company?.company_name || 'Sua Empresa'}
                 </p>
                 <p className="text-[10px] text-emerald-500 font-bold uppercase tracking-widest">
-                  Plano {company?.plan || 'Base'} • NUIT: {company?.nif || 'Não definido'}
+                  Acesso Completo • NUIT: {company?.nif || 'Não definido'}
                 </p>
               </div>
               <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-emerald-500/20 border-2 border-emerald-500 p-0.5 shadow-md flex items-center justify-center">
@@ -284,33 +255,10 @@ export function DashboardLayout() {
 
         {/* Page Content */}
         <main className="flex-1 overflow-auto">
-          <Outlet context={{ companyPlan: company?.plan || 'Base', onOpenUpgradeModal: () => setIsUpgradeModalOpen(true) }} />
+          <Outlet context={{ companyPlan: 'Premium' }} />
         </main>
       </div>
-
-      {/* Renewal Modal */}
-      <PaymentModal
-        isOpen={isPaymentModalOpen}
-        planName={company?.plan || 'Base'}
-        planAmount={company?.plan === 'Premium' ? 500 : 300}
-        onSuccess={() => {
-          setIsPaymentModalOpen(false);
-          fetchCompanyData();
-        }}
-        companyId={company?.id}
-      />
-
-      {/* Upgrade Modal */}
-      <PaymentModal
-        isOpen={isUpgradeModalOpen}
-        planName="Premium"
-        planAmount={500}
-        onSuccess={() => {
-          setIsUpgradeModalOpen(false);
-          fetchCompanyData();
-        }}
-        companyId={company?.id}
-      />
     </div>
   );
 }
+

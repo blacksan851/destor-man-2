@@ -21,8 +21,8 @@ interface CompanyUser {
 }
 
 export function Users() {
-  const { companyPlan, onOpenUpgradeModal } = useOutletContext<{ companyPlan?: string; onOpenUpgradeModal?: () => void }>() || {};
-  const isBasePlan = companyPlan === 'Base';
+  const { companyPlan } = useOutletContext<{ companyPlan?: string }>() || {};
+  const isBasePlan = false;
 
   const [usersList, setUsersList] = useState<CompanyUser[]>([]);
   const [loading, setLoading] = useState(true);

@@ -6,8 +6,6 @@ import {
   Loader2, CheckCircle2, ShieldCheck, Zap, Smartphone,
   Building2, Lock, ArrowRight, ArrowLeft, Check, Eye, EyeOff,
   User, Mail, Phone, Hash, Store, Star, Shield
-} from 'lucide-react';
-import { PaymentModal } from '../../components/PaymentModal';
 import { supabase } from '../../lib/supabase';
 
 export function Register() {
@@ -79,23 +77,18 @@ export function Register() {
           phone: formData.phone,
           email: formData.email,
           plan: selectedPlan,
-          subscription_status: 'pending',
+          subscription_status: 'active',
           subscription_expires_at: null
         }]);
 
-      // 3. Advance to PaySuite Payment Step
-      setStep(2);
+      // Direct access to Dashboard
+      navigate('/dashboard');
     } catch (err: any) {
       console.error(err);
-      // Fallback: Always advance to PaySuite modal step so the user is never blocked
-      setStep(2);
+      navigate('/dashboard');
     } finally {
       setLoading(false);
     }
-  };
-
-  const handlePaymentSuccess = () => {
-    navigate('/dashboard');
   };
 
   const basePlanFeatures = ['Frente de Caixa (POS)', 'Controlo de Estoque', 'Gestão de Clientes & Fiado', 'Carteiras M-Pesa & e-Mola', 'Registo de Despesas', 'Impressão Térmica', 'Cobrança WhatsApp'];
@@ -394,7 +387,7 @@ export function Register() {
                     </>
                   ) : (
                     <>
-                      <span>Criar Conta e Pagar {planAmount} MT</span>
+                      <span>Criar Conta e Acessar Sistema</span>
                       <ArrowRight className="w-4 h-4" />
                     </>
                   )}
@@ -403,12 +396,8 @@ export function Register() {
                 {/* Trust footer */}
                 <div className="flex items-center justify-center gap-4 text-[10px] text-gray-600">
                   <span className="flex items-center gap-1">
-                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> PaySuite Seguro
+                    <ShieldCheck className="w-3.5 h-3.5 text-emerald-500" /> Acesso 100% Gratuito
                   </span>
-                  <span>•</span>
-                  <span className="text-red-400 font-bold">M-Pesa</span>
-                  <span>•</span>
-                  <span className="text-orange-400 font-bold">e-Mola</span>
                 </div>
               </form>
 
@@ -437,15 +426,6 @@ export function Register() {
           </Link>
         </div>
       </div>
-
-      {/* PaySuite Payment Modal */}
-      <PaymentModal
-        isOpen={step === 2}
-        planName={selectedPlan}
-        planAmount={planAmount}
-        onSuccess={handlePaymentSuccess}
-        companyId={companyId}
-      />
     </div>
   );
 }

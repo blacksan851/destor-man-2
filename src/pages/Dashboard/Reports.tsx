@@ -33,8 +33,8 @@ interface FinancialBarChartItem {
 }
 
 export function Reports() {
-  const { companyPlan, onOpenUpgradeModal } = useOutletContext<{ companyPlan?: string; onOpenUpgradeModal?: () => void }>() || {};
-  const isBasePlan = companyPlan === 'Base';
+  const { companyPlan } = useOutletContext<{ companyPlan?: string }>() || {};
+  const isBasePlan = false;
 
   const [loading, setLoading] = useState(true);
   const [periodFilter, setPeriodFilter] = useState<'Hoje' | '7dias' | 'EsteMes' | 'Todas'>('Todas');
