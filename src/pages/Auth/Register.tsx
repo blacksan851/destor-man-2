@@ -6,15 +6,15 @@ import {
   Loader2, CheckCircle2, ShieldCheck, Zap, Smartphone,
   Building2, Lock, ArrowRight, ArrowLeft, Check, Eye, EyeOff,
   User, Mail, Phone, Hash, Store, Star, Shield
+} from 'lucide-react';
 import { supabase } from '../../lib/supabase';
 
 export function Register() {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
 
-  const initialPlan = searchParams.get('plan') === 'premium' ? 'Premium' : 'Base';
-  const [selectedPlan, setSelectedPlan] = useState<'Base' | 'Premium'>(initialPlan);
-  const planAmount = selectedPlan === 'Premium' ? 500 : 300;
+  const selectedPlan = 'Premium';
+  const planAmount = 300;
 
   const [step, setStep] = useState<1 | 2>(1);
   const [error, setError] = useState('');
@@ -207,63 +207,17 @@ export function Register() {
               )}
 
               <form className="space-y-5" onSubmit={handleSubmit}>
-                {/* Plan selector */}
-                <div>
-                  <label className="block text-[10px] font-black text-gray-500 uppercase tracking-widest mb-2.5">
-                    Escolha o Plano
-                  </label>
-                  <div className="grid grid-cols-2 gap-3">
-                    {/* Base */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedPlan('Base')}
-                      className={`relative p-4 rounded-2xl border-2 text-left transition-all cursor-pointer ${
-                        selectedPlan === 'Base'
-                          ? 'border-emerald-500 bg-emerald-500/5'
-                          : 'border-gray-800 hover:border-gray-700'
-                      }`}
-                    >
-                      {selectedPlan === 'Base' && (
-                        <div className="absolute top-2.5 right-2.5 w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
-                          <Check className="w-3 h-3 text-white stroke-[3]" />
-                        </div>
-                      )}
-                      <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest">Base</span>
-                      <div className="mt-1.5 flex items-baseline gap-1">
-                        <span className="text-xl font-black text-white">300</span>
-                        <span className="text-xs text-gray-500">MT/mês</span>
-                      </div>
-                      <p className="text-[10px] text-gray-500 mt-1.5 leading-relaxed">POS, Estoque, Clientes & Carteiras</p>
-                    </button>
-
-                    {/* Premium */}
-                    <button
-                      type="button"
-                      onClick={() => setSelectedPlan('Premium')}
-                      className={`relative p-4 rounded-2xl border-2 text-left transition-all cursor-pointer ${
-                        selectedPlan === 'Premium'
-                          ? 'border-emerald-500 bg-emerald-500/5'
-                          : 'border-gray-800 hover:border-gray-700'
-                      }`}
-                    >
-                      <div className="absolute top-2.5 right-2.5 flex items-center gap-1">
-                        {selectedPlan === 'Premium' ? (
-                          <div className="w-5 h-5 bg-emerald-500 rounded-full flex items-center justify-center">
-                            <Check className="w-3 h-3 text-white stroke-[3]" />
-                          </div>
-                        ) : (
-                          <span className="text-[8px] font-black bg-amber-500/20 text-amber-400 px-1.5 py-0.5 rounded-full uppercase">⭐ Top</span>
-                        )}
-                      </div>
-                      <span className="text-[10px] font-black text-amber-400 uppercase tracking-widest flex items-center gap-1">
-                        <Zap className="w-3 h-3 fill-amber-400" /> Premium
-                      </span>
-                      <div className="mt-1.5 flex items-baseline gap-1">
-                        <span className="text-xl font-black text-white">500</span>
-                        <span className="text-xs text-gray-500">MT/mês</span>
-                      </div>
-                      <p className="text-[10px] text-gray-500 mt-1.5 leading-relaxed">Tudo + DRE, Equipa, Exportação</p>
-                    </button>
+                {/* Plan Badge */}
+                <div className="p-4 rounded-2xl border-2 border-emerald-500 bg-emerald-500/10 flex items-center justify-between">
+                  <div>
+                    <span className="text-[10px] font-black text-emerald-400 uppercase tracking-widest flex items-center gap-1">
+                      <Zap className="w-3 h-3 fill-emerald-400" /> Plano Premium Completo
+                    </span>
+                    <p className="text-xs text-gray-300 font-medium mt-0.5">Acesso total a todas as funcionalidades do sistema</p>
+                  </div>
+                  <div className="text-right">
+                    <span className="text-2xl font-black text-white">300</span>
+                    <span className="text-xs text-gray-400 font-bold ml-1">MT/mês</span>
                   </div>
                 </div>
 

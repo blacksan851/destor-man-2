@@ -152,32 +152,22 @@ export function LandingPage() {
       a: 'Sim! Suportamos impressoras térmicas de 58mm e 80mm (Epson, Xprinter, Sunmi, Bematech). Basta clicar em "Imprimir Talão" após cada venda.'
     },
     {
-      q: 'Posso mudar de plano depois?',
-      a: 'Sim. Pode fazer upgrade do Plano Base para Premium a qualquer momento, directamente no painel, pagando a diferença via M-Pesa ou e-Mola.'
+      q: 'O que está incluído no Plano Premium?',
+      a: 'O Plano Premium por 300 MT/mês inclui acesso ilimitado a todas as funcionalidades: POS, Estoque, Relatórios DRE, Utilizadores, Carteiras Móveis e suporte 24/7.'
     },
   ];
 
-  const basePlanFeatures = [
-    'Frente de Caixa (POS) completo',
-    'Controlo de Estoque & Produtos',
-    'Gestão de Clientes & Fiado',
-    'Cobrança via WhatsApp',
-    'Carteiras Móveis (M-Pesa & e-Mola)',
-    'Registo de Despesas & Custos',
-    'Impressão Térmica (58mm / 80mm)',
-    'Configurações da Empresa & Recibo',
-    '1 utilizador por conta',
-  ];
-
   const premiumPlanFeatures = [
-    'Tudo do Plano Base, mais:',
-    'Relatórios DRE Financeiros',
-    'Análise de Margem por Produto',
-    'Gestão de Equipa & Utilizadores',
-    'Papéis: Admin / Gerente / Caixa',
-    'Exportação PDF & Excel',
-    'Utilizadores ilimitados',
-    'Suporte prioritário',
+    'Frente de Caixa (POS) completo & ilimitado',
+    'Controlo de Estoque & Produtos com Alerta de Falta',
+    'Gestão de Clientes & Registo de Fiados (Cobrança WhatsApp)',
+    'Relatórios DRE Financeiros & Lucro Real',
+    'Gestão de Equipa & Utilizadores (Admin / Gerente / Caixa)',
+    'Carteiras Móveis (M-Pesa & e-Mola)',
+    'Registo de Despesas Operacionais',
+    'Impressão Térmica (58mm / 80mm)',
+    'Exportação de Dados em PDF & Excel',
+    'Suporte Prioritário 24/7 por WhatsApp'
   ];
 
   return (
@@ -595,79 +585,49 @@ export function LandingPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-emerald-500/10 border border-emerald-500/20 rounded-full text-emerald-400 text-xs font-bold uppercase tracking-wider mb-4">
-              Preços
+              Plano Único
             </div>
             <h2 className="text-3xl md:text-5xl font-black text-white tracking-tight">
-              Planos simples e transparentes
+              Acesso Completo e Sem Limites
             </h2>
             <p className="mt-4 text-lg text-gray-400">
-              Sem taxas escondidas. Pague via M-Pesa ou e-Mola. Cancele quando quiser.
+              Todas as funcionalidades do Dr Gestor MZ num único plano simples e transparente.
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-8 max-w-4xl mx-auto">
-            {/* Base Plan */}
+          <div className="max-w-xl mx-auto">
+            {/* Premium Plan Card */}
             <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              className="bg-[#0B1120] rounded-3xl p-8 border border-gray-800 flex flex-col"
-            >
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-xl font-black text-white">Plano Base</h3>
-                <span className="text-xs font-bold px-2.5 py-1 bg-gray-800 text-gray-400 rounded-full">Essencial</span>
-              </div>
-              <div className="flex items-baseline gap-1 mt-4 mb-6">
-                <span className="text-5xl font-black text-white tracking-tight">300</span>
-                <span className="text-xl font-bold text-gray-400">MT/mês</span>
-              </div>
-              <ul className="space-y-3 flex-1">
-                {basePlanFeatures.map((item, i) => (
-                  <li key={i} className="flex items-center gap-2.5">
-                    <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />
-                    <span className="text-sm text-gray-300">{item}</span>
-                  </li>
-                ))}
-              </ul>
-              <Link
-                to="/register?plan=base"
-                className="mt-8 block w-full py-3.5 px-6 bg-[#0F172A] hover:bg-gray-800 text-white text-center font-bold rounded-2xl transition-all border border-gray-700 text-sm"
-              >
-                Começar com Plano Base
-              </Link>
-            </motion.div>
-
-            {/* Premium Plan */}
-            <motion.div
-              initial={{ opacity: 0, x: 20 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }}
-              className="bg-slate-900 rounded-3xl p-8 border-2 border-emerald-500 shadow-2xl shadow-emerald-500/10 flex flex-col relative overflow-hidden"
+              className="bg-slate-900 rounded-3xl p-8 sm:p-10 border-2 border-emerald-500 shadow-2xl shadow-emerald-500/10 flex flex-col relative overflow-hidden"
             >
               <div className="absolute top-4 right-4 bg-emerald-500 text-white px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-wider">
-                ⭐ Recomendado
+                ⭐ Acesso Total
               </div>
               <div className="absolute -bottom-20 -right-20 w-48 h-48 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
               <div className="flex items-center justify-between mb-2">
-                <h3 className="text-xl font-black text-white">Plano Premium</h3>
+                <h3 className="text-2xl font-black text-white">Plano Premium</h3>
               </div>
-              <div className="flex items-baseline gap-1 mt-4 mb-6">
-                <span className="text-5xl font-black text-white tracking-tight">500</span>
-                <span className="text-xl font-bold text-gray-400">MT/mês</span>
+              <p className="text-xs text-gray-400 mb-4">Para micro, pequenas e médias empresas em Moçambique.</p>
+              <div className="flex items-baseline gap-1.5 mt-2 mb-6">
+                <span className="text-5xl font-black text-emerald-400 tracking-tight">300</span>
+                <span className="text-xl font-bold text-gray-400">MT / mês</span>
               </div>
-              <ul className="space-y-3 flex-1">
+              <ul className="space-y-3.5 flex-1 mb-8">
                 {premiumPlanFeatures.map((item, i) => (
-                  <li key={i} className={`flex items-center gap-2.5 ${i === 0 ? 'text-emerald-400 font-bold text-xs uppercase tracking-wider pt-1 pb-1' : ''}`}>
-                    {i !== 0 && <CheckCircle2 className="w-4 h-4 text-emerald-500 flex-shrink-0" />}
-                    <span className={`text-sm ${i === 0 ? '' : 'text-gray-300'}`}>{item}</span>
+                  <li key={i} className="flex items-center gap-3">
+                    <CheckCircle2 className="w-5 h-5 text-emerald-400 flex-shrink-0" />
+                    <span className="text-sm text-gray-200 font-medium">{item}</span>
                   </li>
                 ))}
               </ul>
               <Link
-                to="/register?plan=premium"
-                className="mt-8 block w-full py-3.5 px-6 bg-emerald-500 hover:bg-emerald-600 text-white text-center font-bold rounded-2xl transition-all shadow-lg shadow-emerald-500/25 text-sm relative z-10"
+                to="/register"
+                className="block w-full py-4 px-6 bg-gradient-to-r from-emerald-500 to-emerald-600 hover:from-emerald-600 hover:to-emerald-700 text-white text-center font-black rounded-2xl transition-all shadow-lg shadow-emerald-500/25 text-sm relative z-10"
               >
-                Assinar Premium Agora
+                Criar Conta e Começar Agora
               </Link>
             </motion.div>
           </div>
